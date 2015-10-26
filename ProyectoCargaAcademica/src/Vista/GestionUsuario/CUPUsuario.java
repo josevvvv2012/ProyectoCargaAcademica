@@ -310,9 +310,15 @@ public class CUPUsuario extends javax.swing.JFrame {
             while (rs.next()) {
                  campos = rs.getString(4);//Nombre
                   //txtNombre.setText(rs.getString(5));//Nombre   
-                 
                  log(String.valueOf(campos));
-                    txtNombre.setText(rs.getString(5));//Nombre      
+                 
+                 
+                 if(campos.equals("txtNombre"))
+                 {
+                     txtNombre.setText(rs.getString(5));//Nombre      
+                 }
+                 
+                       
                  
                  
                  
