@@ -108,7 +108,6 @@ public class Conexion {
  String myTableName2="CREATE TABLE IF NOT EXISTS `usuario` (\n" +
 "  `idusuario` int(11) NOT NULL,\n" +
 "  `nombre` varchar(255) DEFAULT NULL,\n" +
-"  `cedula` varchar(255) DEFAULT NULL,\n" +
 "  `idPerfil` int(11) NOT NULL,\n" +
 "  `login` varchar(45) DEFAULT NULL,\n" +
 "  `contrasenia` varchar(45) DEFAULT NULL,\n" +
@@ -118,6 +117,8 @@ public class Conexion {
 "  CONSTRAINT `FK_usuario_perfil` FOREIGN KEY (`idPerfil`) REFERENCES `perfil` (`idperfil`) ON DELETE NO ACTION ON UPDATE NO ACTION\n" +
 ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
+ String myInsertTable1="INSERT INTO `perfil` (`idperfil`, `nombre`) VALUES (1, 'SuperAdministrador');";
+ String myInsertTable2="INSERT INTO `usuario` (`idusuario`, `nombre`, `idPerfil`, `login`, `contrasenia`, `estado`) VALUES (1, 'administrador', 1, 'admin', 'admin', b'1');";
        
         try {
             Class.forName(driver);
@@ -127,6 +128,8 @@ public class Conexion {
             Statement s = conn.createStatement();
             s.executeUpdate(myTableName1);
             s.executeUpdate(myTableName2);
+            s.executeUpdate(myInsertTable1);
+            s.executeUpdate(myInsertTable2);
     
             
         

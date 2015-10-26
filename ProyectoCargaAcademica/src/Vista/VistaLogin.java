@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Vista.GestionUsuario.VistaUsuarios;
 import Controlador.ControllerSql;
 import Modelo.Usuario;
 import java.sql.CallableStatement;
@@ -76,6 +77,7 @@ public class VistaLogin extends javax.swing.JFrame {
 
         jLabel2.setText("Contraseña");
 
+        txtUsuario.setText("admin");
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsuarioActionPerformed(evt);
@@ -110,6 +112,8 @@ public class VistaLogin extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
+
+        txtPassword.setText("admin");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -193,29 +197,35 @@ public class VistaLogin extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         // TODO add your handling code here:
-  
-        
-    if(ValidarCamposVacios(txtUsuario,txtPassword)){
+  if(ValidarCamposVacios(txtUsuario,txtPassword)){
         JOptionPane.showMessageDialog(this, "Faltan datos en los campos.");
     }
-    else{
-  
-        
-          try {
+    else{  
+           try {
             Modelo.Usuario u = new Usuario();
             u.setLogin(txtUsuario.getText().trim());
             u.setContrasenia(String.valueOf(txtPassword.getPassword()));
             int nro = obj.IngresoLogin(u);
-            if (nro >= 1) {
+            log(String.valueOf(nro));
+            if (nro == 1) {//Permil SuperAdmintrador
                 
-            //nombre de la vista a seguir
-                
+            VistaUsuarios VistaUsuarios = new VistaUsuarios();
+            VistaUsuarios.setVisible(true);
             
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Usuario no registrado");
+                if(nro == 2)//PerfilAdministrador 2
+                {
+                
+                JOptionPane.showMessageDialog(rootPane, "Perfil 2");
+                }else
+                {
+                    JOptionPane.showMessageDialog(rootPane, "Usuario no registrado");
+                }
             }
+            
+            
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e.toString());
+            //JOptionPane.showMessageDialog(rootPane, e.toString());
         }
         
     }
