@@ -6,6 +6,7 @@
 package Vista.GestionUsuario;
 
 import Controlador.ControllerSql;
+import java.awt.Component;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -14,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.text.JTextComponent;
 
 /**
  *
@@ -33,7 +35,13 @@ public class CUPUsuario extends javax.swing.JFrame {
     public CUPUsuario() {
         setUndecorated(true);
         initComponents();
-        BackFrame();
+       
+       txtCedula.setName("txtCedula");
+       txtNombre.setName("txtNombre");
+       txtLogin.setName("txtLogin");
+       txtPassword.setName("txtPassword");
+       
+        BackFrame(txtCedula,txtNombre,txtLogin,txtPassword);
     }
 
     /**
@@ -92,9 +100,17 @@ public class CUPUsuario extends javax.swing.JFrame {
 
         jLabel6.setText("Estado");
 
+        txtNombre.setName(""); // NOI18N
         txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtNombreFocusLost(evt);
+            }
+        });
+
+        txtCedula.setName("p1"); // NOI18N
+        txtCedula.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCedulaFocusLost(evt);
             }
         });
 
@@ -206,6 +222,9 @@ public class CUPUsuario extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
+        txtCedula.getAccessibleContext().setAccessibleName("prueba1");
+        txtCedula.getAccessibleContext().setAccessibleDescription("prueba2");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -250,33 +269,12 @@ public class CUPUsuario extends javax.swing.JFrame {
 
     private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
         // TODO add your handling code here:
-        
-        String txtCampo = "txtNombre";
-        String txtdato = txtNombre.getText();
-        String nombreFrame = "CUPUsuario";
-        
-
-        try {
-
-            obj = new ControllerSql();
-
-            boolean res = obj.AgregarCampoBackFrame(1,nombreFrame,txtCampo,txtdato);
-
-            if (res == true) {
-                JOptionPane.showMessageDialog(null, "Usuario Registrado Correctamente");
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "No se pudo ingresar un nuevo Empleado ya existe en la base"
-                        + "de datos");
-            }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "por favor verifique la conexion del servidor");
-
-        }
-
-
+        SaveJTextFieldFrame(txtNombre);
     }//GEN-LAST:event_txtNombreFocusLost
+
+    private void txtCedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCedulaFocusLost
+       SaveJTextFieldFrame(txtCedula);
+    }//GEN-LAST:event_txtCedulaFocusLost
 
     /*Funciones*/
     
@@ -296,35 +294,66 @@ public class CUPUsuario extends javax.swing.JFrame {
     }
  
     
+    public void SaveJTextFieldFrame(JTextField... textFields)
+    {
+
+        for (JTextField textField : textFields) {
+
+            String b = textField.getName();
+
+            String txtCampo = b;
+            String txtdato = textField.getText();
+            String nombreFrame = "CUPUsuario";
+
+            try {
+
+                obj = new ControllerSql();
+
+                boolean res = obj.AgregarCampoBackFrame(1, nombreFrame, txtCampo, txtdato);
+
+                if (res == true) {
+                    JOptionPane.showMessageDialog(null, "Usuario Registrado Correctamente");
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo ingresar un nuevo Empleado ya existe en la base"
+                            + "de datos");
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "por favor verifique la conexion del servidor");
+
+            }
+
+        }
+   
+    }
+      
+      
     /*
       @Retorna los datos recuperados en caso que se cierra la aplicacion
       @auto jose vanegas -jvanegasv@ucentral.edu.co
     */    
     public void BackFrame(JTextField... textFields) {
-            String campos="";
-            
+        String campos = "";
         try {
 
             ResultSet rs;
             rs = obj.ConsultarBackFrame();
             while (rs.next()) {
-                 campos = rs.getString(4);//Nombre
-                  //txtNombre.setText(rs.getString(5));//Nombre   
-                 log(String.valueOf(campos));
-                 
-                 
-                 if(campos.equals("txtNombre"))
-                 {
-                     txtNombre.setText(rs.getString(5));//Nombre      
-                 }
-                 
-                       
-                 
-                 
-                 
+                campos = rs.getString(4);//Nombre
+                //txtNombre.setText(rs.getString(5));//Nombre   
+                //log(String.valueOf(campos));  
+                for (JTextField textField : textFields) {
+
+                    String b = textField.getName();
+
+                    if (campos.equals(b)) {
+                        textField.setText(rs.getString(5));
+                    }
+                }
+
             }
-            
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(CUPUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
