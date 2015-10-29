@@ -1,4 +1,4 @@
-package Vista;
+package VistaInicio;
 
 import javax.swing.JProgressBar;
 

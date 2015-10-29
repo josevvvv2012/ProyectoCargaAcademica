@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import static Controlador.Conexion.dbName;
 import static Controlador.Conexion.driver;
 import static Controlador.Conexion.login;
 import static Controlador.Conexion.url;
@@ -125,17 +126,32 @@ public class ControllerSql {//public
         }
     }
  
-  public boolean AgregarBd(String nombreFrame) {
-      
-      int estado = 1;
+       
+       /*
+      String myTableName3 ="CREATE TABLE IF NOT EXISTS `mybd` (\n" +
+"  `idbd` int(11) NOT NULL AUTO_INCREMENT,\n" +
+"  `servidor` varchar(255) DEFAULT NULL,\n" +
+"  `login` varchar(255) DEFAULT NULL,\n" +
+"  `password` varchar(255) DEFAULT NULL,\n" +
+"  `dbName` varchar(255) DEFAULT NULL,\n" +          
+"  `estado` bit(1) DEFAULT NULL,\n" +
+"  PRIMARY KEY (`idbd`)\n" +
+") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+       */
+    public boolean AgregarBd(String servidor,String login , String password , String dbName) {
+
+        
         try {
-            String query = "insert into mybd (nombre) values ('a');";
+            String query = "INSERT INTO mybd (servidor,login,password,dbName,estado)"
+                + " VALUES (?,?,?,?,1);";
+        
 
             // preparo la consulta para mi base de datos
-            PreparedStatement preparedStmt = conexion.prepareStatement(query);           
-            preparedStmt.setString(1, nombreFrame);
-      
-            
+            PreparedStatement preparedStmt = conexion.prepareStatement(query);
+            preparedStmt.setString(1, servidor);
+            preparedStmt.setString(2, login);
+            preparedStmt.setString(3, password);
+            preparedStmt.setString(4, dbName);
 
             // ejecuto mi query
             preparedStmt.execute();
@@ -143,7 +159,7 @@ public class ControllerSql {//public
         } catch (SQLException e) {
             return false;
         }
-    } 
+    }
         
        
        

@@ -1,4 +1,4 @@
-package Vista;
+package VistaInicio;
 
 import Controlador.Conexion;
 import static Controlador.Conexion.dbName;
@@ -10,7 +10,7 @@ import static Vista.Administrador.VistaConexionBD.txtNombre;
 import static Vista.Administrador.VistaConexionBD.txtNombreBD;
 import static Vista.Administrador.VistaConexionBD.txtPassword;
 import static Vista.Administrador.VistaConexionBD.txtRespuesta;
-import Vista.VistaPrincipal;
+import VistaInicio.VistaPrincipal;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -100,7 +100,7 @@ private void progresoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRS
             servidor = "localhost:3306/" ;
             login = "root";
             password = "";
-            dbName = "baaa0";
+            dbName = "baadsa0";
          
             try {
                 if (Conexion.conectar()) {

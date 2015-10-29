@@ -7,7 +7,7 @@ package proyectocargaacademica;
 
 import UpperEssential.UpperEssentialLookAndFeel;
 import UpperEssential.UpperTheme;
-import Vista.ScreenInicio;
+import VistaInicio.ScreenInicio;
 import java.awt.Color;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;

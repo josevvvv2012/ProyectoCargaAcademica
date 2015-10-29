@@ -8,7 +8,7 @@
  *
  * Created on 16-04-2013, 12:10:52 AM
  */
-package Vista;
+package VistaInicio;
 
 import Controlador.Conexion;
 import java.awt.Desktop;

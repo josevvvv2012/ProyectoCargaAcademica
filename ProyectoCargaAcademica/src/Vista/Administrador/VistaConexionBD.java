@@ -6,7 +6,7 @@
 package Vista.Administrador;
 
 import Controlador.Conexion;
-import Vista.VistaPrincipal;
+import VistaInicio.VistaPrincipal;
 import static Controlador.Conexion.servidor;
 import static Controlador.Conexion.dbName;
 import static Controlador.Conexion.login;
@@ -25,7 +25,7 @@ import javax.swing.JTextField;
  */
 public class VistaConexionBD extends javax.swing.JFrame {
 
-ControllerSql ControllerSql;
+ControllerSql obj;
     
     /**
      * Creates new form InterfazP
@@ -347,9 +347,9 @@ ControllerSql ControllerSql;
                             ini.setLocation((pantall.width - ventan.width) / 2, (pantall.height - ventan.height) / 2);
                             ini.setVisible(true);
                             
-                            ControllerSql.AgregarBd(dbName);
-
                             
+
+                            crearNombreBD();
                             this.dispose();
                            
                             
@@ -398,6 +398,35 @@ ControllerSql ControllerSql;
         // TODO add your handling code here:
     }//GEN-LAST:event_txtServidorActionPerformed
 
+   public void crearNombreBD()
+    {
+    try {
+          
+                    servidor = txtServidor.getText();
+                    login = txtNombre.getText();
+                    password = txtPassword.getText();
+                    dbName = txtNombreBD.getText();
+         
+                obj = new ControllerSql();
+                    
+                     boolean  res = obj.AgregarBd(servidor,login,password,dbName);
+                      log("CREAR");
+                    
+                
+                
+                if (res == true) {
+                    JOptionPane.showMessageDialog(null, "Usuario Registrado Correctamente");
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo ingresar un nuevo Empleado ya existe en la base"
+                            + "de datos");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "por favor verifique la conexion del servidor");
+
+            }
+    } 
+    
     /*
      @autor Jose Vanegas
      */
@@ -429,6 +458,10 @@ ControllerSql ControllerSql;
         return false;
     }
 
+    
+     public void log(String a) {
+        System.out.println("la valor  = " + " " + a);
+    }   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JComboBox ComboBoxDrivers;

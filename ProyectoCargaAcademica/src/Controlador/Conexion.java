@@ -117,10 +117,13 @@ public class Conexion {
 "  KEY `Perfil` (`idPerfil`),\n" +
 "  CONSTRAINT `FK_usuario_perfil` FOREIGN KEY (`idusuario`) REFERENCES `profesor` (`idprofesor`) ON DELETE NO ACTION ON UPDATE NO ACTION\n" +
 ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-
+ 
   String myTableName3 ="CREATE TABLE IF NOT EXISTS `mybd` (\n" +
 "  `idbd` int(11) NOT NULL AUTO_INCREMENT,\n" +
-"  `nombre` varchar(255) DEFAULT NULL,\n" +
+"  `servidor` varchar(255) DEFAULT NULL,\n" +
+"  `login` varchar(255) DEFAULT NULL,\n" +
+"  `password` varchar(255) DEFAULT NULL,\n" +
+"  `dbName` varchar(255) DEFAULT NULL,\n" +          
 "  `estado` bit(1) DEFAULT NULL,\n" +
 "  PRIMARY KEY (`idbd`)\n" +
 ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
