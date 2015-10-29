@@ -100,7 +100,7 @@ private void progresoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRS
             servidor = "localhost:3306/" ;
             login = "root";
             password = "";
-            dbName = "baadsa0";
+            dbName = "baaa0";
          
             try {
                 if (Conexion.conectar()) {

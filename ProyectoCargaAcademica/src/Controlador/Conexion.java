@@ -98,35 +98,36 @@ public class Conexion {
         password = VistaConexionBD.txtPassword.getText();
         dbName = VistaConexionBD.txtNombreBD.getText();
 
-    String myTableName1 ="CREATE TABLE IF NOT EXISTS `profesor` (\n" +
-"  `idprofesor` int(11) NOT NULL AUTO_INCREMENT,\n" +
-"  `tipoContrato` varchar(255) DEFAULT NULL,\n" +
-"  `estadoDispo` bit(1) DEFAULT NULL,\n" +
-"  PRIMARY KEY (`idprofesor`)\n" +
-") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+    String myTableName1 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
+"  `idprofesor` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',\n" +
+"  `tipoContrato` VARCHAR(255) NULL DEFAULT NULL COMMENT '',\n" +
+"  `estadoDispo` BIT(1) NULL DEFAULT NULL COMMENT '',\n" +
+"  PRIMARY KEY (`idprofesor`)  COMMENT '')\n" +
+"ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";
 
     
- String myTableName2="CREATE TABLE IF NOT EXISTS `usuario` (\n" +
-"  `idusuario` int(11) NOT NULL,\n" +
-"  `nombre` varchar(255) DEFAULT NULL,\n" +
-"  `idPerfil` int(11) NOT NULL,\n" +
-"  `login` varchar(45) DEFAULT NULL,\n" +
-"  `contrasenia` varchar(45) DEFAULT NULL,\n" +
-"  `estado` bit(1) DEFAULT NULL,\n" +
-"  PRIMARY KEY (`idusuario`),\n" +
-"  KEY `Perfil` (`idPerfil`),\n" +
-"  CONSTRAINT `FK_usuario_perfil` FOREIGN KEY (`idusuario`) REFERENCES `profesor` (`idprofesor`) ON DELETE NO ACTION ON UPDATE NO ACTION\n" +
-") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+ String myTableName2="CREATE TABLE IF NOT EXISTS `baaa0`.`usuario` (\n" +
+"  `idusuario` INT(11) NOT NULL COMMENT '',\n" +
+"  `nombre` VARCHAR(255) NULL DEFAULT NULL COMMENT '',\n" +
+"  `idPerfil` INT(11) NOT NULL COMMENT '',\n" +
+"  `login` VARCHAR(45) NULL DEFAULT NULL COMMENT '',\n" +
+"  `contrasenia` VARCHAR(45) NULL DEFAULT NULL COMMENT '',\n" +
+"  `estado` BIT(1) NULL DEFAULT NULL COMMENT '',\n" +
+"  PRIMARY KEY (`idusuario`)  COMMENT '',\n" +
+"  INDEX `Perfil` (`idPerfil` ASC)  COMMENT '',\n" +
+"  CONSTRAINT `FK_usuario_perfil`\n" +
+"    FOREIGN KEY (`idusuario`)\n" +
+"    REFERENCES `baaa0`.`profesor` (`idprofesor`))\n" +
+"ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";
  
-  String myTableName3 ="CREATE TABLE IF NOT EXISTS `mybd` (\n" +
-"  `idbd` int(11) NOT NULL AUTO_INCREMENT,\n" +
-"  `servidor` varchar(255) DEFAULT NULL,\n" +
-"  `login` varchar(255) DEFAULT NULL,\n" +
-"  `password` varchar(255) DEFAULT NULL,\n" +
-"  `dbName` varchar(255) DEFAULT NULL,\n" +          
-"  `estado` bit(1) DEFAULT NULL,\n" +
-"  PRIMARY KEY (`idbd`)\n" +
-") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+  String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`administrador` (\n" +
+"  `idAdmin` INT(11) NOT NULL COMMENT '',\n" +
+"  `tipoContrato` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
+"  PRIMARY KEY (`idAdmin`)  COMMENT '',\n" +
+"  CONSTRAINT `FK_Administrador_usuario`\n" +
+"    FOREIGN KEY (`idAdmin`)\n" +
+"    REFERENCES `baaa0`.`usuario` (`idusuario`))\n" +
+"ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";
   
   
   String myTableName4 ="CREATE TABLE IF NOT EXISTS `BackFrame` (\n" +
@@ -141,6 +142,66 @@ public class Conexion {
 "  CONSTRAINT `fk_BackFrame_usuario1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION\n" +
 " )ENGINE=InnoDB DEFAULT CHARSET=utf8;";
   
+  String myTableName5 ="CREATE TABLE IF NOT EXISTS `baaa0`.`materia` (\n" +
+"  `idMateria` INT(11) NOT NULL COMMENT '',\n" +
+"  `nombreMateria` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
+"  `tipo` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
+"  `creditos` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
+"  `intHoraria` BIGINT(20) NULL DEFAULT NULL COMMENT '',\n" +
+"  `semestre` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
+"  `idAdministrador` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
+"  PRIMARY KEY (`idMateria`)  COMMENT '',\n" +
+"  INDEX `idAdministrador` (`idAdministrador` ASC)  COMMENT '',\n" +
+"  CONSTRAINT `FK_Materia_Administrador`\n" +
+"    FOREIGN KEY (`idAdministrador`)\n" +
+"    REFERENCES `baaa0`.`administrador` (`idAdmin`))\n" +
+"ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";
+  
+  String myTableName6 ="CREATE TABLE IF NOT EXISTS `baaa0`.`horariomateria` (\n" +
+"  `idHMateria` INT(11) NOT NULL COMMENT '',\n" +
+"  `codigoMateria` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
+"  `grupo` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
+"  `dia` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
+"  `hora` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
+"  `duracion` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
+"  `semestre` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
+"  `jornada` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
+"  PRIMARY KEY (`idHMateria`)  COMMENT '',\n" +
+"  INDEX `codigoMateria` (`codigoMateria` ASC)  COMMENT '',\n" +
+"  CONSTRAINT `FK_horarioMateria_Materia`\n" +
+"    FOREIGN KEY (`codigoMateria`)\n" +
+"    REFERENCES `baaa0`.`materia` (`idMateria`))\n" +
+"ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";
+  
+  String myTableName7 ="CREATE TABLE IF NOT EXISTS `baaa0`.`horarioprofesor` (\n" +
+"  `idHprofesor` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',\n" +
+"  `idProfesor` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
+"  `dia` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
+"  `hora` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
+"  `estado` BIT(1) NULL DEFAULT NULL COMMENT '',\n" +
+"  `tipoHorario` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
+"  PRIMARY KEY (`idHprofesor`)  COMMENT '',\n" +
+"  INDEX `idProfesor` (`idProfesor` ASC)  COMMENT '',\n" +
+"  CONSTRAINT `FK_horarioProfesor_profesor`\n" +
+"    FOREIGN KEY (`idProfesor`)\n" +
+"    REFERENCES `baaa0`.`profesor` (`idprofesor`))\n" +
+"ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";
+  
+   String myTableName8 ="CREATE TABLE IF NOT EXISTS `mybd` (\n" +
+"  `idbd` int(11) NOT NULL AUTO_INCREMENT,\n" +
+"  `servidor` varchar(255) DEFAULT NULL,\n" +
+"  `login` varchar(255) DEFAULT NULL,\n" +
+"  `password` varchar(255) DEFAULT NULL,\n" +
+"  `dbName` varchar(255) DEFAULT NULL,\n" +          
+"  `estado` bit(1) DEFAULT NULL,\n" +
+"  PRIMARY KEY (`idbd`)\n" +
+") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+   
+ 
+  
+  
+  
+  
         try {
             Class.forName(driver);
 
@@ -151,6 +212,10 @@ public class Conexion {
             s.executeUpdate(myTableName2);
             s.executeUpdate(myTableName3);
             s.executeUpdate(myTableName4);
+            s.executeUpdate(myTableName5);
+            s.executeUpdate(myTableName6);
+            s.executeUpdate(myTableName7);
+            s.executeUpdate(myTableName8);
     
         
             System.out.println("Tables Created");
