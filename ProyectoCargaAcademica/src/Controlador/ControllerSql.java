@@ -69,10 +69,14 @@ public class ControllerSql {//public
             ps.setString(2,p.getContrasenia());
             try (ResultSet rs= ps.executeQuery()){
                 rs.next();
-                r=rs.getInt(1); 
+                r=rs.getInt(1);
+                
             }
+            
         }
+        System.out.println(r);
         return r;
+        
     }
 
   public boolean AgregarCampoBackFrame(int idusuario,String nombreFrame, String txtCampo, String txtdato) {

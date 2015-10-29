@@ -12,6 +12,7 @@ import static Controlador.Conexion.dbName;
 import static Controlador.Conexion.login;
 import static Controlador.Conexion.password;
 import Controlador.ControllerSql;
+import VistaInicio.VistaLogin;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
@@ -338,7 +339,7 @@ ControllerSql obj;
                             txtRespuesta.setText("Creacion Exitosa script sql");
                             
                             
-                            VistaPrincipal ini = new VistaPrincipal();
+                            VistaLogin ini = new VistaLogin();
 
                             Dimension pantall = Toolkit.getDefaultToolkit().getScreenSize();
                             //obtenemos el tamaño de la ventana  
