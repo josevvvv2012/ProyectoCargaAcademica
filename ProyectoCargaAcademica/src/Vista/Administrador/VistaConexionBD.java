@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vista;
+package Vista.Administrador;
 
 import Controlador.Conexion;
+import Vista.VistaPrincipal;
 import static Controlador.Conexion.servidor;
 import static Controlador.Conexion.dbName;
 import static Controlador.Conexion.login;
 import static Controlador.Conexion.password;
+import Controlador.ControllerSql;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
@@ -23,6 +25,8 @@ import javax.swing.JTextField;
  */
 public class VistaConexionBD extends javax.swing.JFrame {
 
+ControllerSql ControllerSql;
+    
     /**
      * Creates new form InterfazP
      */
@@ -328,10 +332,12 @@ public class VistaConexionBD extends javax.swing.JFrame {
                     dbName = txtNombreBD.getText();
                     if (Conexion.createDatabase()) {
                         txtRespuesta.setText("Creacion Exitosa Base de datos");
-
+                        
+                        
                         if (Conexion.createTable()) {
                             txtRespuesta.setText("Creacion Exitosa script sql");
-
+                            
+                            
                             VistaPrincipal ini = new VistaPrincipal();
 
                             Dimension pantall = Toolkit.getDefaultToolkit().getScreenSize();
@@ -340,8 +346,13 @@ public class VistaConexionBD extends javax.swing.JFrame {
                             //para centrar la ventana lo hacemos con el siguiente calculo  
                             ini.setLocation((pantall.width - ventan.width) / 2, (pantall.height - ventan.height) / 2);
                             ini.setVisible(true);
+                            
+                            ControllerSql.AgregarBd(dbName);
 
+                            
                             this.dispose();
+                           
+                            
                             /*
                              Vista.VistaPrincipal.btnCalculosMensuales.setEnabled(true);
                              Vista.VistaPrincipal.btnCargarEmpleado.setEnabled(true);
@@ -357,12 +368,16 @@ public class VistaConexionBD extends javax.swing.JFrame {
                         txtRespuesta.setText("Creacion Fallida de Base de datos ");
                     }
 
+                   
+                    
                 } catch (Exception ex) {
                     System.out.println(ex);
                 }
 
             }
         }
+        
+        
     }//GEN-LAST:event_btnCreaBdActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed

@@ -1,9 +1,21 @@
 package Vista;
 
+import Controlador.Conexion;
+import static Controlador.Conexion.dbName;
+import static Controlador.Conexion.login;
+import static Controlador.Conexion.password;
+import static Controlador.Conexion.servidor;
+import Vista.Administrador.VistaConexionBD;
+import static Vista.Administrador.VistaConexionBD.txtNombre;
+import static Vista.Administrador.VistaConexionBD.txtNombreBD;
+import static Vista.Administrador.VistaConexionBD.txtPassword;
+import static Vista.Administrador.VistaConexionBD.txtRespuesta;
 import Vista.VistaPrincipal;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ScreenInicio extends javax.swing.JFrame {
 
@@ -75,15 +87,44 @@ private void progresoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRS
         this.dispose();
 //Aqui llamamos al JFrame que queremos que aparezca despues
         // VistaPrincipal ini = new VistaPrincipal();
+        try {
+            //        VistaConexionBD ini = new VistaConexionBD();
+//
+//        Dimension pantall = Toolkit.getDefaultToolkit().getScreenSize();
+//        //obtenemos el tamaño de la ventana  
+//        Dimension ventan = ini.getSize();
+//        //para centrar la ventana lo hacemos con el siguiente calculo  
+//        ini.setLocation((pantall.width - ventan.width) / 2, (pantall.height - ventan.height) / 2);
+//        ini.setVisible(true);
+            
+            servidor = "localhost:3306/" ;
+            login = "root";
+            password = "";
+            dbName = "baaa0";
+         
+            try {
+                if (Conexion.conectar()) {
+                    System.out.println("Conexion Exitosa");
 
-        VistaConexionBD ini = new VistaConexionBD();
+                    
+                    VistaLogin VistaLogin = new VistaLogin();
+                    VistaLogin.setVisible(true);
+             
 
-        Dimension pantall = Toolkit.getDefaultToolkit().getScreenSize();
-        //obtenemos el tamaño de la ventana  
-        Dimension ventan = ini.getSize();
-        //para centrar la ventana lo hacemos con el siguiente calculo  
-        ini.setLocation((pantall.width - ventan.width) / 2, (pantall.height - ventan.height) / 2);
-        ini.setVisible(true);
+                } else {
+                    System.out.println("Conexion Fallida");
+                    
+                    VistaConexionBD VistaConexionBD = new VistaConexionBD();
+                    VistaConexionBD.setVisible(true);
+                }
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+            
+            
+        } catch (Exception ex) {
+            Logger.getLogger(ScreenInicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }// TODO add your handling code here:
 }//GEN-LAST:event_progresoStateChanged
 

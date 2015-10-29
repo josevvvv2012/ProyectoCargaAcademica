@@ -251,15 +251,16 @@ public class CUPUsuario extends javax.swing.JFrame {
         }
         else{
         
-            int idCedula = Integer.parseInt(txtCedula.getText());
-            String nombreUsuario = txtNombre.getText();
-            int idPerfilUsuario ;
-            String loginUsuario = txtLogin.getText();
-            String passwordUsuario = txtPassword.getText();
-            boolean estado ;
+//            int idCedula = Integer.parseInt(txtCedula.getText());
+//            String nombreUsuario = txtNombre.getText();
+//            int idPerfilUsuario ;
+//            String loginUsuario = txtLogin.getText();
+//            String passwordUsuario = txtPassword.getText();
+//            boolean estado ;
             
-            
+            deleteDataFrame();
         }
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -360,7 +361,30 @@ public class CUPUsuario extends javax.swing.JFrame {
 
     }
       
-      
+    public void deleteDataFrame() {
+      String nombreFrame = "CUPUsuario";
+        try {
+            obj = new ControllerSql();
+
+            boolean res = obj.deleteBackFrame(1, nombreFrame);
+
+            if (res == true) {
+                JOptionPane.showMessageDialog(null, "Datos Eliminados Correctamente");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo ingresar un nuevo Empleado ya existe en la base"
+                        + "de datos");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "por favor verifique la conexion del servidor");
+
+        }
+
+    }
+    
+    
+    
       public void log(String a) {
         System.out.println("la valor  = " + " " + a);
     } 

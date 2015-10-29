@@ -5,6 +5,9 @@
  */
 package Controlador;
 
+import static Controlador.Conexion.driver;
+import static Controlador.Conexion.login;
+import static Controlador.Conexion.url;
 import Modelo.Usuario;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -95,8 +98,7 @@ public class ControllerSql {//public
             return false;
         }
     } 
- 
- 
+  
     public ResultSet ConsultarBackFrame() {
         try {
 
@@ -110,9 +112,41 @@ public class ControllerSql {//public
         }
     }
 
-    
-    
+       public boolean deleteBackFrame(int idUsuario,String jframe) {
+           
+     try {
+            String query = "delete from backframe where idUsuario = ? and jframe=? and estado =1";
+            PreparedStatement preparedStmt = conexion.prepareStatement(query);
+            preparedStmt.execute();
 
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+ 
+  public boolean AgregarBd(String nombreFrame) {
+      
+      int estado = 1;
+        try {
+            String query = "insert into mybd (nombre) values ('a');";
+
+            // preparo la consulta para mi base de datos
+            PreparedStatement preparedStmt = conexion.prepareStatement(query);           
+            preparedStmt.setString(1, nombreFrame);
+      
+            
+
+            // ejecuto mi query
+            preparedStmt.execute();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    } 
+        
+       
+       
   public static int IngresoLogin(Usuario p) throws ClassNotFoundException, SQLException
     {
         return Ingreso(p);

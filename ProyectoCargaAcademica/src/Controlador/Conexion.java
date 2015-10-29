@@ -11,7 +11,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import Vista.VistaConexionBD;
+import Vista.Administrador.VistaConexionBD;
+import groovy.xml.Entity;
 
 
 /**
@@ -97,11 +98,11 @@ public class Conexion {
         password = VistaConexionBD.txtPassword.getText();
         dbName = VistaConexionBD.txtNombreBD.getText();
 
-    String myTableName1 ="CREATE TABLE IF NOT EXISTS `perfil` (\n" +
-"  `idperfil` int(11) NOT NULL AUTO_INCREMENT,\n" +
-"  `nombre` varchar(255) DEFAULT NULL,\n" +
-"  `estado` bit(1) DEFAULT NULL,\n" +
-"  PRIMARY KEY (`idperfil`)\n" +
+    String myTableName1 ="CREATE TABLE IF NOT EXISTS `profesor` (\n" +
+"  `idprofesor` int(11) NOT NULL AUTO_INCREMENT,\n" +
+"  `tipoContrato` varchar(255) DEFAULT NULL,\n" +
+"  `estadoDispo` bit(1) DEFAULT NULL,\n" +
+"  PRIMARY KEY (`idprofesor`)\n" +
 ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
     
@@ -114,12 +115,29 @@ public class Conexion {
 "  `estado` bit(1) DEFAULT NULL,\n" +
 "  PRIMARY KEY (`idusuario`),\n" +
 "  KEY `Perfil` (`idPerfil`),\n" +
-"  CONSTRAINT `FK_usuario_perfil` FOREIGN KEY (`idPerfil`) REFERENCES `perfil` (`idperfil`) ON DELETE NO ACTION ON UPDATE NO ACTION\n" +
+"  CONSTRAINT `FK_usuario_perfil` FOREIGN KEY (`idusuario`) REFERENCES `profesor` (`idprofesor`) ON DELETE NO ACTION ON UPDATE NO ACTION\n" +
 ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
- String myInsertTable1="INSERT INTO `perfil` (`idperfil`, `nombre`) VALUES (1, 'SuperAdministrador');";
- String myInsertTable2="INSERT INTO `usuario` (`idusuario`, `nombre`, `idPerfil`, `login`, `contrasenia`, `estado`) VALUES (1, 'administrador', 1, 'admin', 'admin', b'1');";
-       
+  String myTableName3 ="CREATE TABLE IF NOT EXISTS `mybd` (\n" +
+"  `idbd` int(11) NOT NULL AUTO_INCREMENT,\n" +
+"  `nombre` varchar(255) DEFAULT NULL,\n" +
+"  `estado` bit(1) DEFAULT NULL,\n" +
+"  PRIMARY KEY (`idbd`)\n" +
+") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+  
+  
+  String myTableName4 ="CREATE TABLE IF NOT EXISTS `BackFrame` (\n" +
+"  `idBackFrame` INT NOT NULL COMMENT '',\n" +
+"  `idUsuario` INT(11) NULL COMMENT '',\n" +
+"  `jframe` VARCHAR(225) NULL COMMENT '',\n" +
+"  `txtdato` VARCHAR(255) NULL COMMENT '',\n" +
+"  `date` VARCHAR(255) NULL COMMENT '',\n" +
+"  `Estado` BINARY(1) NULL COMMENT '',\n" +
+"  PRIMARY KEY (`idBackFrame`)  COMMENT '',\n" +
+"  INDEX `fk_BackFrame_usuario1_idx` (`idUsuario` ASC)  COMMENT '',\n" +
+"  CONSTRAINT `fk_BackFrame_usuario1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION\n" +
+" )ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+  
         try {
             Class.forName(driver);
 
@@ -128,17 +146,16 @@ public class Conexion {
             Statement s = conn.createStatement();
             s.executeUpdate(myTableName1);
             s.executeUpdate(myTableName2);
-            s.executeUpdate(myInsertTable1);
-            s.executeUpdate(myInsertTable2);
+            s.executeUpdate(myTableName3);
+            s.executeUpdate(myTableName4);
     
-            
         
             System.out.println("Tables Created");
 
             if (conn != null) {
                 System.out.println("Conexión..Creacion table." + url + "...Ok" + "...Usuario:..." + login);
+                
             }
-
             return true;
         } catch (SQLException e) {
             System.out.println("Error en la creacion de la table");
