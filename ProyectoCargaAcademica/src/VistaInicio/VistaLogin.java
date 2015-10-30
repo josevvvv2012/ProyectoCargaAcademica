@@ -8,9 +8,13 @@ package VistaInicio;
 import Vista.GestionUsuario.VistaUsuarios;
 import Controlador.ControllerSql;
 import Modelo.Usuario;
+import Vista.SuperAdministrador.VistaPrincipal;
+import java.awt.Color;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -28,12 +32,14 @@ public class VistaLogin extends javax.swing.JFrame {
     CallableStatement cts;
     Connection cn;
     ResultSet r;
+    static Boolean estado;
     
     
     
     public VistaLogin() {
         setUndecorated(true);
         initComponents();
+        boolean op = GetConnection("root", "");
     }
 
     /**
@@ -55,6 +61,7 @@ public class VistaLogin extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
+        estadoConeccion = new javax.swing.JButton();
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/minimizar.png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -115,6 +122,14 @@ public class VistaLogin extends javax.swing.JFrame {
 
         txtPassword.setText("admin");
 
+        estadoConeccion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        estadoConeccion.setToolTipText("Estado de la conexion a la base de datos");
+        estadoConeccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estadoConeccionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,6 +157,9 @@ public class VistaLogin extends javax.swing.JFrame {
                             .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
                             .addComponent(txtUsuario))))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(estadoConeccion, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,7 +179,9 @@ public class VistaLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEntrar)
                     .addComponent(btnRecordarCon))
-                .addGap(41, 41, 41))
+                .addGap(18, 18, 18)
+                .addComponent(estadoConeccion, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
+                .addGap(6, 6, 6))
         );
 
         pack();
@@ -209,23 +229,29 @@ public class VistaLogin extends javax.swing.JFrame {
             log(String.valueOf(nro));
             if (nro == 1) {//Permil SuperAdmintrador
                 
-            VistaUsuarios VistaUsuarios = new VistaUsuarios();
-            VistaUsuarios.setVisible(true);
+            VistaPrincipal VistaPrincipal = new VistaPrincipal();
+            VistaPrincipal.setVisible(true);
+            
+           // this.dispose();
             
             } else {
                 if(nro == 2)//PerfilAdministrador 2
                 {
                 
-                JOptionPane.showMessageDialog(rootPane, "Perfil 2");
-                }else
-                {
-                    JOptionPane.showMessageDialog(rootPane, "Usuario no registrado");
+                JOptionPane.showMessageDialog(rootPane, "Perfil Administrador");
                 }
+                else
+                {
+                    if(nro == 3) // PerfilProfesor
+                    {
+                        JOptionPane.showMessageDialog(rootPane, "Perfil Profesor");
+                    }               
             }
+         }
             
             
         } catch (Exception e) {
-            //JOptionPane.showMessageDialog(rootPane, e.toString());
+            JOptionPane.showMessageDialog(rootPane, e.toString());
         }
         
     }
@@ -233,6 +259,14 @@ public class VistaLogin extends javax.swing.JFrame {
     
          
     }//GEN-LAST:event_btnEntrarActionPerformed
+
+    private void estadoConeccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoConeccionActionPerformed
+
+        //        this.frame_configuracion.pack();
+        //        this.frame_configuracion.setResizable(false);
+        //        this.frame_configuracion.setLocationRelativeTo(null);
+        //        this.frame_configuracion.setVisible(true);
+    }//GEN-LAST:event_estadoConeccionActionPerformed
 
     
     
@@ -245,7 +279,49 @@ public class VistaLogin extends javax.swing.JFrame {
         return false;
     }
     
+     
+     public void estadoConexion (Boolean est,String user, String cont, String db){
+        if(est == true){
+            this.estadoConeccion.setText("Conectado");
+            this.estadoConeccion.setBackground(new Color(134, 255, 63));
+        } 
+        if(est == false){
+            this.estadoConeccion.setText("No conectado");
+            this.estadoConeccion.setBackground(new Color(255, 8, 23));
+
+        }
+   } 
     
+     
+    
+       public boolean GetConnection(String usuarioDB, String contraseña ) {
+             
+             String db = "baaa0";
+         try {
+             Class.forName("com.mysql.jdbc.Driver");
+             String servidor = "jdbc:mysql://localhost:3306/"+db;
+             
+             
+             cn = DriverManager.getConnection(servidor, usuarioDB, contraseña);
+             estado = true;
+             estadoConexion (estado,usuarioDB, contraseña, db);
+             
+         } catch (ClassNotFoundException ex) {
+             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error 1 en la Conexión con la BD " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+             cn = null;
+             estado = false;
+             estadoConexion (estado,usuarioDB, contraseña, db);
+         } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error 2 en la Conexión con la BD " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+             cn = null;
+             estado = false;
+         estadoConexion (estado,usuarioDB, contraseña, db);
+         } finally {
+            
+         }
+         return estado;
+     }
+     
     public void log(String a) {
         System.out.println("la valor  = " + " " + a);
     }
@@ -290,6 +366,7 @@ public class VistaLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
     private javax.swing.JButton btnRecordarCon;
+    private javax.swing.JButton estadoConeccion;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

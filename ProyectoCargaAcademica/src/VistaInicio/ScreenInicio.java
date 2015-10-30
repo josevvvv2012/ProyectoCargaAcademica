@@ -10,7 +10,7 @@ import static Vista.Administrador.VistaConexionBD.txtNombre;
 import static Vista.Administrador.VistaConexionBD.txtNombreBD;
 import static Vista.Administrador.VistaConexionBD.txtPassword;
 import static Vista.Administrador.VistaConexionBD.txtRespuesta;
-import VistaInicio.VistaPrincipal;
+import Vista.SuperAdministrador.VistaPrincipal;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -83,7 +83,7 @@ public class ScreenInicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 private void progresoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_progresoStateChanged
-    if (progreso.getValue() == 100) {
+    if (progreso.getValue() == 10) {
         this.dispose();
 //Aqui llamamos al JFrame que queremos que aparezca despues
         // VistaPrincipal ini = new VistaPrincipal();
@@ -109,6 +109,14 @@ private void progresoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRS
                     
                     VistaLogin VistaLogin = new VistaLogin();
                     VistaLogin.setVisible(true);
+
+                    Dimension pantall = Toolkit.getDefaultToolkit().getScreenSize();
+                    //obtenemos el tamaño de la ventana  
+                    Dimension ventan = VistaLogin.getSize();
+                    //para centrar la ventana lo hacemos con el siguiente calculo  
+                    VistaLogin.setLocation((pantall.width - ventan.width) / 2, (pantall.height - ventan.height) / 2);
+                    VistaLogin.setVisible(true);
+             
              
 
                 } else {

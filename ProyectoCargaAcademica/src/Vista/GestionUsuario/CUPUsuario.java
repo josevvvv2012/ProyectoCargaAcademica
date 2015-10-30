@@ -40,8 +40,11 @@ public class CUPUsuario extends javax.swing.JFrame {
        txtNombre.setName("txtNombre");
        txtLogin.setName("txtLogin");
        txtPassword.setName("txtPassword");
+       BackFrame(txtCedula,txtNombre,txtLogin,txtPassword);
        
-        BackFrame(txtCedula,txtNombre,txtLogin,txtPassword);
+       //comboPerfil.setModel(new javax.swing.DefaultComboBoxModel(cc.listaProvee().toArray()));
+       
+       
     }
 
     /**
@@ -114,7 +117,7 @@ public class CUPUsuario extends javax.swing.JFrame {
             }
         });
 
-        comboEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "0" }));
         comboEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboEstadoActionPerformed(evt);
@@ -135,7 +138,7 @@ public class CUPUsuario extends javax.swing.JFrame {
             }
         });
 
-        comboPerfil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboPerfil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3" }));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Crear Usuario");
@@ -167,16 +170,18 @@ public class CUPUsuario extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(17, 17, 17)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCedula)
+                                    .addComponent(txtCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                                     .addComponent(txtNombre)
-                                    .addComponent(txtLogin)
-                                    .addComponent(comboPerfil, 0, 134, Short.MAX_VALUE)))
+                                    .addComponent(txtLogin)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(comboEstado, 0, 133, Short.MAX_VALUE)
-                                    .addComponent(txtPassword))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(comboEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtPassword)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(comboPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(165, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
@@ -200,10 +205,10 @@ public class CUPUsuario extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(comboPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -215,7 +220,7 @@ public class CUPUsuario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -250,13 +255,30 @@ public class CUPUsuario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Faltan datos en los campos.");
         }
         else{
-        
-//            int idCedula = Integer.parseInt(txtCedula.getText());
-//            String nombreUsuario = txtNombre.getText();
-//            int idPerfilUsuario ;
-//            String loginUsuario = txtLogin.getText();
-//            String passwordUsuario = txtPassword.getText();
-//            boolean estado ;
+            
+            int idUsuario = Integer.parseInt(txtCedula.getText());
+            String nombre = txtNombre.getText();
+            Object perfil = comboPerfil.getSelectedItem();
+            String login = txtLogin.getText();
+            String contrasenia = txtPassword.getText();
+            Object tipoEstado = comboEstado.getSelectedItem();
+            
+             try {
+                    boolean res = obj.AgregarUsuario(
+                              idUsuario,nombre,(String) perfil,login,contrasenia   
+                            );
+                                    
+                            if (res == true) {
+                                JOptionPane.showMessageDialog(null, "Usuario Registrado Correctamente");
+                                //this.dispose();
+                            } else {
+                                JOptionPane.showMessageDialog(null, "No se pudo ingresar otro usuario ya existe"
+                                        + "de datos");
+                            }
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, "por favor verifique la conexion del servidor ");
+
+                        }
             
             deleteDataFrame();
         }
@@ -313,10 +335,11 @@ public class CUPUsuario extends javax.swing.JFrame {
                 boolean res = obj.AgregarCampoBackFrame(1, nombreFrame, txtCampo, txtdato);
 
                 if (res == true) {
-                    JOptionPane.showMessageDialog(null, "Usuario Registrado Correctamente");
+                    log("Usuario Registrado Correctamente");
 
                 } else {
-                    JOptionPane.showMessageDialog(null, "No se pudo ingresar un nuevo Empleado ya existe en la base"
+                    
+                    log("No se pudo ingresar un nuevo Empleado ya existe en la base"
                             + "de datos");
                 }
 
@@ -362,6 +385,8 @@ public class CUPUsuario extends javax.swing.JFrame {
     }
       
     public void deleteDataFrame() {
+        
+        log("deleteDataFrame");
       String nombreFrame = "CUPUsuario";
         try {
             obj = new ControllerSql();

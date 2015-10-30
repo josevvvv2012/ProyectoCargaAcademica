@@ -6,7 +6,7 @@
 package Vista.Administrador;
 
 import Controlador.Conexion;
-import VistaInicio.VistaPrincipal;
+import Vista.SuperAdministrador.VistaPrincipal;
 import static Controlador.Conexion.servidor;
 import static Controlador.Conexion.dbName;
 import static Controlador.Conexion.login;

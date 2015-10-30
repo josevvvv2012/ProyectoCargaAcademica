@@ -63,16 +63,16 @@ public class ControllerSql {//public
     {
         int r=0;
         String sql="select  idPerfil from usuario where login=? and contrasenia=?";
-        try (Connection cn= Conexion.getConn();
-                PreparedStatement ps= cn.prepareStatement(sql)){
+        
+           
+            Connection cn= Conexion.getConn();
+            PreparedStatement ps= cn.prepareStatement(sql);
             ps.setString(1,p.getLogin());
             ps.setString(2,p.getContrasenia());
             try (ResultSet rs= ps.executeQuery()){
                 rs.next();
                 r=rs.getInt(1);
                 
-            }
-            
         }
         System.out.println(r);
         return r;
@@ -89,11 +89,11 @@ public class ControllerSql {//public
             // preparo la consulta para mi base de datos
             PreparedStatement preparedStmt = conexion.prepareStatement(query);
             
-            preparedStmt.setInt(1, idusuario);
-            preparedStmt.setString(2, nombreFrame);
-            preparedStmt.setString(3, txtCampo);
-            preparedStmt.setString(4, txtdato);
-            preparedStmt.setInt(5, estado);
+            preparedStmt.setInt(1,idusuario);
+            preparedStmt.setString(2,nombreFrame);
+            preparedStmt.setString(3,txtCampo);
+            preparedStmt.setString(4,txtdato);
+            preparedStmt.setInt(5,estado);
             
 
             // ejecuto mi query
@@ -107,7 +107,7 @@ public class ControllerSql {//public
     public ResultSet ConsultarBackFrame() {
         try {
 
-            String query = "select * from backframe where Estado = 1";
+            String query = "select * from backframe where estado = 1";
             Statement st = conexion.createStatement();
             rs = st.executeQuery(query);
             return rs;
@@ -166,6 +166,44 @@ public class ControllerSql {//public
     }
         
        
+    
+ 
+       /*
+    `1idusuario` INT(11) NOT NULL,
+	2`nombre` VARCHAR(255) NULL DEFAULT NULL,
+	3`idPerfil` INT(11) NOT NULL,
+	4`login` VARCHAR(45) NULL DEFAULT NULL,
+	5`contrasenia` VARCHAR(45) NULL DEFAULT NULL,
+	6`estado` BIT(1) NULL DEFAULT NULL,
+       */
+    public boolean AgregarUsuario(int idusuario,String nombreUsuario,String idPerfil ,String loginUsuario ,String contrasenia) {
+
+        int estado=1;
+        int p = Integer.parseInt(idPerfil);
+       
+        try {
+            String query = "INSERT INTO usuario (idusuario,nombre,idPerfil,login,contrasenia,estado)"
+                
+                            + " VALUES (?,?,?,?,?,1);";
+        
+
+            // preparo la consulta para mi base de datos
+            PreparedStatement preparedStmt = conexion.prepareStatement(query);
+            preparedStmt.setInt(1, idusuario);
+            preparedStmt.setString(2, nombreUsuario);
+            preparedStmt.setInt(3, p);
+            preparedStmt.setString(4, loginUsuario);
+            preparedStmt.setString(5, contrasenia);
+            preparedStmt.setInt(6, 1);
+        
+            // ejecuto mi query
+            preparedStmt.execute();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }   
+    
        
   public static int IngresoLogin(Usuario p) throws ClassNotFoundException, SQLException
     {

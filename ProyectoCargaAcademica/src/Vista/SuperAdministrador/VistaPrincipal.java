@@ -8,10 +8,14 @@
  *
  * Created on 16-04-2013, 12:10:52 AM
  */
-package VistaInicio;
+package Vista.SuperAdministrador;
 
 import Controlador.Conexion;
+import Vista.GestionUsuario.VistaUsuarios;
+import VistaInicio.VistaLogin;
 import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -112,7 +116,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Cliente.png"))); // NOI18N
         jButton4.setText("Cliente");
-        jButton4.setToolTipText("Clientes");
+        jButton4.setToolTipText("Usuarios");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -237,18 +241,26 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        
+    
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-     VistaLogin  VistaIndex = new VistaLogin();
-     VistaIndex.setVisible(true);
+     VistaUsuarios VistaUsuarios = new VistaUsuarios();
+     VistaUsuarios.setVisible(true);
+     
+             Dimension pantall = Toolkit.getDefaultToolkit().getScreenSize();
+                    //obtenemos el tamaño de la ventana  
+                    Dimension ventan = VistaUsuarios.getSize();
+                    //para centrar la ventana lo hacemos con el siguiente calculo  
+                    VistaUsuarios.setLocation((pantall.width - ventan.width) / 2, (pantall.height - ventan.height) / 2);
+                    VistaUsuarios.setVisible(true);
+     
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

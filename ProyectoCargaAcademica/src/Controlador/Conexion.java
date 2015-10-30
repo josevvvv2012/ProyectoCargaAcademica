@@ -99,7 +99,7 @@ public class Conexion {
         dbName = VistaConexionBD.txtNombreBD.getText();
 
    
-   String myTableName1 ="CREATE TABLE IF NOT EXISTS `baaa0`.`perfil` (\n" +
+   String myTableName1 ="CREATE TABLE IF NOT EXISTS  `perfil` (\n" +
 "  `idperfil` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',\n" +
 "  `nombre` VARCHAR(255) NULL DEFAULT NULL COMMENT '',\n" +
 "  `estado` BIT(1) NULL DEFAULT NULL COMMENT '',\n" +
@@ -144,12 +144,12 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
   
   
   String myTableName5 ="CREATE TABLE IF NOT EXISTS `BackFrame` (\n" +
-"  `idBackFrame` INT NOT NULL COMMENT '',\n" +
+"  `idBackFrame` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',\n" +          
 "  `idUsuario` INT(11) NULL COMMENT '',\n" +
 "  `jframe` VARCHAR(225) NULL COMMENT '',\n" +
 "  `txtdato` VARCHAR(255) NULL COMMENT '',\n" +
-"  `date` VARCHAR(255) NULL COMMENT '',\n" +
-"  `Estado` BINARY(1) NULL COMMENT '',\n" +
+"  `dato` VARCHAR(255) NULL COMMENT '',\n" +
+"  `estado` BIT(1) NULL COMMENT '',\n" +
 "  PRIMARY KEY (`idBackFrame`)  COMMENT '',\n" +
 "  INDEX `fk_BackFrame_usuario1_idx` (`idUsuario` ASC)  COMMENT '',\n" +
 "  CONSTRAINT `fk_BackFrame_usuario1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION\n" +
