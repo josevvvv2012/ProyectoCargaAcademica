@@ -5,7 +5,8 @@
  */
 package VistaInicio;
 
-import Vista.GestionUsuario.VistaUsuarios;
+import Controlador.Conexion;
+import Vista.SuperAdministrador.VistaUsuarios;
 import Controlador.ControllerSql;
 import Modelo.Usuario;
 import Vista.SuperAdministrador.VistaPrincipal;
@@ -33,13 +34,15 @@ public class VistaLogin extends javax.swing.JFrame {
     Connection cn;
     ResultSet r;
     static Boolean estado;
+    Conexion cx;
+   
     
     
     
     public VistaLogin() {
         setUndecorated(true);
         initComponents();
-        boolean op = GetConnection("root", "");
+         //boolean op = cx.GetConnection(cx.login, cx.password);
     }
 
     /**
@@ -279,7 +282,7 @@ public class VistaLogin extends javax.swing.JFrame {
         return false;
     }
     
-     
+     /*
      public void estadoConexion (Boolean est,String user, String cont, String db){
         if(est == true){
             this.estadoConeccion.setText("Conectado");
@@ -291,9 +294,9 @@ public class VistaLogin extends javax.swing.JFrame {
 
         }
    } 
-    
+    */
      
-    
+    /*
        public boolean GetConnection(String usuarioDB, String contraseña ) {
              
              String db = "baaa0";
@@ -320,7 +323,7 @@ public class VistaLogin extends javax.swing.JFrame {
             
          }
          return estado;
-     }
+     }*/
      
     public void log(String a) {
         System.out.println("la valor  = " + " " + a);

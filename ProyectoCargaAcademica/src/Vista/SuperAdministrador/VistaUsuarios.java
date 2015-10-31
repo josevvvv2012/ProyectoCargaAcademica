@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vista.GestionUsuario;
+package Vista.SuperAdministrador;
 
 import Controlador.Conexion;
 import Controlador.ControllerSql;
@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,6 +28,8 @@ public class VistaUsuarios extends javax.swing.JFrame {
     CallableStatement cts;
     Connection cn;
     ResultSet r;
+    CUPUsuario  formUsuario;
+    
     
     /**
      * Creates new form VistaUsuarios
@@ -68,6 +71,107 @@ public class VistaUsuarios extends javax.swing.JFrame {
         }
     }
     
+     /*
+     *Consulta los datos de la tabla
+    @autor jose vanegas -jvanegasv@ucentral.edu.co
+    */
+  
+  public void consultarTable()
+    {
+     log("Consultar tabla");
+        String x = jTextField1.getText();
+        log(String.valueOf(x));
+        PreparedStatement ps;
+        DefaultTableModel tabla = new DefaultTableModel();
+
+        try {
+           tabla.addColumn("Identificacion");
+            tabla.addColumn("Nombre");
+            tabla.addColumn("Perfil");
+            tabla.addColumn("Login");
+            tabla.addColumn("Clave");
+            tabla.addColumn("Estado");
+          
+          
+            cts = cn.prepareCall("{call filtraUsuarioId(?)}");//procedimiento almacenado
+            cts.setString(1, x);
+            r = cts.executeQuery();
+
+
+            while (r.next()) {
+                Object dato[] = new Object[6];
+                for (int i = 0; i < 6; i++) {
+                    dato[i] = r.getString(i + 1);
+
+                    log(String.valueOf(dato[i]));
+                }
+                tabla.addRow(dato);
+            }
+            this.jTable1.setModel(tabla);
+
+        } catch (Exception e) {
+        }
+    
+  }
+  
+   /*
+     *Seleccionar los datos de la tabla
+    @autor jose vanegas -jvanegasv@ucentral.edu.co
+    */
+  
+  
+   public int seleccionarfila(int a) {
+
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        int row = jTable1.getSelectedRow();
+        //ahora obtenemos la fila selccionada
+        int fila_select = jTable1.getSelectedRow();
+
+        if (fila_select < 0) {
+            // no se puede eliminar
+            JOptionPane.showMessageDialog(this, "Tabla vacia o no ha seleccionado uan fila.");
+        } else {
+            // la eliminamos del modelo:
+            //modelo.removeRow(fila_select);
+            /*String idIdentificacion = jTable1.getValueAt(row, 0).toString();
+            String nombre = jTable1.getValueAt(row, 1).toString();
+            String direccion = jTable1.getValueAt(row, 2).toString();
+            String telefono = jTable1.getValueAt(row, 3).toString();
+            txtIdCliente.setText(idIdentificacion);
+            txtIdCliente.setEnabled(false);
+            txt_nombre_cliente.setText(nombre);
+            txtDireccion.setText(direccion);
+            txtTelefono.setText(telefono);
+            btnSelectEditar.setText("Editar");*/
+         
+          
+          String idUsuario =jTable1.getValueAt(row, 0).toString();
+          String nombre =jTable1.getValueAt(row, 1).toString();
+          String Perfil =jTable1.getValueAt(row, 2).toString();
+          String Login =jTable1.getValueAt(row, 3).toString();
+          String Clave =jTable1.getValueAt(row, 4).toString();
+          String Estado =jTable1.getValueAt(row, 5).toString();
+          
+          
+          formUsuario = new  CUPUsuario();
+          formUsuario.setVisible(true);
+          
+         formUsuario.txtCedula.setText(idUsuario);
+         formUsuario.txtNombre.setText(nombre);
+         formUsuario.txtLogin.setText(Login);
+         formUsuario.txtPassword.setText(Clave);
+            
+          
+            a = 1;
+            
+        }
+        
+        log(String.valueOf(a));
+        return a;
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -86,6 +190,8 @@ public class VistaUsuarios extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btnBuscar = new javax.swing.JButton();
+        btnSeleccionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,6 +238,20 @@ public class VistaUsuarios extends javax.swing.JFrame {
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTable1);
 
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,16 +265,20 @@ public class VistaUsuarios extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel1)
                                 .addGap(174, 174, 174)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnBuscar)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnSeleccionar))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -176,7 +300,11 @@ public class VistaUsuarios extends javax.swing.JFrame {
                             .addComponent(jLabel2)))
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
+                .addComponent(btnBuscar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSeleccionar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
@@ -201,6 +329,16 @@ public class VistaUsuarios extends javax.swing.JFrame {
         CUPUsuario  CUPUsuario = new CUPUsuario();
         CUPUsuario.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        consultarTable();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+        // TODO add your handling code here:
+        seleccionarfila(0);
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     
   
@@ -244,6 +382,8 @@ public class VistaUsuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnSeleccionar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;

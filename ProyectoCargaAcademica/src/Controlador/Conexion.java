@@ -30,6 +30,7 @@ public class Conexion {
     public static String login;
     public static String password;
     public static String dbName;
+    static Boolean estado;
 
     private static Conexion conex = null;
 
@@ -160,7 +161,7 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
 "  `nombreMateria` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
 "  `tipo` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
 "  `creditos` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
-"  `intHoraria` BIGINT(20) NULL DEFAULT NULL COMMENT '',\n" +
+"  `intHoraria` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
 "  `semestre` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
 "  `idAdministrador` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
 "  PRIMARY KEY (`idMateria`)  COMMENT '',\n" +
@@ -210,6 +211,16 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
 "  PRIMARY KEY (`idbd`)\n" +
 ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
    
+      
+      
+ String myTableName10 ="CREATE TABLE IF NOT EXISTS `grupo` (\n" +
+"  `idgrupo` int(11) NOT NULL AUTO_INCREMENT,\n" +
+"  `idmateria` varchar(255) DEFAULT NULL,\n" +
+"  `jornada` varchar(255) DEFAULT NULL,\n" +
+"  `bloque` int(11) NOT NULL ,\n" +        
+"  `estado` bit(1) DEFAULT NULL,\n" +
+"  PRIMARY KEY (`idgrupo`)\n" +
+") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
  
            
    String insertTable1 ="INSERT INTO `perfil` (`idperfil`, `nombre`, `estado`) VALUES (1, 'SuperAdministrador', b'1');";
@@ -221,7 +232,17 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
    String insertTable7="INSERT INTO  `administrador` (`idAdmin`, `tipoContrato`) VALUES (2, 'Unico');";
    String insertTable8="INSERT INTO  `usuario` (`idusuario`, `nombre`, `idPerfil`, `login`, `contrasenia`, `estado`) VALUES (3, 'PROFESOR', 3, 'a', 'a', b'1');";
  
+      
+  String prodfiltraUsuarioID="CREATE PROCEDURE `filtraUsuarioId`(IN `cod` INT)\n" +
+	"	\n" +
+	"SELECT * FROM usuario WHERE idusuario = cod ";
+      
+      
+      String prodfiltraMateriaID="CREATE PROCEDURE `filtraMateriaId`(IN `cod` INT)\n" +
+	"	\n" +
+	"SELECT * FROM materia WHERE idMateria = cod ";
   
+      
  
         try {
             Class.forName(driver);
@@ -238,6 +259,7 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
             s.executeUpdate(myTableName7);
             s.executeUpdate(myTableName8);
             s.executeUpdate(myTableName9);
+            s.executeUpdate(myTableName10);
             
             s.executeUpdate(insertTable1);
             s.executeUpdate(insertTable2);
@@ -247,7 +269,9 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
             s.executeUpdate(insertTable6);
             s.executeUpdate(insertTable7);
             s.executeUpdate(insertTable8);
-            
+          
+            s.executeUpdate(prodfiltraUsuarioID);
+            s.executeUpdate(prodfiltraMateriaID);
             
             
     
@@ -269,6 +293,42 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
    public static Connection getConn() {
         return conn;
     }
-
+  
+  
+  
+  public boolean GetConnection(String usuarioDB, String contraseña ) {
+             
+             
+         try {
+             Class.forName("com.mysql.jdbc.Driver");
+             String servidor = "jdbc:mysql://localhost:3306/"+dbName;
+             
+             
+             conn = DriverManager.getConnection(servidor, usuarioDB, contraseña);
+             estado = true;
+           //  estadoConexion (estado,usuarioDB, contraseña, dbName);
+             
+         } catch (ClassNotFoundException ex) {
+            // JOptionPane.showMessageDialog(null, ex.getMessage(), "Error 1 en la Conexión con la BD " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+             log("Error 1 en la Conexión con la BD");
+             conn = null;
+             estado = false;
+         //    estadoConexion (estado,usuarioDB, contraseña, dbName);
+         } catch (SQLException ex) {
+           //  JOptionPane.showMessageDialog(null, ex.getMessage(), "Error 2 en la Conexión con la BD " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+             log("Error 2 en la Conexión con la BD");
+             conn = null;
+             estado = false;
+         //estadoConexion (estado,usuarioDB, contraseña, dbName);
+         } finally {
+            
+         }
+         return estado;
+ }
+  
+  
+  public void log(String a) {
+        System.out.println("la valor  = " + " " + a);
+    }
 }//fin de la clase
 

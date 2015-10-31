@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vista.GestionUsuario;
+package Vista.SuperAdministrador;
 
 import Controlador.ControllerSql;
 import java.awt.Component;
@@ -464,9 +464,9 @@ public class CUPUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField txtCedula;
-    private javax.swing.JTextField txtLogin;
+    public static javax.swing.JTextField txtCedula;
+    public static javax.swing.JTextField txtLogin;
     public static javax.swing.JTextField txtNombre;
-    private javax.swing.JPasswordField txtPassword;
+    public static javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 }

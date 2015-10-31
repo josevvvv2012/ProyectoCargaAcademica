@@ -11,7 +11,6 @@
 package Vista.SuperAdministrador;
 
 import Controlador.Conexion;
-import Vista.GestionUsuario.VistaUsuarios;
 import VistaInicio.VistaLogin;
 import java.awt.Desktop;
 import java.awt.Dimension;

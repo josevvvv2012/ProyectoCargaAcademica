@@ -130,7 +130,7 @@ public class ControllerSql {//public
         }
     }
  
-       
+    /**************************************************************************/       
        /*
       String myTableName3 ="CREATE TABLE IF NOT EXISTS `mybd` (\n" +
 "  `idbd` int(11) NOT NULL AUTO_INCREMENT,\n" +
@@ -141,7 +141,8 @@ public class ControllerSql {//public
 "  `estado` bit(1) DEFAULT NULL,\n" +
 "  PRIMARY KEY (`idbd`)\n" +
 ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-       */
+   /***************************************************************************/
+  
     public boolean AgregarBd(String servidor,String login , String password , String dbName) {
 
         
@@ -166,7 +167,7 @@ public class ControllerSql {//public
     }
         
        
-    
+   /**************************************************************************/ 
  
        /*
     `1idusuario` INT(11) NOT NULL,
@@ -176,6 +177,9 @@ public class ControllerSql {//public
 	5`contrasenia` VARCHAR(45) NULL DEFAULT NULL,
 	6`estado` BIT(1) NULL DEFAULT NULL,
        */
+  
+  
+/**************************************************************************/ 
     public boolean AgregarUsuario(int idusuario,String nombreUsuario,String idPerfil ,String loginUsuario ,String contrasenia) {
 
         int estado=1;
@@ -204,7 +208,112 @@ public class ControllerSql {//public
         }
     }   
     
+  
+  
+    public boolean EliminarUsuario(int idusuario) {
+           
+     try {
+            String query = "delete from usuario where idUsuario = ?";
+            PreparedStatement preparedStmt = conexion.prepareStatement(query);
+            preparedStmt.execute();
+
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+ 
+     
+ /**************************************************************************/ 
+  /*
+   String myTableName6 ="CREATE TABLE IF NOT EXISTS `baaa0`.`materia` (\n" +
+"  `idMateria` INT(11) NOT NULL COMMENT '',\n" +
+"  `nombreMateria` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
+"  `tipo` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
+"  `creditos` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
+"  `intHoraria` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
+"  `semestre` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
+"  `idAdministrador` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
+"  PRIMARY KEY (`idMateria`)  COMMENT '',\n" +
+"  INDEX `idAdministrador` (`idAdministrador` ASC)  COMMENT '',\n" +
+"  CONSTRAINT `FK_Materia_Administrador`\n" +
+"    FOREIGN KEY (`idAdministrador`)\n" +
+"    REFERENCES `baaa0`.`administrador` (`idAdmin`))\n" +
+"ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";*/
+  
+  
+  
+   /**************************************************************************/ 
+  
+  
+  
+  public boolean CrearMateria(
+  int  idMateria,
+  String nombreMateria,
+  String  tipo, 
+  int creditos,
+  int  intHoraria,
+  int semestre,
+  int idAdministrador
+   
+  ) {
+
+        int estado=1;
+      //  int p = Integer.parseInt(idPerfil);
        
+        try {
+            String query = "INSERT INTO materia (idMateria,nombreMateria,tipo,creditos,intHoraria,semestre,idAdministrador)"
+                
+                            + " VALUES (?,?,?,?,?,?,?);";
+        
+
+            // preparo la consulta para mi base de datos
+            PreparedStatement preparedStmt = conexion.prepareStatement(query);
+           
+          
+  
+          preparedStmt.setInt(1, idMateria);
+          preparedStmt.setString(2, nombreMateria);
+          preparedStmt.setString(3, tipo);
+          preparedStmt.setInt(4, creditos);
+          preparedStmt.setInt(5, intHoraria);
+          preparedStmt.setInt(6, semestre);
+          preparedStmt.setInt(7, idAdministrador);
+         
+          
+        
+            // ejecuto mi query
+            preparedStmt.execute();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    } 
+  
+      public boolean EliminarMateria(int idMateria) {
+           
+     try {
+            String query = "delete from materia where idMateria = ?";
+            PreparedStatement preparedStmt = conexion.prepareStatement(query);
+            preparedStmt.execute();
+
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+ 
+  
+  
+   /**************************************************************************/ 
+  
+  
+  
+  
+  
+  
+  
+  
   public static int IngresoLogin(Usuario p) throws ClassNotFoundException, SQLException
     {
         return Ingreso(p);
