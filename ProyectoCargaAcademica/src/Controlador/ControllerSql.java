@@ -180,23 +180,23 @@ public class ControllerSql {//public
   
   
 /**************************************************************************/ 
-    public boolean AgregarUsuario(int idusuario,String nombreUsuario,String idPerfil ,String loginUsuario ,String contrasenia) {
+    public boolean AgregarUsuario(int idusuario,String nombre,int idPerfil,String login,String contrasenia, int estado) {
 
-        int estado=1;
-        int p = Integer.parseInt(idPerfil);
-       
-        try {
-            String query = "INSERT INTO usuario (idusuario,nombre,idPerfil,login,contrasenia,estado)"
-                
-                            + " VALUES (?,?,?,?,?,1);";
         
+//       int p = Integer.parseInt(idPerfil);
+//        log("p"+String.valueOf(p));
+       log("perfil"+String.valueOf(idPerfil));
+        try {
+         //   String query = "INSERT INTO `baaa0`.`usuario` (`idusuario`, `nombre`, `idPerfil`, `login`, `contrasenia`, `estado`) VALUES (5, 'prueba', 1, '1', '1', b'1');";
+            String query = "INSERT INTO usuario (idusuario,nombre, idPerfil, login,contrasenia,estado) "
+                    + "     VALUES (?,?,?,?,?,?);";
 
             // preparo la consulta para mi base de datos
             PreparedStatement preparedStmt = conexion.prepareStatement(query);
-            preparedStmt.setInt(1, idusuario);
-            preparedStmt.setString(2, nombreUsuario);
-            preparedStmt.setInt(3, p);
-            preparedStmt.setString(4, loginUsuario);
+            preparedStmt.setInt(1,idusuario);
+            preparedStmt.setString(2, nombre);
+            preparedStmt.setInt(3, idPerfil);
+            preparedStmt.setString(4,login);
             preparedStmt.setString(5, contrasenia);
             preparedStmt.setInt(6, 1);
         

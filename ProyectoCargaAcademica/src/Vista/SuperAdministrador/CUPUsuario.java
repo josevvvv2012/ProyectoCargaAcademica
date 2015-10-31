@@ -30,6 +30,7 @@ public class CUPUsuario extends javax.swing.JFrame {
     CallableStatement cts;
     Connection cn;
     ResultSet r;
+    VistaUsuarios VistaUsuarios;
     
     
     public CUPUsuario() {
@@ -263,14 +264,30 @@ public class CUPUsuario extends javax.swing.JFrame {
             String contrasenia = txtPassword.getText();
             Object tipoEstado = comboEstado.getSelectedItem();
             
+            
+            String sperfil = (String) perfil;
+            String stipoEstado = (String) tipoEstado;
+            
+            
+            
+            
              try {
-                    boolean res = obj.AgregarUsuario(
-                              idUsuario,nombre,(String) perfil,login,contrasenia   
-                            );
+                 
+                 
+                 int intperfil = Integer.parseInt(sperfil);
+                 int intEstado = Integer.parseInt(stipoEstado);
+            
+                 
+        boolean res = obj.AgregarUsuario(idUsuario,nombre,(int) intperfil,login,contrasenia,(int) intEstado);
                                     
                             if (res == true) {
+                                this.dispose();
+                                VistaUsuarios = new VistaUsuarios();
+                                VistaUsuarios.setVisible(true);
                                 JOptionPane.showMessageDialog(null, "Usuario Registrado Correctamente");
-                                //this.dispose();
+                               
+                               
+                               
                             } else {
                                 JOptionPane.showMessageDialog(null, "No se pudo ingresar otro usuario ya existe"
                                         + "de datos");
@@ -280,7 +297,7 @@ public class CUPUsuario extends javax.swing.JFrame {
 
                         }
             
-            deleteDataFrame();
+            //deleteDataFrame();
         }
         
         

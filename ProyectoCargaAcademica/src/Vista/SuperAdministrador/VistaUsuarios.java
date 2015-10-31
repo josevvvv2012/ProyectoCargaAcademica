@@ -328,6 +328,7 @@ public class VistaUsuarios extends javax.swing.JFrame {
     // TODO add your handling code here:
         CUPUsuario  CUPUsuario = new CUPUsuario();
         CUPUsuario.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
