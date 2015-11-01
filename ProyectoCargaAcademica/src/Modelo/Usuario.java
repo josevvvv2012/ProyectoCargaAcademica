@@ -14,7 +14,6 @@ public class Usuario{
     
     int idUsuario;
     String nombre;
-    String cedula;
     Perfil idPerfil;
     String login;
     String contrasenia;
@@ -23,10 +22,9 @@ public class Usuario{
     
      public Usuario() {
     }
-    public Usuario(int idUsuario, String nombre, String cedula, Perfil idPerfil, String login, String contrasenia, boolean estado) {
+    public Usuario(int idUsuario, String nombre,Perfil idPerfil, String login, String contrasenia, boolean estado) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
-        this.cedula = cedula;
         this.idPerfil = idPerfil;
         this.login = login;
         this.contrasenia = contrasenia;
@@ -48,15 +46,6 @@ public class Usuario{
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-
     public Perfil getIdPerfil() {
         return idPerfil;
     }

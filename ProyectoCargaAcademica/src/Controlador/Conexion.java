@@ -130,7 +130,7 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
 "  PRIMARY KEY (`idprofesor`)  COMMENT '',\n" +
 "  CONSTRAINT `FK_Profesor_usuario`\n" +
 "    FOREIGN KEY (`idprofesor`)\n" +
-"    REFERENCES `baaa0`.`usuario` (`idusuario`))\n" +
+"    REFERENCES `baaa0`.`usuario` (`idusuario`) ON DELETE CASCADE ON UPDATE CASCADE )\n" +
 "ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";
 
   
@@ -243,6 +243,10 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
 	"SELECT * FROM materia WHERE idMateria = cod ";
   
       
+       String prodEliminarUsuario="CREATE PROCEDURE `eliminarUsuario`(IN `cod` INT)\n" +
+	"	\n" +
+	"delete from usuario where idusuario = cod ";
+      
  
         try {
             Class.forName(driver);
@@ -272,6 +276,7 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
           
             s.executeUpdate(prodfiltraUsuarioID);
             s.executeUpdate(prodfiltraMateriaID);
+            s.executeUpdate(prodEliminarUsuario);
             
             
     

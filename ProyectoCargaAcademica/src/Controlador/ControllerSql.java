@@ -32,6 +32,7 @@ public class ControllerSql {//public
     Connection conexion;
     Statement stm;
     ResultSet rs;
+    Usuario Usario;
 
     
     private static ControllerSql cs = new ControllerSql();
@@ -183,21 +184,23 @@ public class ControllerSql {//public
     public boolean AgregarUsuario(int idusuario,String nombre,int idPerfil,String login,String contrasenia, int estado) {
 
         
-//       int p = Integer.parseInt(idPerfil);
-//        log("p"+String.valueOf(p));
-       log("perfil"+String.valueOf(idPerfil));
+        Usuario Usuario = new Usuario(idusuario, nombre, null, login, contrasenia, true);
+        
+      
+
+      // log("perfil"+String.valueOf(idPerfil));
         try {
-         //   String query = "INSERT INTO `baaa0`.`usuario` (`idusuario`, `nombre`, `idPerfil`, `login`, `contrasenia`, `estado`) VALUES (5, 'prueba', 1, '1', '1', b'1');";
+         
             String query = "INSERT INTO usuario (idusuario,nombre, idPerfil, login,contrasenia,estado) "
                     + "     VALUES (?,?,?,?,?,?);";
 
             // preparo la consulta para mi base de datos
             PreparedStatement preparedStmt = conexion.prepareStatement(query);
-            preparedStmt.setInt(1,idusuario);
-            preparedStmt.setString(2, nombre);
+            preparedStmt.setInt(1,Usuario.getIdUsuario());
+            preparedStmt.setString(2, Usuario.getNombre());
             preparedStmt.setInt(3, idPerfil);
-            preparedStmt.setString(4,login);
-            preparedStmt.setString(5, contrasenia);
+            preparedStmt.setString(4,Usuario.getLogin());
+            preparedStmt.setString(5, Usuario.getContrasenia());
             preparedStmt.setInt(6, 1);
         
             // ejecuto mi query
@@ -208,22 +211,7 @@ public class ControllerSql {//public
         }
     }   
     
-  
-  
-    public boolean EliminarUsuario(int idusuario) {
-           
-     try {
-            String query = "delete from usuario where idUsuario = ?";
-            PreparedStatement preparedStmt = conexion.prepareStatement(query);
-            preparedStmt.execute();
-
-            return true;
-        } catch (SQLException e) {
-            return false;
-        }
-    }
- 
-     
+       
  /**************************************************************************/ 
   /*
    String myTableName6 ="CREATE TABLE IF NOT EXISTS `baaa0`.`materia` (\n" +
@@ -318,7 +306,7 @@ public class ControllerSql {//public
     {
         return Ingreso(p);
     }
-
+  
       public void log(String a) {
         System.out.println("la valor  = " + " " + a);
     }  

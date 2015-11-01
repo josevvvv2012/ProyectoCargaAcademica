@@ -278,7 +278,7 @@ public class CUPUsuario extends javax.swing.JFrame {
                  int intEstado = Integer.parseInt(stipoEstado);
             
                  
-        boolean res = obj.AgregarUsuario(idUsuario,nombre,(int) intperfil,login,contrasenia,(int) intEstado);
+              boolean res = obj.AgregarUsuario(idUsuario,nombre,(int) intperfil,login,contrasenia,(int) intEstado);
                                     
                             if (res == true) {
                                 this.dispose();
@@ -297,7 +297,7 @@ public class CUPUsuario extends javax.swing.JFrame {
 
                         }
             
-            //deleteDataFrame();
+            deleteDataFrame();
         }
         
         
