@@ -184,14 +184,11 @@ public class ControllerSql {//public
     public boolean AgregarUsuario(int idusuario,String nombre,int idPerfil,String login,String contrasenia, int estado) {
 
         
-        Usuario Usuario = new Usuario(idusuario, nombre, null, login, contrasenia, true);
+        Usuario Usuario = new Usuario(idusuario, idusuario, nombre, null, login, contrasenia, true);
         
-      
-
-      // log("perfil"+String.valueOf(idPerfil));
         try {
          
-            String query = "INSERT INTO usuario (idusuario,nombre, idPerfil, login,contrasenia,estado) "
+            String query = "INSERT INTO usuario (identificacion,nombre, idPerfil, login,contrasenia,estado) "
                     + "     VALUES (?,?,?,?,?,?);";
 
             // preparo la consulta para mi base de datos

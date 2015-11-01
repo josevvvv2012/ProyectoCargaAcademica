@@ -150,7 +150,7 @@
               <Image iconType="3" name="/Img/Proveedores_opt.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Proveedor"/>
-            <Property name="toolTipText" type="java.lang.String" value="Proveedores"/>
+            <Property name="toolTipText" type="java.lang.String" value="Materias"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>

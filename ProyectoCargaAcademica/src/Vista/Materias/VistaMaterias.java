@@ -5,19 +5,74 @@
  */
 package Vista.Materias;
 
+import Controlador.Conexion;
+import Controlador.ControllerSql;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author negro
  */
 public class VistaMaterias extends javax.swing.JFrame {
 
+    ControllerSql obj;
+    CallableStatement cts;
+    Connection cn;
+    ResultSet r;
+    
     /**
      * Creates new form VistaMaterias
      */
     public VistaMaterias() {
+        setUndecorated(true);
         initComponents();
+         cn = Conexion.getConn();
+        cargar();
     }
 
+    /*
+    @cargar las datos de la tabla usuario 
+    @autor jose vanegas . jvanegasv@ucentral.edu.co
+    */
+     
+    
+    public void cargar() {
+
+        DefaultTableModel tabla = new DefaultTableModel();
+        PreparedStatement ps;
+        try {
+            tabla.addColumn("Id Materia");
+            tabla.addColumn("Nombre");
+            tabla.addColumn("Tipo");
+            tabla.addColumn("No Creditos");
+            tabla.addColumn("Int Horaria");
+            tabla.addColumn("Semestre");
+            tabla.addColumn("Administrador");
+            
+            ps = cn.prepareStatement("SELECT idMateria,nombreMateria,tipo,creditos,intHoraria,semestre,idAdministrador FROM materia");
+            r = ps.executeQuery();
+
+            while (r.next()) {
+                Object dato[] = new Object[7];
+                
+                for (int i = 0; i < 7; i++) {
+                    dato[i] = r.getString(i + 1);
+                    //log(String.valueOf(dato[0]));
+                }
+                tabla.addRow(dato);
+            }
+            this.jTable1.setModel(tabla);
+
+        } catch (Exception e) {
+        }
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

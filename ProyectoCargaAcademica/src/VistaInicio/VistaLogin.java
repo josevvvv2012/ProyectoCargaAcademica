@@ -234,6 +234,7 @@ public class VistaLogin extends javax.swing.JFrame {
                 
             VistaPrincipal VistaPrincipal = new VistaPrincipal();
             VistaPrincipal.setVisible(true);
+            this.dispose();
             
            // this.dispose();
             

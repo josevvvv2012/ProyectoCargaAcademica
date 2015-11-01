@@ -257,7 +257,7 @@ public class CUPUsuario extends javax.swing.JFrame {
         }
         else{
             
-            int idUsuario = Integer.parseInt(txtCedula.getText());
+            int identificacion = Integer.parseInt(txtCedula.getText());
             String nombre = txtNombre.getText();
             Object perfil = comboPerfil.getSelectedItem();
             String login = txtLogin.getText();
@@ -278,7 +278,7 @@ public class CUPUsuario extends javax.swing.JFrame {
                  int intEstado = Integer.parseInt(stipoEstado);
             
                  
-              boolean res = obj.AgregarUsuario(idUsuario,nombre,(int) intperfil,login,contrasenia,(int) intEstado);
+              boolean res = obj.AgregarUsuario(identificacion,nombre,(int) intperfil,login,contrasenia,(int) intEstado);
                                     
                             if (res == true) {
                                 this.dispose();

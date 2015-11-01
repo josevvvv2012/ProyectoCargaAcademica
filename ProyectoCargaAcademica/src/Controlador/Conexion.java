@@ -109,7 +109,8 @@ public class Conexion {
 
     
  String myTableName2="CREATE TABLE IF NOT EXISTS `baaa0`.`usuario` (\n" +
-"  `idusuario` INT(11) NOT NULL COMMENT '',\n" +
+"  `idusuario` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',\n" +
+"  `identificacion` INT(11) NOT NULL COMMENT '',\n" +
 "  `nombre` VARCHAR(255) NULL DEFAULT NULL COMMENT '',\n" +
 "  `idPerfil` INT(11) NOT NULL COMMENT '',\n" +
 "  `login` VARCHAR(45) NULL DEFAULT NULL COMMENT '',\n" +
@@ -153,7 +154,7 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
 "  `estado` BIT(1) NULL COMMENT '',\n" +
 "  PRIMARY KEY (`idBackFrame`)  COMMENT '',\n" +
 "  INDEX `fk_BackFrame_usuario1_idx` (`idUsuario` ASC)  COMMENT '',\n" +
-"  CONSTRAINT `fk_BackFrame_usuario1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION\n" +
+"  CONSTRAINT `fk_BackFrame_usuario1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idusuario`) ON DELETE CASCADE ON UPDATE CASCADE  " +
 " )ENGINE=InnoDB DEFAULT CHARSET=utf8;";
   
   String myTableName6 ="CREATE TABLE IF NOT EXISTS `baaa0`.`materia` (\n" +
@@ -226,11 +227,13 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
    String insertTable1 ="INSERT INTO `perfil` (`idperfil`, `nombre`, `estado`) VALUES (1, 'SuperAdministrador', b'1');";
    String insertTable2 ="INSERT INTO `perfil` (`idperfil`, `nombre`, `estado`) VALUES (2, 'Administrador', b'1');";        
    String insertTable3 ="INSERT INTO `perfil` (`idperfil`, `nombre`, `estado`) VALUES (3, 'Profesor', b'1');";        
-   String insertTable4="INSERT INTO  `usuario` (`idusuario`, `nombre`, `idPerfil`, `login`, `contrasenia`, `estado`) VALUES (1, 'JUAN', 1, 'admin', 'admin', b'1');";
-   String insertTable5="INSERT INTO  `profesor` (`idprofesor`, `tipoContrato`, `estadoDispo`) VALUES (1, 'Unico', b'1');";
-   String insertTable6="INSERT INTO  `usuario` (`idusuario`, `nombre`, `idPerfil`, `login`, `contrasenia`, `estado`) VALUES (2, 'PEDRO', 2, 'p', 'p', b'1');";
-   String insertTable7="INSERT INTO  `administrador` (`idAdmin`, `tipoContrato`) VALUES (2, 'Unico');";
-   String insertTable8="INSERT INTO  `usuario` (`idusuario`, `nombre`, `idPerfil`, `login`, `contrasenia`, `estado`) VALUES (3, 'PROFESOR', 3, 'a', 'a', b'1');";
+   String insertTable4="INSERT INTO `baaa0`.`usuario` (`idusuario`, `identificacion`, `nombre`, `idPerfil`, `login`, `contrasenia`, `estado`) VALUES (1, 1022, 'jose', 1, 'admin', 'admin', b'1');";
+   String insertTable5="INSERT INTO `baaa0`.`usuario` (`idusuario`, `identificacion`, `nombre`, `idPerfil`, `login`, `contrasenia`, `estado`) VALUES (2, 10203, 'jose1', 1, 'x', 'x', b'1');";
+//   String insertTable5="INSERT INTO  `profesor` (`idprofesor`, `tipoContrato`, `estadoDispo`) VALUES (1, 'Unico', b'1');";
+   //String insertTable6="INSERT INTO  `usuario` (`idusuario`, `nombre`, `idPerfil`, `login`, `contrasenia`, `estado`) VALUES (2, 'PEDRO', 2, 'p', 'p', b'1');";
+ //  String insertTable7="INSERT INTO  `administrador` (`idAdmin`, `tipoContrato`) VALUES (2, 'Unico');";
+//   String insertTable8="INSERT INTO  `usuario` (`idusuario`, `nombre`, `idPerfil`, `login`, `contrasenia`, `estado`) VALUES (3, 'PROFESOR', 3, 'a', 'a', b'1');";
+  // String insertTable9="INSERT INTO `baaa0`.`materia` (`idMateria`, `nombreMateria`, `tipo`, `creditos`, `intHoraria`, `semestre`) VALUES (1, 'Ingles', 'A', 3, 6, 1);";
  
       
   String prodfiltraUsuarioID="CREATE PROCEDURE `filtraUsuarioId`(IN `cod` INT)\n" +
@@ -270,9 +273,10 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
             s.executeUpdate(insertTable3);
             s.executeUpdate(insertTable4);
             s.executeUpdate(insertTable5);
-            s.executeUpdate(insertTable6);
-            s.executeUpdate(insertTable7);
-            s.executeUpdate(insertTable8);
+////            s.executeUpdate(insertTable6);
+//            s.executeUpdate(insertTable7);
+////            s.executeUpdate(insertTable8);
+////            s.executeUpdate(insertTable9);
           
             s.executeUpdate(prodfiltraUsuarioID);
             s.executeUpdate(prodfiltraMateriaID);

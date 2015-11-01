@@ -43,11 +43,16 @@ public class VistaUsuarios extends javax.swing.JFrame {
         cargar();
     }
 
+    /*
+    @cargar las datos de la tabla usuario 
+    @autor jose vanegas . jvanegasv@ucentral.edu.co
+    */    
     public void cargar() {
 
         DefaultTableModel tabla = new DefaultTableModel();
         PreparedStatement ps;
         try {
+            tabla.addColumn("IdUsuario");
             tabla.addColumn("Identificacion");
             tabla.addColumn("Nombre");
             tabla.addColumn("Perfil");
@@ -55,13 +60,13 @@ public class VistaUsuarios extends javax.swing.JFrame {
             tabla.addColumn("Clave");
             tabla.addColumn("Estado");
             
-            ps = cn.prepareStatement("SELECT idusuario,nombre,idPerfil,login,contrasenia,estado FROM usuario");
+            ps = cn.prepareStatement("SELECT idusuario,identificacion,nombre,idPerfil,login,contrasenia,estado FROM usuario");
             r = ps.executeQuery();
 
             while (r.next()) {
-                Object dato[] = new Object[6];
+                Object dato[] = new Object[7];
                 
-                for (int i = 0; i < 6; i++) {
+                for (int i = 0; i < 7; i++) {
                     dato[i] = r.getString(i + 1);
                     //log(String.valueOf(dato[0]));
                 }
@@ -357,8 +362,30 @@ public class VistaUsuarios extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         
-      // TODO add your handling code here:
-          String cod=this.jTextField1.getText();
+                
+        // TODO add your handling code  here:
+         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        //ahora obtenemos la fila selccionada
+        int fila_select = jTable1.getSelectedRow();
+
+        if(fila_select<0){
+            // no se puede eliminar
+            JOptionPane.showMessageDialog(this,"Tabla vacia o no ha seleccionado uan fila.");
+        }else {
+          // la eliminamos del modelo:
+        modelo.removeRow(fila_select);
+       
+        }
+        eliminar(fila_select+1); 
+   
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    public void eliminar(int idUsuario)
+    {
+            
+        // TODO add your handling code here:
+          String cod=  Integer.toString(idUsuario);
+          log("idUsuario"+String.valueOf(cod));
         try {
             cts=cn.prepareCall("{call eliminarUsuario(?)}");
             cts.setString(1, cod);
@@ -372,13 +399,9 @@ public class VistaUsuarios extends javax.swing.JFrame {
 
             }
 
-        } catch (SQLException | HeadlessException e) {JOptionPane.showMessageDialog(this, e.toString());
+        }catch (SQLException | HeadlessException e) {JOptionPane.showMessageDialog(this, e.toString());
         }
-
-       
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
-    
+    }
     
   
     public void log(String a) {

@@ -11,6 +11,7 @@
 package Vista.SuperAdministrador;
 
 import Controlador.Conexion;
+import Vista.Materias.VistaMaterias;
 import VistaInicio.VistaLogin;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -79,7 +80,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Proveedores_opt.png"))); // NOI18N
         jButton5.setText("Proveedor");
-        jButton5.setToolTipText("Proveedores");
+        jButton5.setToolTipText("Materias");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -240,7 +241,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-    
+    VistaMaterias VistaMaterias = new VistaMaterias();
+    VistaMaterias.setVisible(true);
 
     }//GEN-LAST:event_jButton5ActionPerformed
 

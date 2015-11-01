@@ -13,6 +13,7 @@ public class Usuario{
     
     
     int idUsuario;
+    int identificacion;
     String nombre;
     Perfil idPerfil;
     String login;
@@ -22,8 +23,9 @@ public class Usuario{
     
      public Usuario() {
     }
-    public Usuario(int idUsuario, String nombre,Perfil idPerfil, String login, String contrasenia, boolean estado) {
+    public Usuario(int idUsuario,int identificacion, String nombre,Perfil idPerfil, String login, String contrasenia, boolean estado) {
         this.idUsuario = idUsuario;
+        this.identificacion = identificacion;
         this.nombre = nombre;
         this.idPerfil = idPerfil;
         this.login = login;
@@ -76,6 +78,14 @@ public class Usuario{
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+
+    public int getIdentificacion() {
+        return identificacion;
+    }
+
+    public void setIdentificacion(int identificacion) {
+        this.identificacion = identificacion;
     }
 
     
