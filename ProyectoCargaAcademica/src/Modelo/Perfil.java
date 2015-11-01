@@ -14,9 +14,9 @@ public class Perfil {
     
     int idPerfil;
     String nombre;
-    boolean estado;
+    int estado;
 
-    public Perfil(int idPerfil, String nombre, boolean estado) {
+    public Perfil(int idPerfil, String nombre, int estado) {
         this.idPerfil = idPerfil;
         this.nombre = nombre;
         this.estado = estado;
@@ -38,14 +38,17 @@ public class Perfil {
         this.nombre = nombre;
     }
 
-    public boolean isEstado() {
+    public int isEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
     
-    
+    @Override
+    public String toString() {
+        return getNombre();
+    } 
     
 }

@@ -6,11 +6,14 @@
 package Vista.SuperAdministrador;
 
 import Controlador.ControllerSql;
+import Controlador.FuncionesController;
+import Modelo.Perfil;
 import java.awt.Component;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -27,6 +30,8 @@ public class CUPUsuario extends javax.swing.JFrame {
      * Creates new form Usuario
      */
     ControllerSql obj = new ControllerSql();
+    FuncionesController cc = new FuncionesController();
+    private final List<Perfil> Perfil;
     CallableStatement cts;
     Connection cn;
     ResultSet r;
@@ -43,9 +48,20 @@ public class CUPUsuario extends javax.swing.JFrame {
        txtPassword.setName("txtPassword");
        BackFrame(txtCedula,txtNombre,txtLogin,txtPassword);
        
-       //comboPerfil.setModel(new javax.swing.DefaultComboBoxModel(cc.listaProvee().toArray()));
+       obj = ControllerSql.getInstancia();
+       
+       /*cargar los datos del perfil en el combo*/
+       comboPerfil.setModel(new javax.swing.DefaultComboBoxModel(cc.listaPerfil().toArray()));
+       Perfil = cc.listaPerfil();
+       comboPerfil.setSelectedIndex(0);
+       
+       /****************************/
+       
+       /*cargar los datos del estado en el combo*/
        
        
+       
+       /***************************************/
     }
 
     /**
@@ -138,8 +154,6 @@ public class CUPUsuario extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-
-        comboPerfil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3" }));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Crear Usuario");
@@ -259,13 +273,16 @@ public class CUPUsuario extends javax.swing.JFrame {
             
             int identificacion = Integer.parseInt(txtCedula.getText());
             String nombre = txtNombre.getText();
-            Object perfil = comboPerfil.getSelectedItem();
+//            Object perfil = comboPerfil.getSelectedItem();
+            int sperfil = ((Perfil) comboPerfil.getSelectedItem()).getIdPerfil();
+            
             String login = txtLogin.getText();
             String contrasenia = txtPassword.getText();
             Object tipoEstado = comboEstado.getSelectedItem();
             
             
-            String sperfil = (String) perfil;
+            
+//            String sperfil = (String) perfil;
             String stipoEstado = (String) tipoEstado;
             
             
@@ -274,11 +291,11 @@ public class CUPUsuario extends javax.swing.JFrame {
              try {
                  
                  
-                 int intperfil = Integer.parseInt(sperfil);
+//                 int intperfil = Integer.parseInt(sperfil);
                  int intEstado = Integer.parseInt(stipoEstado);
             
                  
-              boolean res = obj.AgregarUsuario(identificacion,nombre,(int) intperfil,login,contrasenia,(int) intEstado);
+              boolean res = obj.AgregarUsuario(identificacion,nombre,(int) sperfil,login,contrasenia,(int) intEstado);
                                     
                             if (res == true) {
                                 this.dispose();
@@ -468,8 +485,8 @@ public class CUPUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox comboEstado;
-    private javax.swing.JComboBox comboPerfil;
+    public static javax.swing.JComboBox comboEstado;
+    public static javax.swing.JComboBox comboPerfil;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;

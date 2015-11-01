@@ -7,10 +7,13 @@ package Vista.Materias;
 
 import Controlador.Conexion;
 import Controlador.ControllerSql;
+import java.awt.HeadlessException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -86,14 +89,15 @@ public class VistaMaterias extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnCrear = new javax.swing.JButton();
+        btnSeleccionar = new javax.swing.JButton();
+        btnExportar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/minimizar.png"))); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -125,13 +129,23 @@ public class VistaMaterias extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Crear");
+        btnCrear.setText("Crear");
+        btnCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Seleccionar");
+        btnSeleccionar.setText("Seleccionar");
 
-        jButton3.setText("Exportar");
+        btnExportar.setText("Exportar");
 
-        jButton4.setText("Buscar");
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Buscar");
 
@@ -150,6 +164,13 @@ public class VistaMaterias extends javax.swing.JFrame {
             }
         });
 
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -158,13 +179,13 @@ public class VistaMaterias extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnCrear)
                         .addGap(89, 89, 89)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)
+                        .addComponent(btnBuscar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -172,38 +193,37 @@ public class VistaMaterias extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(66, 66, 66)
-                                .addComponent(jButton2)
-                                .addContainerGap(43, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton3)
-                                .addGap(28, 28, 28))))))
+                            .addComponent(btnSeleccionar, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnExportar, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnEliminar)
+                                .addContainerGap())))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
+                        .addComponent(btnCrear)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1)
-                        .addComponent(jButton4))
+                        .addComponent(btnBuscar))
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addGap(108, 108, 108)
-                        .addComponent(jButton3)
-                        .addGap(58, 58, 58))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                        .addComponent(btnSeleccionar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminar)
+                        .addGap(68, 68, 68)
+                        .addComponent(btnExportar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -229,6 +249,115 @@ public class VistaMaterias extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
 
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+        // TODO add your handling code here:
+        CUPMaterias CUPMaterias = new CUPMaterias();
+        CUPMaterias.setVisible(true);
+        
+    }//GEN-LAST:event_btnCrearActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        consultarTable();
+        
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        
+         // TODO add your handling code  here:
+         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        //ahora obtenemos la fila selccionada
+        int fila_select = jTable1.getSelectedRow();
+
+        if(fila_select<0){
+            // no se puede eliminar
+            JOptionPane.showMessageDialog(this,"Tabla vacia o no ha seleccionado uan fila.");
+        }else {
+          // la eliminamos del modelo:
+        modelo.removeRow(fila_select);
+       
+        }
+        eliminar(fila_select+1); 
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+/**********************************FUNCIONES*****************************************************/    
+ /*
+     *Consulta los datos de la tabla
+    @autor jose vanegas -jvanegasv@ucentral.edu.co
+    */
+  
+  public void consultarTable()
+    {
+        
+     log("Consultar tabla");
+        String x = jTextField1.getText();
+        log(String.valueOf(x));
+        PreparedStatement ps;
+        DefaultTableModel tabla = new DefaultTableModel();
+
+        try {
+           tabla.addColumn("Id Materia");
+            tabla.addColumn("Nombre");
+            tabla.addColumn("Tipo");
+            tabla.addColumn("No Creditos");
+            tabla.addColumn("Int Horaria");
+            tabla.addColumn("Semestre");
+            tabla.addColumn("Administrador");
+          
+            cts = cn.prepareCall("{call filtraMateriaId(?)}");//procedimiento almacenado
+            cts.setString(1, x);
+            r = cts.executeQuery();
+
+
+            while (r.next()) {
+                Object dato[] = new Object[7];
+                for (int i = 0; i < 7; i++) {
+                    dato[i] = r.getString(i + 1);
+
+                    log(String.valueOf(dato[i]));
+                }
+                tabla.addRow(dato);
+            }
+            this.jTable1.setModel(tabla);
+
+        } catch (Exception e) {
+        }
+    
+  }    
+    
+  
+  public void eliminar(int idMateria)
+    {
+            
+        // TODO add your handling code here:
+          String cod=  Integer.toString(idMateria);
+          
+        try {
+            cts=cn.prepareCall("{call eliminarMateria(?)}");
+            cts.setString(1, cod);
+            int rpta=cts.executeUpdate();
+
+            if(rpta==1){
+            JOptionPane.showMessageDialog(this, "Empleado Eliminado","Aviso",JOptionPane.INFORMATION_MESSAGE);
+          
+                    }else {
+             JOptionPane.showMessageDialog(this, "Empleado No Eliminado","Aviso",JOptionPane.INFORMATION_MESSAGE);
+
+            }
+
+        }catch (SQLException | HeadlessException e) {JOptionPane.showMessageDialog(this, e.toString());
+        }
+    }
+  
+   public void log(String a) {
+        System.out.println("la valor  = " + " " + a);
+    } 
+   
+   /****************************************************************************************/
+  
+    
     /**
      * @param args the command line arguments
      */
@@ -265,10 +394,11 @@ public class VistaMaterias extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnCrear;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnExportar;
+    private javax.swing.JButton btnSeleccionar;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;

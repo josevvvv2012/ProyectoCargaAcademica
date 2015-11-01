@@ -158,7 +158,8 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
 " )ENGINE=InnoDB DEFAULT CHARSET=utf8;";
   
   String myTableName6 ="CREATE TABLE IF NOT EXISTS `baaa0`.`materia` (\n" +
-"  `idMateria` INT(11) NOT NULL COMMENT '',\n" +
+"  `idMateria` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',\n" +
+"  `codMateria` INT(11) NOT NULL COMMENT '',\n" +          
 "  `nombreMateria` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
 "  `tipo` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
 "  `creditos` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
@@ -229,14 +230,11 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
    String insertTable3 ="INSERT INTO `perfil` (`idperfil`, `nombre`, `estado`) VALUES (3, 'Profesor', b'1');";        
    String insertTable4="INSERT INTO `baaa0`.`usuario` (`idusuario`, `identificacion`, `nombre`, `idPerfil`, `login`, `contrasenia`, `estado`) VALUES (1, 1022, 'jose', 1, 'admin', 'admin', b'1');";
    String insertTable5="INSERT INTO `baaa0`.`usuario` (`idusuario`, `identificacion`, `nombre`, `idPerfil`, `login`, `contrasenia`, `estado`) VALUES (2, 10203, 'jose1', 1, 'x', 'x', b'1');";
-//   String insertTable5="INSERT INTO  `profesor` (`idprofesor`, `tipoContrato`, `estadoDispo`) VALUES (1, 'Unico', b'1');";
-   //String insertTable6="INSERT INTO  `usuario` (`idusuario`, `nombre`, `idPerfil`, `login`, `contrasenia`, `estado`) VALUES (2, 'PEDRO', 2, 'p', 'p', b'1');";
- //  String insertTable7="INSERT INTO  `administrador` (`idAdmin`, `tipoContrato`) VALUES (2, 'Unico');";
-//   String insertTable8="INSERT INTO  `usuario` (`idusuario`, `nombre`, `idPerfil`, `login`, `contrasenia`, `estado`) VALUES (3, 'PROFESOR', 3, 'a', 'a', b'1');";
-  // String insertTable9="INSERT INTO `baaa0`.`materia` (`idMateria`, `nombreMateria`, `tipo`, `creditos`, `intHoraria`, `semestre`) VALUES (1, 'Ingles', 'A', 3, 6, 1);";
+   String insertTable6="INSERT INTO `baaa0`.`materia` (`idMateria`, `codMateria`, `nombreMateria`, `tipo`, `creditos`, `intHoraria`, `semestre`) VALUES (1, 829292, 'ingles', '1', 1, 1, 2);";
+   String insertTable7="INSERT INTO `baaa0`.`materia` (`idMateria`, `codMateria`, `nombreMateria`, `tipo`, `creditos`, `intHoraria`, `semestre`) VALUES (2, 33829292, 'teatro', '1', 1, 1, 2);";
  
-      
-  String prodfiltraUsuarioID="CREATE PROCEDURE `filtraUsuarioId`(IN `cod` INT)\n" +
+       
+     String prodfiltraUsuarioID="CREATE PROCEDURE `filtraUsuarioId`(IN `cod` INT)\n" +
 	"	\n" +
 	"SELECT * FROM usuario WHERE idusuario = cod ";
       
@@ -244,13 +242,17 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
       String prodfiltraMateriaID="CREATE PROCEDURE `filtraMateriaId`(IN `cod` INT)\n" +
 	"	\n" +
 	"SELECT * FROM materia WHERE idMateria = cod ";
-  
+      
       
        String prodEliminarUsuario="CREATE PROCEDURE `eliminarUsuario`(IN `cod` INT)\n" +
 	"	\n" +
 	"delete from usuario where idusuario = cod ";
       
  
+       String prodEliminarMateria="CREATE PROCEDURE `eliminarMateria`(IN `cod` INT)\n" +
+	"	\n" +
+	"delete from materia where idMateria = cod ";
+       
         try {
             Class.forName(driver);
 
@@ -273,14 +275,15 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
             s.executeUpdate(insertTable3);
             s.executeUpdate(insertTable4);
             s.executeUpdate(insertTable5);
-////            s.executeUpdate(insertTable6);
-//            s.executeUpdate(insertTable7);
+            s.executeUpdate(insertTable6);
+            s.executeUpdate(insertTable7);
 ////            s.executeUpdate(insertTable8);
 ////            s.executeUpdate(insertTable9);
           
             s.executeUpdate(prodfiltraUsuarioID);
             s.executeUpdate(prodfiltraMateriaID);
             s.executeUpdate(prodEliminarUsuario);
+            s.executeUpdate(prodEliminarMateria);
             
             
     

@@ -152,12 +152,12 @@ public class VistaUsuarios extends javax.swing.JFrame {
             btnSelectEditar.setText("Editar");*/
          
           
-          String idUsuario =jTable1.getValueAt(row, 0).toString();
-          String nombre =jTable1.getValueAt(row, 1).toString();
-          String Perfil =jTable1.getValueAt(row, 2).toString();
-          String Login =jTable1.getValueAt(row, 3).toString();
-          String Clave =jTable1.getValueAt(row, 4).toString();
-          String Estado =jTable1.getValueAt(row, 5).toString();
+          String idUsuario =jTable1.getValueAt(row, 1).toString();
+          String nombre =jTable1.getValueAt(row, 2).toString();
+          String Perfil =jTable1.getValueAt(row, 3).toString();
+          String Login =jTable1.getValueAt(row, 4).toString();
+          String Clave =jTable1.getValueAt(row, 5).toString();
+          String Estado =jTable1.getValueAt(row, 6).toString();
           
           
           formUsuario = new  CUPUsuario();
@@ -165,6 +165,7 @@ public class VistaUsuarios extends javax.swing.JFrame {
           
          formUsuario.txtCedula.setText(idUsuario);
          formUsuario.txtNombre.setText(nombre);
+         formUsuario.comboPerfil.setSelectedIndex(Integer.parseInt(Perfil));
          formUsuario.txtLogin.setText(Login);
          formUsuario.txtPassword.setText(Clave);
             

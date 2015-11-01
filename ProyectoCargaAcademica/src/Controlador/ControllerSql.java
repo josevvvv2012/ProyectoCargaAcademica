@@ -9,6 +9,7 @@ import static Controlador.Conexion.dbName;
 import static Controlador.Conexion.driver;
 import static Controlador.Conexion.login;
 import static Controlador.Conexion.url;
+import Modelo.Perfil;
 import Modelo.Usuario;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,6 +34,7 @@ public class ControllerSql {//public
     Statement stm;
     ResultSet rs;
     Usuario Usario;
+   
 
     
     private static ControllerSql cs = new ControllerSql();
@@ -207,6 +209,28 @@ public class ControllerSql {//public
             return false;
         }
     }   
+    
+    
+    public List<Perfil> listadoPerfil(){
+        List<Perfil> Perfiles = new Stack<Perfil>();
+        PreparedStatement ps;
+        try {
+            
+            ps = conexion.prepareStatement("SELECT idperfil,nombre,estado  FROM perfil");
+            rs = ps.executeQuery();
+            while(rs.next()){
+                //Proveedor p = new Proveedor(rs.getInt(4),rs.getString(1), rs.getString(2), rs.getString(3));
+                Perfil p = new Perfil(rs.getInt(1),rs.getString(2),rs.getInt(3));
+                Perfiles.add(p);
+                log(String.valueOf(p));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return Perfiles;
+    }
+    
     
        
  /**************************************************************************/ 
