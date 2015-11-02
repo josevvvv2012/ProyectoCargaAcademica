@@ -56,8 +56,12 @@ public class CUPUsuario extends javax.swing.JFrame {
        comboPerfil.setSelectedIndex(0);
        
        /****************************/
+       /*Oculta los combos de los profesores*/
+       labelTipoC.setVisible(false);
+       comboTipoC.setVisible(false);
+       labelHabien.setVisible(false);
+       comboHabien.setVisible(false);
        
-       /*cargar los datos del estado en el combo*/
        
        
        
@@ -90,6 +94,11 @@ public class CUPUsuario extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         comboPerfil = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
+        comboTipoC = new javax.swing.JComboBox();
+        labelTipoC = new javax.swing.JLabel();
+        labelHabien = new javax.swing.JLabel();
+        comboHabien = new javax.swing.JComboBox();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -155,24 +164,46 @@ public class CUPUsuario extends javax.swing.JFrame {
             }
         });
 
+        comboPerfil.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboPerfilItemStateChanged(evt);
+            }
+        });
+
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Crear Usuario");
+
+        comboTipoC.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fijo", "Indefinido", "Temporal" }));
+
+        labelTipoC.setText("Tipo de Contrato");
+
+        labelHabien.setText("Habilitador en");
+
+        comboHabien.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Diurna", "Nocturna" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 159, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(32, 32, 32)
+                .addComponent(jButton2)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel7)
-                .addGap(69, 69, 69)
+                .addGap(171, 171, 171)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -195,23 +226,34 @@ public class CUPUsuario extends javax.swing.JFrame {
                                     .addComponent(txtPassword)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(17, 17, 17)
-                                .addComponent(comboPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(165, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(32, 32, 32)
-                .addComponent(jButton2)
-                .addContainerGap())
+                                .addComponent(comboPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(132, 132, 132))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelHabien)
+                                    .addComponent(labelTipoC))
+                                .addGap(18, 18, 18)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboTipoC, 0, 129, Short.MAX_VALUE)
+                            .addComponent(comboHabien, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(17, 17, 17)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(17, 17, 17))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -221,16 +263,26 @@ public class CUPUsuario extends javax.swing.JFrame {
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(comboPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(comboPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelTipoC)
+                            .addComponent(comboTipoC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(11, 11, 11)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboHabien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelHabien))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -263,61 +315,31 @@ public class CUPUsuario extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-        if(ValidarCamposVacios(txtCedula,txtNombre,txtLogin,txtPassword)){
-            JOptionPane.showMessageDialog(this, "Faltan datos en los campos.");
-        }
-        else{
-            
-            int identificacion = Integer.parseInt(txtCedula.getText());
-            String nombre = txtNombre.getText();
-//            Object perfil = comboPerfil.getSelectedItem();
-            int sperfil = ((Perfil) comboPerfil.getSelectedItem()).getIdPerfil();
-            
-            String login = txtLogin.getText();
-            String contrasenia = txtPassword.getText();
-            Object tipoEstado = comboEstado.getSelectedItem();
-            
-            
-            
-//            String sperfil = (String) perfil;
-            String stipoEstado = (String) tipoEstado;
-            
-            
-            
-            
-             try {
-                 
-                 
-//                 int intperfil = Integer.parseInt(sperfil);
-                 int intEstado = Integer.parseInt(stipoEstado);
-            
-                 
-              boolean res = obj.AgregarUsuario(identificacion,nombre,(int) sperfil,login,contrasenia,(int) intEstado);
-                                    
-                            if (res == true) {
-                                this.dispose();
-                                VistaUsuarios = new VistaUsuarios();
-                                VistaUsuarios.setVisible(true);
-                                JOptionPane.showMessageDialog(null, "Usuario Registrado Correctamente");
-                               
-                               
-                               
-                            } else {
-                                JOptionPane.showMessageDialog(null, "No se pudo ingresar otro usuario ya existe"
-                                        + "de datos");
-                            }
-                        } catch (Exception e) {
-                            JOptionPane.showMessageDialog(null, "por favor verifique la conexion del servidor ");
+    /*
+    @Accion crear Usuario
+    @Autor jose vanegas - jvanegas@ucentrla.edu.co
+    */
+    
+    /*
+    
+CREATE TABLE `profesor` (
+	`idprofesor` INT(11) NOT NULL AUTO_INCREMENT,
+	`tipoContrato` VARCHAR(255) NULL DEFAULT NULL,
+	`habilitadoEn` VARCHAR(255) NULL DEFAULT NULL,
+	`estadoDispo` BIT(1) NULL DEFAULT NULL,
+	PRIMARY KEY (`idprofesor`),
+	CONSTRAINT `FK_Profesor_usuario` FOREIGN KEY (`idprofesor`) REFERENCES `usuario` (`idusuario`) ON UPDATE CASCADE ON DELETE CASCADE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
 
-                        }
-            
-            deleteDataFrame();
-        }
-        
-        
+    
+    */
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+     
+        crearUsuario();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void comboEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboEstadoActionPerformed
@@ -332,6 +354,33 @@ public class CUPUsuario extends javax.swing.JFrame {
     private void txtCedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCedulaFocusLost
        SaveJTextFieldFrame(txtCedula);
     }//GEN-LAST:event_txtCedulaFocusLost
+
+    
+/*cambiar el estado para que aparescan nueva infomracion*/   
+    private void comboPerfilItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboPerfilItemStateChanged
+        // TODO add your handling code here:
+        int sperfil = ((Perfil) comboPerfil.getSelectedItem()).getIdPerfil();
+        
+        if(sperfil != 3)
+            {
+       
+                log("hola soy profesor");
+       labelTipoC.setVisible(false);
+       comboTipoC.setVisible(false);
+       labelHabien.setVisible(false);
+       comboHabien.setVisible(false);
+       
+                
+            }
+        else{
+       log("hola soy profesor");
+       labelTipoC.setVisible(true);
+       comboTipoC.setVisible(true);
+       labelHabien.setVisible(true);
+       comboHabien.setVisible(true);
+        
+        }
+    }//GEN-LAST:event_comboPerfilItemStateChanged
 
     /*Funciones*/
     
@@ -442,7 +491,95 @@ public class CUPUsuario extends javax.swing.JFrame {
 
     }
     
+public void crearUsuario()
+{
+ // TODO add your handling code here:
+
+        if (ValidarCamposVacios(txtCedula, txtNombre, txtLogin, txtPassword)) {
+            JOptionPane.showMessageDialog(this, "Faltan datos en los campos.");
+        } else {
+
+            int identificacion = Integer.parseInt(txtCedula.getText());
+            String nombre = txtNombre.getText();
+//            Object perfil = comboPerfil.getSelectedItem();
+            int sperfil = ((Perfil) comboPerfil.getSelectedItem()).getIdPerfil();
+
+            String login = txtLogin.getText();
+            String contrasenia = txtPassword.getText();
+            Object tipoEstado = comboEstado.getSelectedItem();
+//            String sperfil = (String) perfil;
+            String stipoEstado = (String) tipoEstado;
+            try {
+
+//                 int intperfil = Integer.parseInt(sperfil);
+                int intEstado = Integer.parseInt(stipoEstado);
+
+                boolean res = obj.AgregarUsuario(identificacion, nombre, (int) sperfil, login, contrasenia, (int) intEstado);
+
+                if (res == true) {
+                    this.dispose();
+                    VistaUsuarios = new VistaUsuarios();
+                    VistaUsuarios.setVisible(true);
+                    JOptionPane.showMessageDialog(null, "Usuario Registrado Correctamente");
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo ingresar otro usuario ya existe"
+                            + "de datos");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "por favor verifique la conexion del servidor ");
+
+            }
+
+            deleteDataFrame();
+        }
+
+}
+
+public void crearProfesor()
+{
+ // TODO add your handling code here:
+
+        if (ValidarCamposVacios(txtCedula, txtNombre, txtLogin, txtPassword)) {
+            JOptionPane.showMessageDialog(this, "Faltan datos en los campos.");
+        } else {
+
+            int identificacion = Integer.parseInt(txtCedula.getText());
+            String nombre = txtNombre.getText();
+//            Object perfil = comboPerfil.getSelectedItem();
+            int sperfil = ((Perfil) comboPerfil.getSelectedItem()).getIdPerfil();
+
+            String login = txtLogin.getText();
+            String contrasenia = txtPassword.getText();
+            Object tipoEstado = comboEstado.getSelectedItem();
+//            String sperfil = (String) perfil;
+            String stipoEstado = (String) tipoEstado;
+            try {
+
+//                 int intperfil = Integer.parseInt(sperfil);
+                int intEstado = Integer.parseInt(stipoEstado);
+
+                boolean res = obj.AgregarUsuario(identificacion, nombre, (int) sperfil, login, contrasenia, (int) intEstado);
+
+                if (res == true) {
+                    this.dispose();
+                    VistaUsuarios = new VistaUsuarios();
+                    VistaUsuarios.setVisible(true);
+                    JOptionPane.showMessageDialog(null, "Usuario Registrado Correctamente");
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo ingresar otro usuario ya existe"
+                            + "de datos");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "por favor verifique la conexion del servidor ");
+
+            }
+
+            deleteDataFrame();
+        }
     
+}
     
       public void log(String a) {
         System.out.println("la valor  = " + " " + a);
@@ -486,18 +623,23 @@ public class CUPUsuario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JComboBox comboEstado;
+    private javax.swing.JComboBox comboHabien;
     public static javax.swing.JComboBox comboPerfil;
+    private javax.swing.JComboBox comboTipoC;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel labelHabien;
+    private javax.swing.JLabel labelTipoC;
     public static javax.swing.JTextField txtCedula;
     public static javax.swing.JTextField txtLogin;
     public static javax.swing.JTextField txtNombre;

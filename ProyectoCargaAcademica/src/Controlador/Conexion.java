@@ -127,6 +127,7 @@ public class Conexion {
 String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
 "  `idprofesor` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',\n" +
 "  `tipoContrato` VARCHAR(255) NULL DEFAULT NULL COMMENT '',\n" +
+"  `habilitadoEn` VARCHAR(255) NULL DEFAULT NULL COMMENT '',\n" +
 "  `estadoDispo` BIT(1) NULL DEFAULT NULL COMMENT '',\n" +
 "  PRIMARY KEY (`idprofesor`)  COMMENT '',\n" +
 "  CONSTRAINT `FK_Profesor_usuario`\n" +
