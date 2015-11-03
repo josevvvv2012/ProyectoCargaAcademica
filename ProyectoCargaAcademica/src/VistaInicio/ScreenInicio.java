@@ -115,7 +115,7 @@ private void progresoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRS
                     Dimension ventan = VistaLogin.getSize();
                     //para centrar la ventana lo hacemos con el siguiente calculo  
                     VistaLogin.setLocation((pantall.width - ventan.width) / 2, (pantall.height - ventan.height) / 2);
-                    VistaLogin.setVisible(true);
+                    
              
              
 

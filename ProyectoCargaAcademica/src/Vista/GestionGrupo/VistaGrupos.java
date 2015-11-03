@@ -33,9 +33,35 @@ public class VistaGrupos extends javax.swing.JFrame {
         cn = Conexion.getConn();
         cargar();
     }
-
+    
     public void cargar() {
 
+        
+        DefaultTableModel tabla = new DefaultTableModel();
+        PreparedStatement ps;
+        try {
+            tabla.addColumn("Grupo");
+            tabla.addColumn("Materia");
+            tabla.addColumn("Jornada");
+            tabla.addColumn("Numero");
+            tabla.addColumn("Numero");
+            
+            ps = cn.prepareStatement("SELECT idgrupo,idmateria,jornada,bloque,estado from  grupo");
+            r = ps.executeQuery();
+
+            while (r.next()) {
+                Object dato[] = new Object[5];
+                
+                for (int i = 0; i < 5; i++) {
+                    dato[i] = r.getString(i + 1);
+                    //log(String.valueOf(dato[0]));
+                }
+                tabla.addRow(dato);
+            }
+            this.jTable1.setModel(tabla);
+
+        } catch (Exception e) {
+        }
        
     }
     

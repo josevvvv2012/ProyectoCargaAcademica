@@ -9,8 +9,11 @@ import Controlador.Conexion;
 import Vista.SuperAdministrador.VistaUsuarios;
 import Controlador.ControllerSql;
 import Modelo.Usuario;
+import Vista.Profesor.VistaIndexProfesor;
 import Vista.SuperAdministrador.VistaPrincipal;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -234,21 +237,57 @@ public class VistaLogin extends javax.swing.JFrame {
                 
             VistaPrincipal VistaPrincipal = new VistaPrincipal();
             VistaPrincipal.setVisible(true);
-            this.dispose();
             
-           // this.dispose();
+            
+            
+            
+            /*Centra el jframe*/
+            Dimension pantall = Toolkit.getDefaultToolkit().getScreenSize();
+                    //obtenemos el tamaño de la ventana  
+            Dimension ventan = VistaPrincipal.getSize();
+                    //para centrar la ventana lo hacemos con el siguiente calculo  
+            VistaPrincipal.setLocation((pantall.width - ventan.width) / 2, (pantall.height - ventan.height) / 2);
+            
+            this.dispose();
+           
             
             } else {
                 if(nro == 2)//PerfilAdministrador 2
                 {
                 
-                JOptionPane.showMessageDialog(rootPane, "Perfil Administrador");
+                 
+                   log("Perfil Administrador");
+                   VistaPrincipal VistaPrincipal = new VistaPrincipal();
+                   VistaPrincipal.setVisible(true);
+                   
+                    /*Centra el jframe*/
+                    Dimension pantall = Toolkit.getDefaultToolkit().getScreenSize();
+                    //obtenemos el tamaño de la ventana  
+                    Dimension ventan = VistaPrincipal.getSize();
+                    //para centrar la ventana lo hacemos con el siguiente calculo  
+                    VistaPrincipal.setLocation((pantall.width - ventan.width) / 2, (pantall.height - ventan.height) / 2);
+            
+                    this.dispose();
+                
                 }
                 else
                 {
                     if(nro == 3) // PerfilProfesor
                     {
-                        JOptionPane.showMessageDialog(rootPane, "Perfil Profesor");
+                     log("Perfil Profesor");
+                     
+                     VistaIndexProfesor VistaIndexProfesor = new VistaIndexProfesor();
+                     VistaIndexProfesor.setVisible(true);
+                     
+                     /*Centra el jframe*/
+                    Dimension pantall = Toolkit.getDefaultToolkit().getScreenSize();
+                    //obtenemos el tamaño de la ventana  
+                    Dimension ventan = VistaIndexProfesor.getSize();
+                    //para centrar la ventana lo hacemos con el siguiente calculo  
+                    VistaIndexProfesor.setLocation((pantall.width - ventan.width) / 2, (pantall.height - ventan.height) / 2);
+                     
+                     this.dispose();
+                     
                     }               
             }
          }

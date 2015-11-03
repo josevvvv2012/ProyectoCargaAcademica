@@ -108,7 +108,7 @@ public class Conexion {
 "ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";   
 
     
- String myTableName2="CREATE TABLE IF NOT EXISTS `baaa0`.`usuario` (\n" +
+ String myTableName2="CREATE TABLE IF NOT EXISTS `usuario` (\n" +
 "  `idusuario` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',\n" +
 "  `identificacion` INT(11) NOT NULL COMMENT '',\n" +
 "  `nombre` VARCHAR(255) NULL DEFAULT NULL COMMENT '',\n" +
@@ -123,7 +123,7 @@ public class Conexion {
 "  INDEX `Perfil` (`idPerfil` ASC)  COMMENT '',\n" +
 "  CONSTRAINT `FK_usuario_perfil`\n" +
 "    FOREIGN KEY (`idPerfil`)\n" +
-"    REFERENCES `baaa0`.`perfil` (`idperfil`))\n" +
+"    REFERENCES `perfil` (`idperfil`))\n" +
 "ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";
  
  /*
@@ -139,13 +139,13 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
 "ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";
 */
   
-  String myTableName4 ="CREATE TABLE IF NOT EXISTS `baaa0`.`administrador` (\n" +
+  String myTableName4 ="CREATE TABLE IF NOT EXISTS `administrador` (\n" +
 "  `idAdmin` INT(11) NOT NULL COMMENT '',\n" +
 "  `tipoContrato` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
 "  PRIMARY KEY (`idAdmin`)  COMMENT '',\n" +
 "  CONSTRAINT `FK_Administrador_usuario`\n" +
 "    FOREIGN KEY (`idAdmin`)\n" +
-"    REFERENCES `baaa0`.`usuario` (`idusuario`))\n" +
+"    REFERENCES `usuario` (`idusuario`))\n" +
 "ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";
   
   
@@ -161,7 +161,7 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
 "  CONSTRAINT `fk_BackFrame_usuario1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idusuario`) ON DELETE CASCADE ON UPDATE CASCADE  " +
 " )ENGINE=InnoDB DEFAULT CHARSET=utf8;";
   
-  String myTableName6 ="CREATE TABLE IF NOT EXISTS `baaa0`.`materia` (\n" +
+  String myTableName6 ="CREATE TABLE IF NOT EXISTS `materia` (\n" +
 "  `idMateria` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',\n" +
 "  `codMateria` INT(11) NOT NULL COMMENT '',\n" +          
 "  `nombreMateria` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
@@ -169,15 +169,15 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
 "  `creditos` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
 "  `intHoraria` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
 "  `semestre` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
-"  `idAdministrador` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
+"  `idAdministradorM` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
 "  PRIMARY KEY (`idMateria`)  COMMENT '',\n" +
-"  INDEX `idAdministrador` (`idAdministrador` ASC)  COMMENT '',\n" +
+"  INDEX `idAdministradorM` (`idAdministradorM` ASC)  COMMENT '',\n" +
 "  CONSTRAINT `FK_Materia_Administrador`\n" +
-"    FOREIGN KEY (`idAdministrador`)\n" +
-"    REFERENCES `baaa0`.`administrador` (`idAdmin`))\n" +
+"    FOREIGN KEY (`idAdministradorM`)\n" +
+"    REFERENCES `usuario` (`idusuario`))\n" +
 "ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";
   
-  String myTableName7 ="CREATE TABLE IF NOT EXISTS `baaa0`.`horariomateria` (\n" +
+  String myTableName7 ="CREATE TABLE IF NOT EXISTS `horariomateria` (\n" +
 "  `idHMateria` INT(11) NOT NULL COMMENT '',\n" +
 "  `codigoMateria` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
 "  `grupo` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
@@ -190,10 +190,10 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
 "  INDEX `codigoMateria` (`codigoMateria` ASC)  COMMENT '',\n" +
 "  CONSTRAINT `FK_horarioMateria_Materia`\n" +
 "    FOREIGN KEY (`codigoMateria`)\n" +
-"    REFERENCES `baaa0`.`materia` (`idMateria`))\n" +
+"    REFERENCES `materia` (`idMateria`))\n" +
 "ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";
   
-  String myTableName8 ="CREATE TABLE IF NOT EXISTS `baaa0`.`horarioprofesor` (\n" +
+  String myTableName8 ="CREATE TABLE IF NOT EXISTS `horarioprofesor` (\n" +
 "  `idHprofesor` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',\n" +
 "  `idProfesor` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
 "  `dia` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
@@ -204,7 +204,7 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
 "  INDEX `idProfesor` (`idProfesor` ASC)  COMMENT '',\n" +
 "  CONSTRAINT `FK_horarioProfesor_profesor`\n" +
 "    FOREIGN KEY (`idProfesor`)\n" +
-"    REFERENCES `baaa0`.`usuario` (`idusuario`))\n" +
+"    REFERENCES `usuario` (`idusuario`))\n" +
 "ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";
   
    String myTableName9 ="CREATE TABLE IF NOT EXISTS `mybd` (\n" +
@@ -232,10 +232,10 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
    String insertTable1 ="INSERT INTO `perfil` (`idperfil`, `nombre`, `estado`) VALUES (1, 'SuperAdministrador', b'1');";
    String insertTable2 ="INSERT INTO `perfil` (`idperfil`, `nombre`, `estado`) VALUES (2, 'Administrador', b'1');";        
    String insertTable3 ="INSERT INTO `perfil` (`idperfil`, `nombre`, `estado`) VALUES (3, 'Profesor', b'1');";        
-   String insertTable4="INSERT INTO `baaa0`.`usuario` (`idusuario`, `identificacion`, `nombre`, `idPerfil`, `login`, `contrasenia`, `estado`) VALUES (1, 1022, 'jose', 1, 'admin', 'admin', b'1');";
-   String insertTable5="INSERT INTO `baaa0`.`usuario` (`idusuario`, `identificacion`, `nombre`, `idPerfil`, `login`, `contrasenia`, `estado`) VALUES (2, 10203, 'jose1', 1, 'x', 'x', b'1');";
-   String insertTable6="INSERT INTO `baaa0`.`materia` (`idMateria`, `codMateria`, `nombreMateria`, `tipo`, `creditos`, `intHoraria`, `semestre`) VALUES (1, 829292, 'ingles', '1', 1, 1, 2);";
-   String insertTable7="INSERT INTO `baaa0`.`materia` (`idMateria`, `codMateria`, `nombreMateria`, `tipo`, `creditos`, `intHoraria`, `semestre`) VALUES (2, 33829292, 'teatro', '1', 1, 1, 2);";
+   String insertTable4="INSERT INTO `usuario` (`idusuario`, `identificacion`, `nombre`, `idPerfil`, `login`, `contrasenia`, `estado`) VALUES (1, 1022, 'jose', 1, 'admin', 'admin', b'1');";
+   String insertTable5="INSERT INTO `usuario` (`idusuario`, `identificacion`, `nombre`, `idPerfil`, `login`, `contrasenia`, `estado`) VALUES (2, 10203, 'jose1', 1, 'x', 'x', b'1');";
+   String insertTable6="INSERT INTO `materia` (`idMateria`, `codMateria`, `nombreMateria`, `tipo`, `creditos`, `intHoraria`, `semestre`) VALUES (1, 829292, 'ingles', '1', 1, 1, 2);";
+   String insertTable7="INSERT INTO `materia` (`idMateria`, `codMateria`, `nombreMateria`, `tipo`, `creditos`, `intHoraria`, `semestre`) VALUES (2, 33829292, 'teatro', '1', 1, 1, 2);";
  
        
      String prodfiltraUsuarioID="CREATE PROCEDURE `filtraUsuarioId`(IN `cod` INT)\n" +

@@ -7,6 +7,7 @@ package Vista.Materias;
 
 import Controlador.Conexion;
 import Controlador.ControllerSql;
+import Vista.SuperAdministrador.CUPUsuario;
 import java.awt.HeadlessException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -26,6 +27,8 @@ public class VistaMaterias extends javax.swing.JFrame {
     CallableStatement cts;
     Connection cn;
     ResultSet r;
+    CUPMaterias  formMaterias;
+    String Mod = "Modificar";
     
     /**
      * Creates new form VistaMaterias
@@ -47,6 +50,7 @@ public class VistaMaterias extends javax.swing.JFrame {
         PreparedStatement ps;
         try {
             tabla.addColumn("Id Materia");
+            tabla.addColumn("Codigo");
             tabla.addColumn("Nombre");
             tabla.addColumn("Tipo");
             tabla.addColumn("No Creditos");
@@ -54,13 +58,13 @@ public class VistaMaterias extends javax.swing.JFrame {
             tabla.addColumn("Semestre");
             tabla.addColumn("Administrador");
             
-            ps = cn.prepareStatement("SELECT idMateria,nombreMateria,tipo,creditos,intHoraria,semestre,idAdministrador FROM materia");
+            ps = cn.prepareStatement("SELECT idMateria,codMateria,nombreMateria,tipo,creditos,intHoraria,semestre,idAdministradorM FROM materia");
             r = ps.executeQuery();
 
             while (r.next()) {
-                Object dato[] = new Object[7];
+                Object dato[] = new Object[8];
                 
-                for (int i = 0; i < 7; i++) {
+                for (int i = 0; i < 8; i++) {
                     dato[i] = r.getString(i + 1);
                     //log(String.valueOf(dato[0]));
                 }
@@ -134,7 +138,12 @@ public class VistaMaterias extends javax.swing.JFrame {
             }
         });
 
-        btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.setText("Editar");
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarActionPerformed(evt);
+            }
+        });
 
         btnExportar.setText("Exportar");
 
@@ -190,14 +199,12 @@ public class VistaMaterias extends javax.swing.JFrame {
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSeleccionar, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnExportar, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnEliminar)
-                                .addContainerGap())))))
+                        .addComponent(jScrollPane1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnSeleccionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnExportar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,18 +217,18 @@ public class VistaMaterias extends javax.swing.JFrame {
                         .addComponent(btnBuscar))
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                        .addGap(0, 3, Short.MAX_VALUE)
                         .addComponent(btnSeleccionar)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEliminar)
-                        .addGap(68, 68, 68)
-                        .addComponent(btnExportar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnExportar)
+                        .addGap(121, 121, 121))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -279,6 +286,12 @@ public class VistaMaterias extends javax.swing.JFrame {
         eliminar(fila_select+1); 
         
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+        // TODO add your handling code here:
+        
+        seleccionarfila(0);
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
 
 /**********************************FUNCIONES*****************************************************/    
  /*
@@ -338,10 +351,10 @@ public class VistaMaterias extends javax.swing.JFrame {
             int rpta=cts.executeUpdate();
 
             if(rpta==1){
-            JOptionPane.showMessageDialog(this, "Empleado Eliminado","Aviso",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Materia Eliminada","Aviso",JOptionPane.INFORMATION_MESSAGE);
           
                     }else {
-             JOptionPane.showMessageDialog(this, "Empleado No Eliminado","Aviso",JOptionPane.INFORMATION_MESSAGE);
+             JOptionPane.showMessageDialog(this, "Materias No Eliminada","Aviso",JOptionPane.INFORMATION_MESSAGE);
 
             }
 
@@ -349,8 +362,71 @@ public class VistaMaterias extends javax.swing.JFrame {
         }
     }
   
+    /*
+     *Seleccionar los datos de la tabla
+    @autor jose vanegas -jvanegasv@ucentral.edu.co
+    */
+ public int seleccionarfila(int a) {
+        
+        
+        
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        int row = jTable1.getSelectedRow();
+        //ahora obtenemos la fila selccionada
+        int fila_select = jTable1.getSelectedRow();
+
+        if (fila_select < 0) {
+            // no se puede eliminar
+            JOptionPane.showMessageDialog(this, "Tabla vacia o no ha seleccionado uan fila para editar.");
+        } else {
+          
+          formMaterias = new  CUPMaterias();
+          formMaterias.setVisible(true);
+          
+          
+          
+          String codMateria =jTable1.getValueAt(row, 1).toString();
+          String nombreMateria =jTable1.getValueAt(row, 2).toString();
+          String tipo =jTable1.getValueAt(row, 3).toString();
+          String creditos =jTable1.getValueAt(row, 4).toString();
+          String intHoraria =jTable1.getValueAt(row, 5).toString();
+          String semestre =jTable1.getValueAt(row, 6).toString();
+//          String idAdministradorM =jTable1.getValueAt(row, 7).toString();
+          
+        
+          
+          
+          
+            
+          formMaterias.btnGuardar.setText(getMod());
+          formMaterias.txtIdMateria.setEnabled(false);
+                      
+         formMaterias.txtIdMateria.setText(codMateria);
+         formMaterias.txtNombre.setText(nombreMateria);
+         formMaterias.comboTipoM.setSelectedIndex(1);
+         formMaterias.txtCreditos.setText(creditos);
+         formMaterias.txtIntHoraria.setText(intHoraria);
+         formMaterias.txtSemestre.setText(semestre);
+         
+            a = 1;
+            
+        }
+        
+        log(String.valueOf(a));
+        return a;
+    }
+  
+  
    public void log(String a) {
         System.out.println("la valor  = " + " " + a);
+    } 
+   
+        public void setMod(String Mod) {
+        this.Mod = Mod;
+    }
+      
+     public String getMod() {
+        return Mod;
     } 
    
    /****************************************************************************************/

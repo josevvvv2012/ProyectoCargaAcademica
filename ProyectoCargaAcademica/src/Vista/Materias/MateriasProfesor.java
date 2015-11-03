@@ -80,25 +80,24 @@ public class MateriasProfesor extends javax.swing.JFrame {
         DefaultTableModel tabla = new DefaultTableModel();
         PreparedStatement ps;
         try {
-            tabla.addColumn("Id Materia");
+            tabla.addColumn("Cod Materia");
             tabla.addColumn("Nombre");
             tabla.addColumn("Tipo");
             tabla.addColumn("No Creditos");
             tabla.addColumn("Int Horaria");
             tabla.addColumn("Semestre");
-            tabla.addColumn("Administrador");
             tabla.addColumn("Check");
             
-            ps = cn.prepareStatement("SELECT idMateria,nombreMateria,tipo,creditos,intHoraria,semestre,idAdministrador FROM materia");
+            ps = cn.prepareStatement("SELECT idMateria,nombreMateria,tipo,creditos,intHoraria,semestre FROM materia");
             r = ps.executeQuery();
 
             while (r.next()) {
               //  Object dato[] = new Object[7];
                 
-                Object dato[]={"Id Materia","Nombre","Tipo","No Creditos","Int Horaria","Semestre","Administrador",false};
+                Object dato[]={"Id Materia","Nombre","Tipo","No Creditos","Int Horaria","Semestre",false};
                         
                
-                for (int i = 0; i < 7; i++) {
+                for (int i = 0; i < 6; i++) {
                     dato[i] = r.getString(i + 1);
                     
                 }
@@ -108,9 +107,9 @@ public class MateriasProfesor extends javax.swing.JFrame {
             
             
         //Se crea el JCheckBox en la columna indicada en getColumn, en este caso, la primera columna
-        jTable1.getColumnModel().getColumn( 7 ).setCellEditor( new Celda_CheckBox() );
+        jTable1.getColumnModel().getColumn( 6 ).setCellEditor( new Celda_CheckBox() );
         //para pintar la columna con el CheckBox en la tabla, en este caso, la primera columna
-        jTable1.getColumnModel().getColumn( 7 ).setCellRenderer(new Render_CheckBox());   
+        jTable1.getColumnModel().getColumn( 6 ).setCellRenderer(new Render_CheckBox());   
 
         } catch (Exception e) {
         }
@@ -136,7 +135,6 @@ public class MateriasProfesor extends javax.swing.JFrame {
         btnGuardar = new javax.swing.JButton();
         comboProfesores = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         BtnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -183,8 +181,6 @@ public class MateriasProfesor extends javax.swing.JFrame {
 
         jLabel1.setText("Profesor");
 
-        jLabel2.setText("jLabel2");
-
         BtnCancelar.setText("Cancelar");
         BtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,7 +193,7 @@ public class MateriasProfesor extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addContainerGap(130, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -209,17 +205,11 @@ public class MateriasProfesor extends javax.swing.JFrame {
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnGuardar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtnCancelar)))
+                        .addComponent(btnGuardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnCancelar)
                         .addGap(18, 18, 18))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(313, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,11 +221,9 @@ public class MateriasProfesor extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(comboProfesores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(45, 45, 45)
+                .addGap(62, 62, 62)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
+                .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(BtnCancelar))
@@ -337,6 +325,9 @@ public class MateriasProfesor extends javax.swing.JFrame {
     } 
 
     
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -379,7 +370,6 @@ public class MateriasProfesor extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

@@ -49,7 +49,7 @@ public class CUPUsuario extends javax.swing.JFrame {
         
        cn = Conexion.getConn();
        
-       
+       /*Recupera los datos en caso de se caiga la conexion*/
        txtCedula.setName("txtCedula");
        txtNombre.setName("txtNombre");
        txtLogin.setName("txtLogin");
@@ -621,7 +621,7 @@ public void crearUsuario()
  public void editarUsuario()
  {
      
-     log("Modificar cliente se llama correctamente");
+    
        // TODO add your handling code here:
         if (ValidarCamposVacios(txtCedula,txtNombre,txtLogin,txtPassword)) {
             JOptionPane.showMessageDialog(this, "Faltan datos en los campos.");

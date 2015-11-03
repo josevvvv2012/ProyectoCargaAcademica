@@ -134,9 +134,7 @@ public class VistaUsuarios extends javax.swing.JFrame {
      *Seleccionar los datos de la tabla
     @autor jose vanegas -jvanegasv@ucentral.edu.co
     */
-  
-  
-   public int seleccionarfila(int a) {
+ public int seleccionarfila(int a) {
         
         
         

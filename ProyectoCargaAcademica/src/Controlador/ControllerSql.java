@@ -36,6 +36,7 @@ public class ControllerSql {//public
     Statement stm;
     ResultSet rs;
     Usuario Usario;
+    Materia Materia;
    
 
     
@@ -221,11 +222,8 @@ public class ControllerSql {//public
     /*
     @Modifica los datos del usuario
     @auto jose vanegas - jvanegasv@ucentral.edu.co
-    */
-//    public boolean actualizarUsuario(int identificacion,String nombre){
-        
-       
-        public boolean actualizarUsuario(int identificacion, String nombre,int idPerfil,String login,String contrasenia,
+    */       
+public boolean actualizarUsuario(int identificacion, String nombre,int idPerfil,String login,String contrasenia,
             String tipoContrato,String habilitadoEn, int estadoDispo, int estado){
 //    
         log("Controller ACTUALIZAR");
@@ -255,6 +253,40 @@ public class ControllerSql {//public
         }
     }
     
+  /*
+    @Modifica los datos del usuario
+    @auto jose vanegas - jvanegasv@ucentral.edu.co
+    */       
+public boolean actualizarMateria(int codMateria, String nombreMateria,int tipo,int  creditos,int intHoraria,
+            int semestre){
+//    
+        log("Controller ACTUALIZAR");
+        
+        try {
+           
+            String query = " update materia set  nombreMateria = ? , tipo = ? , creditos = ?, intHoraria = ? , semestre = ? where codMateria = ?";
+            
+            log(query);
+
+            PreparedStatement preparedStmt = conexion.prepareStatement(query);            
+            preparedStmt.setString(1, nombreMateria);
+            preparedStmt.setInt(2, tipo);
+            preparedStmt.setInt(3, creditos);
+            preparedStmt.setInt(4, intHoraria);
+            preparedStmt.setInt(5, semestre);
+            preparedStmt.setInt(6, codMateria);
+            
+            
+            
+           
+            preparedStmt.execute();    
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+
     /*
     @retornar la listado de perfil a combobox en la vistaUsarios
     @auto jose vanegas - jvanegasv@ucentral.edu.co
@@ -356,22 +388,16 @@ public class ControllerSql {//public
   
   
   
-  public boolean CrearMateria(
-  int  idMateria,
-  String nombreMateria,
-  String  tipo, 
-  int creditos,
-  int  intHoraria,
-  int semestre,
-  int idAdministrador
+  public boolean CrearMateria(int  codMateria,String nombreMateria,String  tipo, int creditos,int  intHoraria,int semestre
    
   ) {
 
         int estado=1;
       //  int p = Integer.parseInt(idPerfil);
+        Materia Materia = new Materia(codMateria, codMateria, nombreMateria, tipo, creditos, intHoraria, semestre, null);
        
         try {
-            String query = "INSERT INTO materia (idMateria,nombreMateria,tipo,creditos,intHoraria,semestre,idAdministrador)"
+            String query = "INSERT INTO materia (codMateria,nombreMateria,tipo,creditos,intHoraria,semestre,idAdministradorM)"
                 
                             + " VALUES (?,?,?,?,?,?,?);";
         
@@ -381,13 +407,13 @@ public class ControllerSql {//public
            
           
   
-          preparedStmt.setInt(1, idMateria);
+          preparedStmt.setInt(1, codMateria);
           preparedStmt.setString(2, nombreMateria);
           preparedStmt.setString(3, tipo);
           preparedStmt.setInt(4, creditos);
           preparedStmt.setInt(5, intHoraria);
           preparedStmt.setInt(6, semestre);
-          preparedStmt.setInt(7, idAdministrador);
+          preparedStmt.setInt(7, 1);
          
           
         
