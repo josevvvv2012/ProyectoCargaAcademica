@@ -88,6 +88,11 @@ public class Usuario{
         this.identificacion = identificacion;
     }
 
+    @Override
+    public String toString() {
+        return getNombre();
+    }
+
     
     
     

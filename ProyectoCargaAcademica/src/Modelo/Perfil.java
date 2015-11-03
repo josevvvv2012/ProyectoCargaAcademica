@@ -22,6 +22,10 @@ public class Perfil {
         this.estado = estado;
     }
 
+    public Perfil() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getIdPerfil() {
         return idPerfil;
     }

@@ -228,28 +228,17 @@ public class ControllerSql {//public
         public boolean actualizarUsuario(int identificacion, String nombre,int idPerfil,String login,String contrasenia,
             String tipoContrato,String habilitadoEn, int estadoDispo, int estado){
 //    
-        
-        
         log("Controller ACTUALIZAR");
         log(String.valueOf(identificacion));
         log(nombre);
         try {
            
-   
-
-            
-            
             String query = " update usuario set nombre = ? , idPerfil= ? , login = ? , contrasenia = ? ," 
                     + "tipoContrato= ? , habilitadoEn = ? , estadoDispo = ? , estado = ? where identificacion = ?";
             
-            
-//            String query = " update usuario set nombre = ?  where identificacion = ?";
             log(query);
 
-            
-            
-            PreparedStatement preparedStmt = conexion.prepareStatement(query);
-            
+            PreparedStatement preparedStmt = conexion.prepareStatement(query);            
             preparedStmt.setString(1, nombre);
             preparedStmt.setInt(2, idPerfil);
             preparedStmt.setString(3,login);
@@ -259,18 +248,37 @@ public class ControllerSql {//public
             preparedStmt.setInt(7, 1);
             preparedStmt.setInt(8, 1);
             preparedStmt.setInt(9,identificacion);
-        
-            
-            preparedStmt.execute();
-        
-            
+            preparedStmt.execute();    
             return true;
         } catch (SQLException e) {
             return false;
         }
     }
     
-    
+    /*
+    @retornar la listado de perfil a combobox en la vistaUsarios
+    @auto jose vanegas - jvanegasv@ucentral.edu.co
+    */
+    public List<Usuario> listadoUsuarioProfesores(){
+        List<Usuario> UsuarioProfesores = new Stack<Usuario>();
+        Perfil Perfil = new Perfil(3, "Profesor", 1);
+        PreparedStatement ps;
+        try {
+            
+            ps = conexion.prepareStatement("select idusuario,identificacion,nombre,idPerfil,login,contrasenia,estado from usuario where idPerfil= 3");
+            rs = ps.executeQuery();
+            while(rs.next()){
+                //Proveedor p = new Proveedor(rs.getInt(4),rs.getString(1), rs.getString(2), rs.getString(3));
+                Usuario p = new Usuario(rs.getInt(1),rs.getInt(2),rs.getString(3),(Perfil) ,rs.getString(5),rs.getString(6),true);
+                UsuarioProfesores.add(p);
+                log(String.valueOf(p));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return UsuarioProfesores;
+    }
     
     /*
     @retornar la listado de perfil a combobox en la vistaUsarios

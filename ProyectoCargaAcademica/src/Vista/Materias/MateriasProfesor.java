@@ -7,6 +7,10 @@ package Vista.Materias;
 
 import Controlador.Conexion;
 import Controlador.ControllerSql;
+import Controlador.FuncionesController;
+import Modelo.Perfil;
+import Modelo.Usuario;
+import static Vista.SuperAdministrador.CUPUsuario.comboPerfil;
 import static groovyjarjarasm.asm.tree.InsnList.check;
 import java.awt.Color;
 import java.awt.Component;
@@ -21,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.Color;
 import java.awt.Component;
+import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -36,11 +41,17 @@ import javax.swing.table.TableColumn;
  * @author negro
  */
 public class MateriasProfesor extends javax.swing.JFrame {
-
-    ControllerSql obj;
+    
+    ControllerSql obj = new ControllerSql();
+    FuncionesController cc = new FuncionesController();
+    private final List<Usuario> Usuario;
+   //ControllerSql obj;
     CallableStatement cts;
     Connection cn;
     ResultSet r;
+    
+    
+    
     /**
      * Creates new form MateriasProfesor
      */
@@ -49,9 +60,12 @@ public class MateriasProfesor extends javax.swing.JFrame {
        initComponents();
        cn = Conexion.getConn();
        cargar();
+       obj = ControllerSql.getInstancia();
     
-       
-       
+       /*cargar los datos del perfil en el combo*/
+       comboProfesores.setModel(new javax.swing.DefaultComboBoxModel(cc.listaUsuarioProfesores().toArray()));
+       Usuario = cc.listaUsuarioProfesores();
+       comboProfesores.setSelectedIndex(0);
 
        
     }
@@ -120,7 +134,7 @@ public class MateriasProfesor extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
+        comboProfesores = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         BtnCancelar = new javax.swing.JButton();
@@ -188,7 +202,7 @@ public class MateriasProfesor extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(41, 41, 41)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboProfesores, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(68, 68, 68)
                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -215,7 +229,7 @@ public class MateriasProfesor extends javax.swing.JFrame {
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboProfesores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
@@ -361,9 +375,9 @@ public class MateriasProfesor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JButton btnGuardar;
+    public static javax.swing.JComboBox comboProfesores;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

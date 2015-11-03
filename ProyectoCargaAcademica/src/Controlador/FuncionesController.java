@@ -10,6 +10,7 @@ import Controlador.Conexion;
 import Controlador.ControllerSql;
 import Modelo.Materia;
 import Modelo.Perfil;
+import Modelo.Usuario;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
@@ -52,5 +53,9 @@ private Conexion cn;
          return sen.listadoMaterias();
      }
      
+      
+      public List<Usuario> listaUsuarioProfesores(){
+         return sen.listadoUsuarioProfesores();
+     }
  
 }
