@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vista.Administrador;
+package Vista.SuperAdministrador;
 
 import Controlador.Conexion;
 import Vista.SuperAdministrador.VistaPrincipal;
@@ -416,7 +416,7 @@ ControllerSql obj;
                 
                 
                 if (res == true) {
-                    JOptionPane.showMessageDialog(null, "Usuario Registrado Correctamente");
+                    JOptionPane.showMessageDialog(null, "Conexion Exitosa");
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "No se pudo ingresar un nuevo Empleado ya existe en la base"

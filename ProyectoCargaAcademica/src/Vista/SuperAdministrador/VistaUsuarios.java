@@ -167,6 +167,7 @@ public class VistaUsuarios extends javax.swing.JFrame {
           
             
           formUsuario.btnGuardar.setText(getMod());
+          formUsuario.txtCedula.setEnabled(false);
           
 //            log("perfil"+"  "+Perfil);
          

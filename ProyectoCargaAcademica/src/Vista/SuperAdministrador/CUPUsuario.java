@@ -11,6 +11,8 @@ import Controlador.FuncionesController;
 import Modelo.Perfil;
 import java.awt.Component;
 import java.awt.HeadlessException;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -67,11 +69,12 @@ public class CUPUsuario extends javax.swing.JFrame {
        comboTipoC.setVisible(false);
        labelHabien.setVisible(false);
        comboHabien.setVisible(false);
+      /***************************************/
        
-       
-       
-       
-       /***************************************/
+       /*Validacion de campos*/
+        ValidadSoloNumeros(txtCedula);
+        ValidadCaracteres(txtNombre);
+        
     }
 
     /**
@@ -418,6 +421,47 @@ ENGINE=InnoDB
         return false;
     }
  
+     /*
+    @Valida que los campor solo contengan numeros
+    @auto jvanegasv@ucentral.edu.co
+    */    
+      
+    public void ValidadSoloNumeros(JTextField a) {
+        a.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                Character ch = e.getKeyChar();
+                if (!Character.isDigit(e.getKeyChar()) && (ch != KeyEvent.VK_BACK_SPACE) && (ch != '.')) {
+         // if(((ch < '0') || (ch > '9')) && (ch != KeyEvent.VK_BACK_SPACE)&& (ch !='.')){ 
+
+                    getToolkit().beep();
+                    e.consume();;
+                }
+            }
+        });
+    }
+
+    /*
+    @Valida que los campor solo contengan caracteres
+    @auto jvanegasv@ucentral.edu.co
+    */    
+    
+    public void ValidadCaracteres(JTextField a) {
+        a.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                Character ch = e.getKeyChar();
+                if (Character.isDigit(e.getKeyChar())) {
+         // if(((ch < '0') || (ch > '9')) && (ch != KeyEvent.VK_BACK_SPACE)&& (ch !='.')){ 
+
+                    getToolkit().beep();
+                    e.consume();;
+                }
+
+            }
+        });
+    }
+      
+      
+      
       
       /*
       @Guardar los datos de cada JTextField para recuperar los datos
@@ -537,15 +581,11 @@ public void crearUsuario()
 
              int identificacion = Integer.parseInt(txtCedula.getText());
             String nombre = txtNombre.getText();
-//            Object perfil = comboPerfil.getSelectedItem();
             int sperfil = ((Perfil) comboPerfil.getSelectedItem()).getIdPerfil();
-
             String login = txtLogin.getText();
             String contrasenia = txtPassword.getText();
             Object tipoEstado = comboEstado.getSelectedItem();
-//            String sperfil = (String) perfil;
             String stipoEstado = (String) tipoEstado;
-            
             Object tipoContrado = comboTipoC.getSelectedItem();
             Object habilitadoEn = comboHabien.getSelectedItem();
             
@@ -629,69 +669,6 @@ public void crearUsuario()
         
      
  }
-
-
-public void crearProfesor()
-{
-//// // TODO add your handling code here:
-////
-////        if (ValidarCamposVacios(txtCedula, txtNombre, txtLogin, txtPassword)) {
-////            JOptionPane.showMessageDialog(this, "Faltan datos en los campos.");
-////        } else {
-////
-////            int identificacion = Integer.parseInt(txtCedula.getText());
-////            String nombre = txtNombre.getText();
-//////            Object perfil = comboPerfil.getSelectedItem();
-////            int sperfil = ((Perfil) comboPerfil.getSelectedItem()).getIdPerfil();
-////
-////            String login = txtLogin.getText();
-////            String contrasenia = txtPassword.getText();
-////            Object tipoEstado = comboEstado.getSelectedItem();
-//////            String sperfil = (String) perfil;
-////            String stipoEstado = (String) tipoEstado;
-////            
-////            Object tipoContrado = comboTipoC.getSelectedItem();
-////            Object habilitadoEn = comboHabien.getSelectedItem();
-////            
-////            String ab = (String) tipoContrado;
-////            String ac = (String) habilitadoEn;
-////            
-////            try {
-////
-//////                 int intperfil = Integer.parseInt(sperfil);
-////                int intEstado = Integer.parseInt(stipoEstado);
-////
-////               // boolean res = obj.AgregarUsuario(identificacion, nombre, (int) sperfil, login, contrasenia, (int) intEstado);
-////                boolean res2 = obj.AgregarProfesor(identificacion,ab,ac,(int) intEstado);
-////
-////                if (res ==true) {
-////                    JOptionPane.showMessageDialog(null, "Usuario Registrado Correctamente");
-////                    if(res2 == true)
-////                    {
-////                        this.dispose();
-////                    VistaUsuarios = new VistaUsuarios();
-////                    VistaUsuarios.setVisible(true);
-////                    JOptionPane.showMessageDialog(null, "Usuario Registrado Correctamente");
-////                    }
-////                    else {
-////                    JOptionPane.showMessageDialog(null, "No se pudo ingresar otro usuario ya existe"
-////                            + "de datos");
-////                }
-////
-////                } else {
-////                    JOptionPane.showMessageDialog(null, "No se pudo ingresar otro usuario ya existe"
-////                            + "de datos");
-////                }
-////                
-////            } catch (Exception e) {
-////                JOptionPane.showMessageDialog(null, "por favor verifique la conexion del servidor ");
-////
-////            }
-////
-////            deleteDataFrame();
-////        }
-    
-}
 
 
 /*
