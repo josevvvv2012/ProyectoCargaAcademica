@@ -11,6 +11,7 @@
 package Vista.SuperAdministrador;
 
 import Controlador.Conexion;
+import Vista.Materias.MateriasProfesor;
 import Vista.Materias.VistaMaterias;
 import VistaInicio.VistaLogin;
 import java.awt.Desktop;
@@ -266,6 +267,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        MateriasProfesor MateriasProfesor = new MateriasProfesor();
+        MateriasProfesor.setVisible(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

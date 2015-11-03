@@ -41,9 +41,7 @@ public class VistaMaterias extends javax.swing.JFrame {
     @cargar las datos de la tabla usuario 
     @autor jose vanegas . jvanegasv@ucentral.edu.co
     */
-     
-    
-    public void cargar() {
+     public void cargar() {
 
         DefaultTableModel tabla = new DefaultTableModel();
         PreparedStatement ps;

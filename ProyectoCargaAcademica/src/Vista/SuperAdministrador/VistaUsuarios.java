@@ -138,19 +138,7 @@ public class VistaUsuarios extends javax.swing.JFrame {
             // no se puede eliminar
             JOptionPane.showMessageDialog(this, "Tabla vacia o no ha seleccionado uan fila.");
         } else {
-            // la eliminamos del modelo:
-            //modelo.removeRow(fila_select);
-            /*String idIdentificacion = jTable1.getValueAt(row, 0).toString();
-            String nombre = jTable1.getValueAt(row, 1).toString();
-            String direccion = jTable1.getValueAt(row, 2).toString();
-            String telefono = jTable1.getValueAt(row, 3).toString();
-            txtIdCliente.setText(idIdentificacion);
-            txtIdCliente.setEnabled(false);
-            txt_nombre_cliente.setText(nombre);
-            txtDireccion.setText(direccion);
-            txtTelefono.setText(telefono);
-            btnSelectEditar.setText("Editar");*/
-         
+           
           
           String idUsuario =jTable1.getValueAt(row, 1).toString();
           String nombre =jTable1.getValueAt(row, 2).toString();
