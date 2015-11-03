@@ -8,6 +8,7 @@ package Controlador;
 import java.util.List;
 import Controlador.Conexion;
 import Controlador.ControllerSql;
+import Modelo.Materia;
 import Modelo.Perfil;
 import java.io.IOException;
 import java.net.URL;
@@ -46,4 +47,10 @@ private Conexion cn;
      public List<Perfil> listaPerfil(){
          return sen.listadoPerfil();
      }
+     
+      public List<Materia> listaMateria(){
+         return sen.listadoMaterias();
+     }
+     
+ 
 }

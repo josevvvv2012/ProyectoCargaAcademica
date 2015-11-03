@@ -31,8 +31,9 @@ public class VistaUsuarios extends javax.swing.JFrame {
     Connection cn;
     ResultSet r;
     CUPUsuario  formUsuario;
-    
-    
+    String Mod = "Modificar";
+
+ 
     /**
      * Creates new form VistaUsuarios
      */
@@ -58,15 +59,19 @@ public class VistaUsuarios extends javax.swing.JFrame {
             tabla.addColumn("Perfil");
             tabla.addColumn("Login");
             tabla.addColumn("Clave");
+            tabla.addColumn("tipoContrato");
+            tabla.addColumn("habilitadoEn");
+            tabla.addColumn("estadoDispo");
             tabla.addColumn("Estado");
             
-            ps = cn.prepareStatement("SELECT idusuario,identificacion,nombre,idPerfil,login,contrasenia,estado FROM usuario");
+            ps = cn.prepareStatement("SELECT idusuario,identificacion,nombre,idPerfil,login,contrasenia,tipoContrato,"
+                    + "habilitadoEn,estadoDispo,estado FROM usuario");
             r = ps.executeQuery();
 
             while (r.next()) {
-                Object dato[] = new Object[7];
+                Object dato[] = new Object[10];
                 
-                for (int i = 0; i < 7; i++) {
+                for (int i = 0; i < 10; i++) {
                     dato[i] = r.getString(i + 1);
                     //log(String.valueOf(dato[0]));
                 }
@@ -92,11 +97,15 @@ public class VistaUsuarios extends javax.swing.JFrame {
         DefaultTableModel tabla = new DefaultTableModel();
 
         try {
-           tabla.addColumn("Identificacion");
+           tabla.addColumn("IdUsuario");
+            tabla.addColumn("Identificacion");
             tabla.addColumn("Nombre");
             tabla.addColumn("Perfil");
             tabla.addColumn("Login");
             tabla.addColumn("Clave");
+            tabla.addColumn("tipoContrato");
+            tabla.addColumn("habilitadoEn");
+            tabla.addColumn("estadoDispo");
             tabla.addColumn("Estado");
           
           
@@ -106,8 +115,8 @@ public class VistaUsuarios extends javax.swing.JFrame {
 
 
             while (r.next()) {
-                Object dato[] = new Object[6];
-                for (int i = 0; i < 6; i++) {
+                Object dato[] = new Object[10];
+                for (int i = 0; i < 10; i++) {
                     dato[i] = r.getString(i + 1);
 
                     log(String.valueOf(dato[i]));
@@ -128,7 +137,9 @@ public class VistaUsuarios extends javax.swing.JFrame {
   
   
    public int seleccionarfila(int a) {
-
+        
+        
+        
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         int row = jTable1.getSelectedRow();
         //ahora obtenemos la fila selccionada
@@ -136,28 +147,46 @@ public class VistaUsuarios extends javax.swing.JFrame {
 
         if (fila_select < 0) {
             // no se puede eliminar
-            JOptionPane.showMessageDialog(this, "Tabla vacia o no ha seleccionado uan fila.");
+            JOptionPane.showMessageDialog(this, "Tabla vacia o no ha seleccionado uan fila para editar.");
         } else {
-           
+          
+          formUsuario = new  CUPUsuario();
+          formUsuario.setVisible(true);
+          
           
           String idUsuario =jTable1.getValueAt(row, 1).toString();
           String nombre =jTable1.getValueAt(row, 2).toString();
           String Perfil =jTable1.getValueAt(row, 3).toString();
           String Login =jTable1.getValueAt(row, 4).toString();
           String Clave =jTable1.getValueAt(row, 5).toString();
-          String Estado =jTable1.getValueAt(row, 6).toString();
+           String TipoC =jTable1.getValueAt(row, 6).toString();
+          String Habilien =jTable1.getValueAt(row, 7).toString();
+          String EstadoD =jTable1.getValueAt(row, 8).toString();
+          String Estado =jTable1.getValueAt(row, 9).toString();
           
           
-          formUsuario = new  CUPUsuario();
-          formUsuario.setVisible(true);
+            
+          formUsuario.btnGuardar.setText(getMod());
           
+//            log("perfil"+"  "+Perfil);
+         
+         if(Integer.parseInt(Perfil) != 2)
+         {
+            
          formUsuario.txtCedula.setText(idUsuario);
          formUsuario.txtNombre.setText(nombre);
-         formUsuario.comboPerfil.setSelectedIndex(Integer.parseInt(Perfil));
+         formUsuario.comboPerfil.setSelectedIndex(2);
          formUsuario.txtLogin.setText(Login);
          formUsuario.txtPassword.setText(Clave);
-            
-          
+         }else{
+         
+         formUsuario.txtCedula.setText(idUsuario);
+         formUsuario.txtNombre.setText(nombre);
+         formUsuario.txtLogin.setText(Login);
+         formUsuario.txtPassword.setText(Clave);
+         formUsuario.comboTipoC.setSelectedItem(TipoC);
+         formUsuario.comboHabien.setSelectedItem(EstadoD);
+         } 
             a = 1;
             
         }
@@ -242,7 +271,7 @@ public class VistaUsuarios extends javax.swing.JFrame {
             }
         });
 
-        btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.setText("Editar");
         btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeleccionarActionPerformed(evt);
@@ -260,14 +289,21 @@ public class VistaUsuarios extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 701, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addGap(212, 212, 212)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
@@ -283,14 +319,7 @@ public class VistaUsuarios extends javax.swing.JFrame {
                                 .addComponent(btnSeleccionar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnEliminar)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
+                                .addGap(0, 31, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -396,6 +425,14 @@ public class VistaUsuarios extends javax.swing.JFrame {
     public void log(String a) {
         System.out.println("la valor  = " + " " + a);
     } 
+    
+      public void setMod(String Mod) {
+        this.Mod = Mod;
+    }
+      
+     public String getMod() {
+        return Mod;
+    }  
     
     /**
      * @param args the command line arguments

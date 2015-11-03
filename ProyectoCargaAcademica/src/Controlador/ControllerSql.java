@@ -9,6 +9,8 @@ import static Controlador.Conexion.dbName;
 import static Controlador.Conexion.driver;
 import static Controlador.Conexion.login;
 import static Controlador.Conexion.url;
+import Modelo.Administrador;
+import Modelo.Materia;
 import Modelo.Perfil;
 import Modelo.Usuario;
 import java.sql.Connection;
@@ -183,15 +185,16 @@ public class ControllerSql {//public
   
   
 /**************************************************************************/ 
-    public boolean AgregarUsuario(int idusuario,String nombre,int idPerfil,String login,String contrasenia, int estado) {
+    public boolean AgregarUsuario(int idusuario,String nombre,int idPerfil,String login,String contrasenia,
+            String tipoContrato,String habilitadoEn, int estadoDispo, int estado) {
 
         
-        Usuario Usuario = new Usuario(idusuario, idusuario, nombre, null, login, contrasenia, true);
+            Usuario Usuario = new Usuario(idusuario, idusuario, nombre, null, login, contrasenia, true);
         
         try {
          
-            String query = "INSERT INTO usuario (identificacion,nombre, idPerfil, login,contrasenia,estado) "
-                    + "     VALUES (?,?,?,?,?,?);";
+            String query = "INSERT INTO usuario (identificacion,nombre, idPerfil, login,contrasenia,tipoContrato,habilitadoEn,estadoDispo,estado) "
+                    + "     VALUES (?,?,?,?,?,?,?,?,?);";
 
             // preparo la consulta para mi base de datos
             PreparedStatement preparedStmt = conexion.prepareStatement(query);
@@ -200,7 +203,10 @@ public class ControllerSql {//public
             preparedStmt.setInt(3, idPerfil);
             preparedStmt.setString(4,Usuario.getLogin());
             preparedStmt.setString(5, Usuario.getContrasenia());
-            preparedStmt.setInt(6, 1);
+            preparedStmt.setString(6,tipoContrato);
+            preparedStmt.setString(7, habilitadoEn);
+            preparedStmt.setInt(8, 1);
+            preparedStmt.setInt(9, 1);
         
             // ejecuto mi query
             preparedStmt.execute();
@@ -208,9 +214,68 @@ public class ControllerSql {//public
         } catch (SQLException e) {
             return false;
         }
+    
+        
     }   
     
+    /*
+    @Modifica los datos del usuario
+    @auto jose vanegas - jvanegasv@ucentral.edu.co
+    */
+//    public boolean actualizarUsuario(int identificacion,String nombre){
+        
+       
+        public boolean actualizarUsuario(int identificacion, String nombre,int idPerfil,String login,String contrasenia,
+            String tipoContrato,String habilitadoEn, int estadoDispo, int estado){
+//    
+        
+        
+        log("Controller ACTUALIZAR");
+        log(String.valueOf(identificacion));
+        log(nombre);
+        try {
+           
+   
+
+            
+            
+            String query = " update usuario set nombre = ? , idPerfil= ? , login = ? , contrasenia = ? ," 
+                    + "tipoContrato= ? , habilitadoEn = ? , estadoDispo = ? , estado = ? where identificacion = ?";
+            
+            
+//            String query = " update usuario set nombre = ?  where identificacion = ?";
+            log(query);
+
+            
+            
+            PreparedStatement preparedStmt = conexion.prepareStatement(query);
+            
+            preparedStmt.setString(1, nombre);
+            preparedStmt.setInt(2, idPerfil);
+            preparedStmt.setString(3,login);
+            preparedStmt.setString(4,contrasenia);
+            preparedStmt.setString(5,tipoContrato);
+            preparedStmt.setString(6, habilitadoEn);
+            preparedStmt.setInt(7, 1);
+            preparedStmt.setInt(8, 1);
+            preparedStmt.setInt(9,identificacion);
+        
+            
+            preparedStmt.execute();
+        
+            
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
     
+    
+    
+    /*
+    @retornar la listado de perfil a combobox en la vistaUsarios
+    @auto jose vanegas - jvanegasv@ucentral.edu.co
+    */
     public List<Perfil> listadoPerfil(){
         List<Perfil> Perfiles = new Stack<Perfil>();
         PreparedStatement ps;
@@ -231,6 +296,33 @@ public class ControllerSql {//public
         return Perfiles;
     }
     
+    
+    
+    /*
+    @retornar la listado de materia a vista la vistaGrupos
+    @auto jose vanegas - jvanegasv@ucentral.edu.co
+    */
+    public List<Materia> listadoMaterias(){
+        List<Materia> Materias = new Stack<Materia>();
+        PreparedStatement ps;
+        try {
+            
+            ps = conexion.prepareStatement("SELECT  idMateria,codMateria,nombreMateria,tipo,creditos,intHoraria,semestre,idAdministrador  "
+                    + " FROM materia");
+            rs = ps.executeQuery();
+            while(rs.next()){
+                //Proveedor p = new Proveedor(rs.getInt(4),rs.getString(1), rs.getString(2), rs.getString(3));
+                Materia p = new Materia(rs.getInt(1), rs.getInt(2),rs.getString(3),rs.getString(4),rs.getInt(5),
+                rs.getInt(6),rs.getInt(7),null);
+                Materias.add(p);
+                log(String.valueOf(p));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return Materias;
+    }
     
        
  /**************************************************************************/ 

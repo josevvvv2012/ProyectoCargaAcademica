@@ -5,17 +5,44 @@
  */
 package Vista.GestionGrupo;
 
+import Controlador.ControllerSql;
+import Controlador.FuncionesController;
+import Modelo.Materia;
+import Modelo.Perfil;
+import static Vista.SuperAdministrador.CUPUsuario.comboPerfil;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.util.List;
+
 /**
  *
  * @author negro
  */
 public class CUPGrupos extends javax.swing.JFrame {
 
+    ControllerSql obj = new ControllerSql();
+    FuncionesController cc = new FuncionesController();
+    private final List<Materia> Materia;
+    CallableStatement cts;
+    Connection cn;
+    ResultSet r;
+    
+    
     /**
      * Creates new form CUPGrupos
      */
     public CUPGrupos() {
+        setUndecorated(true);
         initComponents();
+        
+        obj = ControllerSql.getInstancia();
+       
+       /*cargar los datos del perfil en el combo*/
+       comboMateria.setModel(new javax.swing.DefaultComboBoxModel(cc.listaMateria().toArray()));
+       Materia = cc.listaMateria();
+       comboMateria.setSelectedIndex(0);
+        
     }
 
     /**
@@ -53,13 +80,16 @@ public class CUPGrupos extends javax.swing.JFrame {
 
         jLabel5.setText("Bloque");
 
-        comboMateria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         comboJornada.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Diurna", "Nocturna" }));
 
         jButton1.setText("Guardar");
 
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/minimizar.png"))); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -91,13 +121,12 @@ public class CUPGrupos extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboJornada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtGrupo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                                .addComponent(txtNBloques, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(comboMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(196, 196, 196))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(comboJornada, 0, 117, Short.MAX_VALUE)
+                            .addComponent(comboMateria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtGrupo)
+                            .addComponent(txtNBloques))
+                        .addGap(155, 155, 155))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -154,6 +183,11 @@ public class CUPGrupos extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -191,7 +225,7 @@ public class CUPGrupos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox comboJornada;
-    private javax.swing.JComboBox comboMateria;
+    public static javax.swing.JComboBox comboMateria;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;

@@ -137,8 +137,8 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Img/Productos.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Productos"/>
-            <Property name="toolTipText" type="java.lang.String" value="Productos"/>
+            <Property name="text" type="java.lang.String" value="Grupos"/>
+            <Property name="toolTipText" type="java.lang.String" value="Grupos"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>

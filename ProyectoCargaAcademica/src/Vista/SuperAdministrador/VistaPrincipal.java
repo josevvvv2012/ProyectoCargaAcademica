@@ -11,6 +11,7 @@
 package Vista.SuperAdministrador;
 
 import Controlador.Conexion;
+import Vista.GestionGrupo.VistaGrupos;
 import Vista.Materias.MateriasProfesor;
 import Vista.Materias.VistaMaterias;
 import VistaInicio.VistaLogin;
@@ -71,8 +72,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Productos.png"))); // NOI18N
-        jButton2.setText("Productos");
-        jButton2.setToolTipText("Productos");
+        jButton2.setText("Grupos");
+        jButton2.setToolTipText("Grupos");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -262,6 +263,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        VistaGrupos VistaGrupos = new VistaGrupos();
+        VistaGrupos.setVisible(true);
 
     }//GEN-LAST:event_jButton2ActionPerformed
 

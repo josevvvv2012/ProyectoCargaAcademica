@@ -10,25 +10,10 @@ package Modelo;
  * @author negro
  */
 public class Materia {
-    
-    String myTableName6 ="CREATE TABLE IF NOT EXISTS `baaa0`.`materia` (\n" +
-"  `idMateria` INT(11) NOT NULL COMMENT '',\n" +
-"  `nombreMateria` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
-"  `tipo` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
-"  `creditos` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
-"  `intHoraria` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
-"  `semestre` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
-"  `idAdministrador` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
-"  PRIMARY KEY (`idMateria`)  COMMENT '',\n" +
-"  INDEX `idAdministrador` (`idAdministrador` ASC)  COMMENT '',\n" +
-"  CONSTRAINT `FK_Materia_Administrador`\n" +
-"    FOREIGN KEY (`idAdministrador`)\n" +
-"    REFERENCES `baaa0`.`administrador` (`idAdmin`))\n" +
-"ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";
-  
-  
+     
   
   int idMateria;
+  int codMaterias;
   String nombreMateria;
   String tipo;
   int creditos;
@@ -40,8 +25,10 @@ public class Materia {
   
     public Materia() {
     }
-    public Materia(int idMateria,String nombreMateria,String tipo,int creditos,int intHoraria,int semestre,Administrador idAdministrador) {
+
+    public Materia(int idMateria, int codMaterias, String nombreMateria, String tipo, int creditos, int intHoraria, int semestre, Administrador idAdministrador) {
         this.idMateria = idMateria;
+        this.codMaterias = codMaterias;
         this.nombreMateria = nombreMateria;
         this.tipo = tipo;
         this.creditos = creditos;
@@ -49,6 +36,7 @@ public class Materia {
         this.semestre = semestre;
         this.idAdministrador = idAdministrador;
     }
+    
   
   
   
@@ -151,7 +139,26 @@ public void setSemestre(int semestre) {
  public void setidAdministrador(Administrador idAdministrador) {
         this.idAdministrador = idAdministrador;
     }
-  
 
+    public int getCodMaterias() {
+        return codMaterias;
+    }
+
+    public void setCodMaterias(int codMaterias) {
+        this.codMaterias = codMaterias;
+    }
+
+    public Administrador getIdAdministrador() {
+        return idAdministrador;
+    }
+
+    public void setIdAdministrador(Administrador idAdministrador) {
+        this.idAdministrador = idAdministrador;
+    }
+
+    @Override
+    public String toString() {
+        return  getNombreMateria();
+    }
   
 }

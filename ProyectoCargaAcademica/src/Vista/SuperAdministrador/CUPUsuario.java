@@ -5,10 +5,12 @@
  */
 package Vista.SuperAdministrador;
 
+import Controlador.Conexion;
 import Controlador.ControllerSql;
 import Controlador.FuncionesController;
 import Modelo.Perfil;
 import java.awt.Component;
+import java.awt.HeadlessException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -41,6 +43,10 @@ public class CUPUsuario extends javax.swing.JFrame {
     public CUPUsuario() {
         setUndecorated(true);
         initComponents();
+       
+        
+       cn = Conexion.getConn();
+       
        
        txtCedula.setName("txtCedula");
        txtNombre.setName("txtNombre");
@@ -90,8 +96,8 @@ public class CUPUsuario extends javax.swing.JFrame {
         txtLogin = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         comboEstado = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         comboPerfil = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
         comboTipoC = new javax.swing.JComboBox();
@@ -143,6 +149,18 @@ public class CUPUsuario extends javax.swing.JFrame {
             }
         });
 
+        txtLogin.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtLoginFocusLost(evt);
+            }
+        });
+
+        txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPasswordFocusLost(evt);
+            }
+        });
+
         comboEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "0" }));
         comboEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,17 +168,17 @@ public class CUPUsuario extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
 
@@ -173,13 +191,13 @@ public class CUPUsuario extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Crear Usuario");
 
-        comboTipoC.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fijo", "Indefinido", "Temporal" }));
+        comboTipoC.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Fijo", "Indefinido", "Temporal" }));
 
         labelTipoC.setText("Tipo de Contrato");
 
         labelHabien.setText("Habilitador en");
 
-        comboHabien.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Diurna", "Nocturna" }));
+        comboHabien.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Diurna", "Nocturna" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -187,9 +205,9 @@ public class CUPUsuario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnGuardar)
                 .addGap(32, 32, 32)
-                .addComponent(jButton2)
+                .addComponent(btnCancelar)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -290,8 +308,8 @@ public class CUPUsuario extends javax.swing.JFrame {
                     .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnGuardar)
+                    .addComponent(btnCancelar))
                 .addGap(20, 20, 20))
         );
 
@@ -311,10 +329,10 @@ public class CUPUsuario extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /*
     @Accion crear Usuario
@@ -338,10 +356,19 @@ ENGINE=InnoDB
     
     */
     
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
      
-        crearUsuario();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        VistaUsuarios VistaUsuarios = new VistaUsuarios();
+        
+        if((VistaUsuarios.getMod() != btnGuardar.getText()))
+        {
+       crearUsuario();
+        }
+        else{
+       editarUsuario();
+        }
+
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void comboEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboEstadoActionPerformed
         // TODO add your handling code here:
@@ -359,29 +386,20 @@ ENGINE=InnoDB
     
 /*cambiar el estado para que aparescan nueva infomracion*/   
     private void comboPerfilItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboPerfilItemStateChanged
-        // TODO add your handling code here:
-        int sperfil = ((Perfil) comboPerfil.getSelectedItem()).getIdPerfil();
         
-        if(sperfil != 3)
-            {
-       
-                log("hola soy profesor");
-       labelTipoC.setVisible(false);
-       comboTipoC.setVisible(false);
-       labelHabien.setVisible(false);
-       comboHabien.setVisible(false);
-       
-                
-            }
-        else{
-       log("hola soy profesor");
-       labelTipoC.setVisible(true);
-       comboTipoC.setVisible(true);
-       labelHabien.setVisible(true);
-       comboHabien.setVisible(true);
+        esProfesor(0);
         
-        }
     }//GEN-LAST:event_comboPerfilItemStateChanged
+
+    private void txtLoginFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLoginFocusLost
+        // TODO add your handling code here
+        SaveJTextFieldFrame(txtLogin);
+    }//GEN-LAST:event_txtLoginFocusLost
+
+    private void txtPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusLost
+        // TODO add your handling code here:
+        SaveJTextFieldFrame(txtPassword);
+    }//GEN-LAST:event_txtPasswordFocusLost
 
     /*Funciones*/
     
@@ -400,7 +418,12 @@ ENGINE=InnoDB
         return false;
     }
  
-    
+      
+      /*
+      @Guardar los datos de cada JTextField para recuperar los datos
+       en casos se caiga el servicio del servidor
+      @autor jose vanegas - jvamegasv@ucentral.edu.co
+      */
     public void SaveJTextFieldFrame(JTextField... textFields)
     {
 
@@ -468,29 +491,41 @@ ENGINE=InnoDB
 
     }
       
-    public void deleteDataFrame() {
+    public void deleteDataFrame(int idUsuario) {
         
-        log("deleteDataFrame");
-      String nombreFrame = "CUPUsuario";
+        // TODO add your handling code here:
+          String cod=  Integer.toString(idUsuario);
+          String nombreFrame = "CUPUsuario";
+          
+          log("idUsuario"+String.valueOf(cod));
         try {
-            obj = new ControllerSql();
+            cts=cn.prepareCall("{call eliminarbackframe(?,?)}");
+            cts.setString(1, cod);
+            cts.setString(2, nombreFrame);
+            int rpta=cts.executeUpdate();
 
-            boolean res = obj.deleteBackFrame(1, nombreFrame);
+            if(rpta==1){
+            
+            
+                
+          log("No se eliminado correctamente los datos");
+                    }else {
+             
+                log("Se ha eliminado correctamente los datos");
 
-            if (res == true) {
-                JOptionPane.showMessageDialog(null, "Datos Eliminados Correctamente");
-
-            } else {
-                JOptionPane.showMessageDialog(null, "No se pudo ingresar un nuevo Empleado ya existe en la base"
-                        + "de datos");
             }
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "por favor verifique la conexion del servidor");
-
+        }catch (SQLException | HeadlessException e) {JOptionPane.showMessageDialog(this, e.toString());
         }
-
     }
+    
+    
+    /*********************************************************************************************/
+    
+/*
+@Crear usuario
+@autor jose vanegas -jvanegasv@ucentral.edu.co    
+*/    
     
 public void crearUsuario()
 {
@@ -500,7 +535,7 @@ public void crearUsuario()
             JOptionPane.showMessageDialog(this, "Faltan datos en los campos.");
         } else {
 
-            int identificacion = Integer.parseInt(txtCedula.getText());
+             int identificacion = Integer.parseInt(txtCedula.getText());
             String nombre = txtNombre.getText();
 //            Object perfil = comboPerfil.getSelectedItem();
             int sperfil = ((Perfil) comboPerfil.getSelectedItem()).getIdPerfil();
@@ -510,12 +545,18 @@ public void crearUsuario()
             Object tipoEstado = comboEstado.getSelectedItem();
 //            String sperfil = (String) perfil;
             String stipoEstado = (String) tipoEstado;
+            
+            Object tipoContrado = comboTipoC.getSelectedItem();
+            Object habilitadoEn = comboHabien.getSelectedItem();
+            
+            String ab = (String) tipoContrado;
+            String ac = (String) habilitadoEn;
             try {
 
 //                 int intperfil = Integer.parseInt(sperfil);
                 int intEstado = Integer.parseInt(stipoEstado);
 
-                boolean res = obj.AgregarUsuario(identificacion, nombre, (int) sperfil, login, contrasenia, (int) intEstado);
+                boolean res = obj.AgregarUsuario(identificacion, nombre, (int) sperfil, login, contrasenia,ab,ac,(int) intEstado,(int) intEstado);
 
                 if (res == true) {
                     this.dispose();
@@ -532,55 +573,162 @@ public void crearUsuario()
 
             }
 
-            deleteDataFrame();
+            deleteDataFrame(1);
         }
 
 }
+
+ public void editarUsuario()
+ {
+     
+     log("Modificar cliente se llama correctamente");
+       // TODO add your handling code here:
+        if (ValidarCamposVacios(txtCedula,txtNombre,txtLogin,txtPassword)) {
+            JOptionPane.showMessageDialog(this, "Faltan datos en los campos.");
+
+        } else {
+            
+            // TODO add your handling code here:
+            int identificacion = Integer.parseInt(txtCedula.getText());
+            String nombre = txtNombre.getText();
+            int sperfil = ((Perfil) comboPerfil.getSelectedItem()).getIdPerfil();
+            String login = txtLogin.getText();
+            String contrasenia = txtPassword.getText();
+            Object tipoEstado = comboEstado.getSelectedItem();
+            String stipoEstado = (String) tipoEstado;
+            Object tipoContrado = comboTipoC.getSelectedItem();
+            Object habilitadoEn = comboHabien.getSelectedItem();
+            
+            String ab = (String) tipoContrado;
+            String ac = (String) habilitadoEn;
+
+            try {
+        
+                
+                obj = new ControllerSql();
+               int intEstado = Integer.parseInt(stipoEstado);
+                   
+                      boolean res = obj.actualizarUsuario(identificacion,nombre, (int) sperfil, login, contrasenia,ab,ac,(int) intEstado,(int) intEstado);
+//                      boolean res = obj.actualizarUsuario(identificacion,nombre);
+                        log("EDITAR");
+                  
+                
+                
+                if (res == true) {
+                    JOptionPane.showMessageDialog(null, "Se Modifico Correctamente el usario");
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo Actualizar ocurrio un problema"
+                            + "de datos");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "por favor verifique la conexion del servidor");
+
+            }
+        }
+        
+     
+ }
+
 
 public void crearProfesor()
 {
- // TODO add your handling code here:
-
-        if (ValidarCamposVacios(txtCedula, txtNombre, txtLogin, txtPassword)) {
-            JOptionPane.showMessageDialog(this, "Faltan datos en los campos.");
-        } else {
-
-            int identificacion = Integer.parseInt(txtCedula.getText());
-            String nombre = txtNombre.getText();
-//            Object perfil = comboPerfil.getSelectedItem();
-            int sperfil = ((Perfil) comboPerfil.getSelectedItem()).getIdPerfil();
-
-            String login = txtLogin.getText();
-            String contrasenia = txtPassword.getText();
-            Object tipoEstado = comboEstado.getSelectedItem();
-//            String sperfil = (String) perfil;
-            String stipoEstado = (String) tipoEstado;
-            try {
-
-//                 int intperfil = Integer.parseInt(sperfil);
-                int intEstado = Integer.parseInt(stipoEstado);
-
-                boolean res = obj.AgregarUsuario(identificacion, nombre, (int) sperfil, login, contrasenia, (int) intEstado);
-
-                if (res == true) {
-                    this.dispose();
-                    VistaUsuarios = new VistaUsuarios();
-                    VistaUsuarios.setVisible(true);
-                    JOptionPane.showMessageDialog(null, "Usuario Registrado Correctamente");
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "No se pudo ingresar otro usuario ya existe"
-                            + "de datos");
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "por favor verifique la conexion del servidor ");
-
-            }
-
-            deleteDataFrame();
-        }
+//// // TODO add your handling code here:
+////
+////        if (ValidarCamposVacios(txtCedula, txtNombre, txtLogin, txtPassword)) {
+////            JOptionPane.showMessageDialog(this, "Faltan datos en los campos.");
+////        } else {
+////
+////            int identificacion = Integer.parseInt(txtCedula.getText());
+////            String nombre = txtNombre.getText();
+//////            Object perfil = comboPerfil.getSelectedItem();
+////            int sperfil = ((Perfil) comboPerfil.getSelectedItem()).getIdPerfil();
+////
+////            String login = txtLogin.getText();
+////            String contrasenia = txtPassword.getText();
+////            Object tipoEstado = comboEstado.getSelectedItem();
+//////            String sperfil = (String) perfil;
+////            String stipoEstado = (String) tipoEstado;
+////            
+////            Object tipoContrado = comboTipoC.getSelectedItem();
+////            Object habilitadoEn = comboHabien.getSelectedItem();
+////            
+////            String ab = (String) tipoContrado;
+////            String ac = (String) habilitadoEn;
+////            
+////            try {
+////
+//////                 int intperfil = Integer.parseInt(sperfil);
+////                int intEstado = Integer.parseInt(stipoEstado);
+////
+////               // boolean res = obj.AgregarUsuario(identificacion, nombre, (int) sperfil, login, contrasenia, (int) intEstado);
+////                boolean res2 = obj.AgregarProfesor(identificacion,ab,ac,(int) intEstado);
+////
+////                if (res ==true) {
+////                    JOptionPane.showMessageDialog(null, "Usuario Registrado Correctamente");
+////                    if(res2 == true)
+////                    {
+////                        this.dispose();
+////                    VistaUsuarios = new VistaUsuarios();
+////                    VistaUsuarios.setVisible(true);
+////                    JOptionPane.showMessageDialog(null, "Usuario Registrado Correctamente");
+////                    }
+////                    else {
+////                    JOptionPane.showMessageDialog(null, "No se pudo ingresar otro usuario ya existe"
+////                            + "de datos");
+////                }
+////
+////                } else {
+////                    JOptionPane.showMessageDialog(null, "No se pudo ingresar otro usuario ya existe"
+////                            + "de datos");
+////                }
+////                
+////            } catch (Exception e) {
+////                JOptionPane.showMessageDialog(null, "por favor verifique la conexion del servidor ");
+////
+////            }
+////
+////            deleteDataFrame();
+////        }
     
 }
+
+
+/*
+@funcion que realiza en cambio de combos para que muestre las demas informacion
+cuando se va a registar un profesor
+@autor jose vanegas - jvanegasv@ucentral.edu.co
+*/
+public void esProfesor(int a)
+{
+// TODO add your handling code here:
+        int sperfil = ((Perfil) comboPerfil.getSelectedItem()).getIdPerfil();
+        
+        if(sperfil != 3)
+            {
+       
+       log("hola soy administrador");
+       labelTipoC.setVisible(false);
+       comboTipoC.setVisible(false);
+       labelHabien.setVisible(false);
+       comboHabien.setVisible(false);
+       
+                
+            }
+        else{
+       log("hola soy profesor");
+       labelTipoC.setVisible(true);
+       comboTipoC.setVisible(true);
+       labelHabien.setVisible(true);
+       comboHabien.setVisible(true);
+        
+        }
+        
+    
+    
+}
+
+
     
       public void log(String a) {
         System.out.println("la valor  = " + " " + a);
@@ -623,12 +771,12 @@ public void crearProfesor()
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
+    public static javax.swing.JButton btnGuardar;
     public static javax.swing.JComboBox comboEstado;
-    private javax.swing.JComboBox comboHabien;
+    public static javax.swing.JComboBox comboHabien;
     public static javax.swing.JComboBox comboPerfil;
-    private javax.swing.JComboBox comboTipoC;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    public static javax.swing.JComboBox comboTipoC;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;

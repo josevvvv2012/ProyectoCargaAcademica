@@ -115,15 +115,18 @@ public class Conexion {
 "  `idPerfil` INT(11) NOT NULL COMMENT '',\n" +
 "  `login` VARCHAR(45) NULL DEFAULT NULL COMMENT '',\n" +
 "  `contrasenia` VARCHAR(45) NULL DEFAULT NULL COMMENT '',\n" +
+"  `tipoContrato` VARCHAR(255) NULL DEFAULT NULL COMMENT '',\n" +
+"  `habilitadoEn` VARCHAR(255) NULL DEFAULT NULL COMMENT '',\n" +
+"  `estadoDispo` BIT(1) NULL DEFAULT NULL COMMENT '',\n" +         
 "  `estado` BIT(1) NULL DEFAULT NULL COMMENT '',\n" +
 "  PRIMARY KEY (`idusuario`)  COMMENT '',\n" +
 "  INDEX `Perfil` (`idPerfil` ASC)  COMMENT '',\n" +
 "  CONSTRAINT `FK_usuario_perfil`\n" +
 "    FOREIGN KEY (`idPerfil`)\n" +
-"    REFERENCES `baaa0`.`perfil` (`idperfil`)\n" +
-"    ON DELETE NO ACTION\n" +
-"    ON UPDATE NO ACTION) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";
+"    REFERENCES `baaa0`.`perfil` (`idperfil`))\n" +
+"ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";
  
+ /*
 String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
 "  `idprofesor` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',\n" +
 "  `tipoContrato` VARCHAR(255) NULL DEFAULT NULL COMMENT '',\n" +
@@ -134,7 +137,7 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
 "    FOREIGN KEY (`idprofesor`)\n" +
 "    REFERENCES `baaa0`.`usuario` (`idusuario`) ON DELETE CASCADE ON UPDATE CASCADE )\n" +
 "ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";
-
+*/
   
   String myTableName4 ="CREATE TABLE IF NOT EXISTS `baaa0`.`administrador` (\n" +
 "  `idAdmin` INT(11) NOT NULL COMMENT '',\n" +
@@ -201,7 +204,7 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
 "  INDEX `idProfesor` (`idProfesor` ASC)  COMMENT '',\n" +
 "  CONSTRAINT `FK_horarioProfesor_profesor`\n" +
 "    FOREIGN KEY (`idProfesor`)\n" +
-"    REFERENCES `baaa0`.`profesor` (`idprofesor`))\n" +
+"    REFERENCES `baaa0`.`usuario` (`idusuario`))\n" +
 "ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";
   
    String myTableName9 ="CREATE TABLE IF NOT EXISTS `mybd` (\n" +
@@ -245,6 +248,11 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
 	"SELECT * FROM materia WHERE idMateria = cod ";
       
       
+       String prodfiltraGrupoID="CREATE PROCEDURE `prodfiltraGrupoID`(IN `cod` INT)\n" +
+	"	\n" +
+	"SELECT * FROM grupo WHERE idgrupo = cod ";
+      
+      
        String prodEliminarUsuario="CREATE PROCEDURE `eliminarUsuario`(IN `cod` INT)\n" +
 	"	\n" +
 	"delete from usuario where idusuario = cod ";
@@ -254,6 +262,21 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
 	"	\n" +
 	"delete from materia where idMateria = cod ";
        
+       
+       String prodEliminarGrupo="CREATE PROCEDURE `eliminarGrupo`(IN `cod` INT)\n" +
+	"	\n" +
+	"delete from grupo where idgrupo = cod ";
+       
+       
+       String prodEliminarBackframe="CREATE PROCEDURE `eliminarbackframe`(IN `cod` INT , IN  `frame` VARCHAR(100) )\n" +
+	"	\n" +
+	"delete from backframe where idUsuario = cod and jframe = frame ";
+//       
+//       String prodEliminarBackframe="CREATE PROCEDURE `eliminarbackframe`(IN `cod` INT)\n" +
+//	"	\n" +
+//	"delete from backframe where idUsuario = cod";       
+       
+       
         try {
             Class.forName(driver);
 
@@ -262,7 +285,7 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
             Statement s = conn.createStatement();
             s.executeUpdate(myTableName1);
             s.executeUpdate(myTableName2);
-            s.executeUpdate(myTableName3);
+//            s.executeUpdate(myTableName3);
             s.executeUpdate(myTableName4);
             s.executeUpdate(myTableName5);
             s.executeUpdate(myTableName6);
@@ -283,8 +306,14 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
           
             s.executeUpdate(prodfiltraUsuarioID);
             s.executeUpdate(prodfiltraMateriaID);
+            s.executeUpdate(prodfiltraGrupoID);
             s.executeUpdate(prodEliminarUsuario);
             s.executeUpdate(prodEliminarMateria);
+            s.executeUpdate(prodEliminarBackframe);
+            
+            
+            
+            
             
             
     
