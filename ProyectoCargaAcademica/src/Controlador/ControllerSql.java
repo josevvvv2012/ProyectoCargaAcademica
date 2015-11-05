@@ -347,7 +347,7 @@ public boolean actualizarMateria(int codMateria, String nombreMateria,int tipo,i
         PreparedStatement ps;
         try {
             
-            ps = conexion.prepareStatement("SELECT  idMateria,codMateria,nombreMateria,tipo,creditos,intHoraria,semestre,idAdministrador  "
+            ps = conexion.prepareStatement("SELECT  idMateria,codMateria,nombreMateria,tipo,creditos,intHoraria,semestre,idAdministradorM  "
                     + " FROM materia");
             rs = ps.executeQuery();
             while(rs.next()){
