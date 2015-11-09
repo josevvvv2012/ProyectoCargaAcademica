@@ -618,6 +618,11 @@ public void crearUsuario()
 
 }
 
+
+/*
+@Editar usuario
+@autor jose vanegas -jvanegasv@ucentral.edu.co    
+*/  
  public void editarUsuario()
  {
      

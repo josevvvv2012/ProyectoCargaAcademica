@@ -175,8 +175,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Img/Adobe.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Reporte Clientes"/>
-            <Property name="toolTipText" type="java.lang.String" value="Reporte Clientes"/>
+            <Property name="toolTipText" type="java.lang.String" value="Reporte"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
@@ -185,10 +184,9 @@
         <Component class="javax.swing.JButton" name="jButton8">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Img/Adobe.png"/>
+              <Image iconType="3" name="/Img/Salir_opt.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Reporte Productos"/>
-            <Property name="toolTipText" type="java.lang.String" value="Reporte Productos"/>
+            <Property name="toolTipText" type="java.lang.String" value="Salones"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
@@ -223,8 +221,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Img/Compra.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Factura"/>
-            <Property name="toolTipText" type="java.lang.String" value="Factura"/>
+            <Property name="toolTipText" type="java.lang.String" value="Horario"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
@@ -235,8 +232,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Img/Adobe.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Reporte Proveedores"/>
-            <Property name="toolTipText" type="java.lang.String" value="Reporte Proveedores"/>
+            <Property name="toolTipText" type="java.lang.String" value="Reporte"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>

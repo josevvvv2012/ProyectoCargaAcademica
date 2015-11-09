@@ -12,6 +12,7 @@ package Vista.SuperAdministrador;
 
 import Controlador.Conexion;
 import Vista.GestionGrupo.VistaGrupos;
+import Vista.GestionSalones.VistaSalones;
 import Vista.Materias.MateriasProfesor;
 import Vista.Materias.VistaMaterias;
 import VistaInicio.VistaLogin;
@@ -92,17 +93,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
         });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Adobe.png"))); // NOI18N
-        jButton3.setText("Reporte Clientes");
-        jButton3.setToolTipText("Reporte Clientes");
+        jButton3.setToolTipText("Reporte");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Adobe.png"))); // NOI18N
-        jButton8.setText("Reporte Productos");
-        jButton8.setToolTipText("Reporte Productos");
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Salir_opt.png"))); // NOI18N
+        jButton8.setToolTipText("Salones");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -128,8 +127,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Compra.png"))); // NOI18N
-        jButton1.setText("Factura");
-        jButton1.setToolTipText("Factura");
+        jButton1.setToolTipText("Horario");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -137,8 +135,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         });
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Adobe.png"))); // NOI18N
-        jButton7.setText("Reporte Proveedores");
-        jButton7.setToolTipText("Reporte Proveedores");
+        jButton7.setToolTipText("Reporte");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -308,9 +305,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-        pdfProductos();
-        String jasper="reporteProductos";
-        verReporteProductosjasper(jasper);
+     VistaSalones VistaSalones = new VistaSalones();
+     VistaSalones.setVisible(true);     
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed

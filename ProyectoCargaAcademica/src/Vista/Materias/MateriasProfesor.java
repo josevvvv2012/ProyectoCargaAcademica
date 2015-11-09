@@ -8,7 +8,11 @@ package Vista.Materias;
 import Controlador.Conexion;
 import Controlador.ControllerSql;
 import Controlador.FuncionesController;
+import Modelo.Administrador;
+import Modelo.Grupo;
+import Modelo.Materia;
 import Modelo.Perfil;
+import Modelo.Salon;
 import Modelo.Usuario;
 import static Vista.SuperAdministrador.CUPUsuario.comboPerfil;
 import static groovyjarjarasm.asm.tree.InsnList.check;
@@ -25,6 +29,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.Color;
 import java.awt.Component;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
@@ -42,6 +48,8 @@ import javax.swing.table.TableColumn;
  */
 public class MateriasProfesor extends javax.swing.JFrame {
     
+    DefaultTableModel tabla;
+    
     ControllerSql obj = new ControllerSql();
     FuncionesController cc = new FuncionesController();
     private final List<Usuario> Usuario;
@@ -56,18 +64,19 @@ public class MateriasProfesor extends javax.swing.JFrame {
      * Creates new form MateriasProfesor
      */
     public MateriasProfesor() {
-        setUndecorated(true);
+       setUndecorated(true);
        initComponents();
        cn = Conexion.getConn();
-       cargar();
+       cargarTablaMaterias();
        obj = ControllerSql.getInstancia();
-    
+    cargarTablaMateriasBloques();
        /*cargar los datos del perfil en el combo*/
        comboProfesores.setModel(new javax.swing.DefaultComboBoxModel(cc.listaUsuarioProfesores().toArray()));
        Usuario = cc.listaUsuarioProfesores();
        comboProfesores.setSelectedIndex(0);
-
        
+
+       tabla = (DefaultTableModel) jTable3.getModel();
     }
 
     
@@ -75,7 +84,7 @@ public class MateriasProfesor extends javax.swing.JFrame {
     @cargar las datos de la tabla usuario 
     @autor jose vanegas . jvanegasv@ucentral.edu.co
     */
-     public void cargar() {
+     public void cargarTablaMaterias() {
 
         DefaultTableModel tabla = new DefaultTableModel();
         PreparedStatement ps;
@@ -136,6 +145,12 @@ public class MateriasProfesor extends javax.swing.JFrame {
         comboProfesores = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         BtnCancelar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableHorario = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        btnPrueba = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -188,42 +203,107 @@ public class MateriasProfesor extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setText("Asignar Materias - Horario");
+
+        jTableHorario.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"6-7 am", null, null, null, null, null, null},
+                {"7-8 am", null, null, null, null, null, null},
+                {"8-9 am", null, null, null, null, null, null},
+                {"9-10am", null, null, null, null, null, null}
+            },
+            new String [] {
+                "Hora", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"
+            }
+        ));
+        jScrollPane2.setViewportView(jTableHorario);
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable3);
+
+        btnPrueba.setText("Prueba");
+        btnPrueba.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPruebaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(130, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(166, 166, 166)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(41, 41, 41)
                         .addComponent(comboProfesores, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(68, 68, 68)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnGuardar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnCancelar)
-                        .addGap(18, 18, 18))))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(134, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(432, 432, 432)
+                .addComponent(btnPrueba)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(comboProfesores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)))
-                .addGap(62, 62, 62)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(jLabel2))
+                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(comboProfesores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)))
+                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(btnPrueba)
+                .addGap(117, 117, 117)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(BtnCancelar))
@@ -279,22 +359,61 @@ public class MateriasProfesor extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:for (int i = 0; i < table.getRowCount(); i++) {
 
-
+        if (tabla.getRowCount() > 0){
+        
+        ArrayList <Materia> filas = new ArrayList <Materia> ();
+        
+        
         	for (int i = 0; i < jTable1.getRowCount(); i++) {
-                    
+                        
                     
                     log("hola");
-					Boolean chked = Boolean.valueOf(jTable1.getValueAt(i, 7).toString());
+					Boolean chked = Boolean.valueOf(jTable1.getValueAt(i, 6).toString());                                        
                                         log("chked"+String.valueOf(chked));
 					String dataCol7 = jTable1.getValueAt(i, 1).toString();
                                                 log("data campor check"+String.valueOf(dataCol7));
 //                                                
 					if (chked) {
 						JOptionPane.showMessageDialog(null, dataCol7);
+                                                
+                                                log(String.valueOf(filas.toArray()));
+                                                
+//                                                            filas.add(new Clase(
+//                                 (String) tabla.getValueAt(i, 0) ,
+//                                dia2int((String) tabla.getValueAt(i, 1)),
+//                                hora(Double.parseDouble(((String) tabla.getValueAt(i, 2)).replace(':','.'))),
+//                                hora(Double.parseDouble(((String) tabla.getValueAt(i, 3)).replace(':','.')))));
+
+                                                
+// int idSalon;String codigoSalonM;String nombreSalon;String Ubicacion;boolean estado; dia hora salon ubicacion
+                                                
+//int idMateria;int codMaterias;String nombreMateria;String tipo;int creditos;int intHoraria;int semestre;Administrador idAdministrador;      
+                                                
+//cod,nombre,tipo,Nocreditos,IntHoria,semestre                                                
+                                                
+                                                
+                                             filas.add(new Materia(
+                                                        1,
+                                                        (int) tabla.getValueAt(1, 0),
+                                                        (String ) tabla.getValueAt(i, 1),
+                                                        (String) tabla.getValueAt(i, 2),
+                                                        (int) tabla.getValueAt(i, 3),
+                                                        (int) tabla.getValueAt(i, 4),
+                                                        (int) tabla.getValueAt(i, 5)
+                                                        ,null));
+                                                
+                                                
+                                                
 					}
+                                        
+                                        
 				}
-        
-        
+                
+                
+                
+                
+        }        
+                
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
@@ -302,6 +421,25 @@ public class MateriasProfesor extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_BtnCancelarActionPerformed
+
+    private void btnPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaActionPerformed
+        // TODO add your handling code here:
+        
+          if (tabla.getRowCount() > 0){
+        //ArrayList <Clase> filas = new ArrayList <Clase> ();
+//        int horaini;
+        for (int i=0; i< tabla.getRowCount(); i++)
+        {
+//            horaini=hora(Double.parseDouble(((String) tabla.getValueAt(i, 2)).replace(':','.')));
+//            filas.add(new Clase((String) tabla.getValueAt(i, 0) ,
+//                                dia2int((String) tabla.getValueAt(i, 1)),
+//                                hora(Double.parseDouble(((String) tabla.getValueAt(i, 2)).replace(':','.'))),
+//                                hora(Double.parseDouble(((String) tabla.getValueAt(i, 3)).replace(':','.')))));
+            log("hola");
+        }
+       // Collections.sort(filas);
+     }
+    }//GEN-LAST:event_btnPruebaActionPerformed
 
     
     public void installCellRenderers(JTable table) {
@@ -318,6 +456,55 @@ public class MateriasProfesor extends javax.swing.JFrame {
 //
 //        table.setDefaultRenderer(Boolean.class, r2);
 
+    }
+    
+    
+
+    
+    /*
+    @cargar las datos de la tabla usuario 
+    @autor jose vanegas . jvanegasv@ucentral.edu.co
+    */
+     public void cargarTablaMateriasBloques() {
+
+        DefaultTableModel tabla = new DefaultTableModel();
+        PreparedStatement ps;
+        try {
+            tabla.addColumn("Dia");
+            tabla.addColumn("Hora");
+            tabla.addColumn("Salon");
+            tabla.addColumn("Ubicacion");
+            //tabla.addColumn("Estado");
+            
+            ps = cn.prepareStatement("select bloq.dia,bloq.hora,salo.nombreSalon,salo.ubicacion from materia mate\n" +
+"inner join grupo grup ON grup.idMateria = mate.idMateria\n" +
+"inner join bloque bloq ON grup.idbloque = bloq.idbloque\n" +
+"inner join salon salo ON bloq.idsalon = salo.idsalon\n" +
+"where mate.codMateria = 829292");
+            r = ps.executeQuery();
+
+            while (r.next()) {
+              //  Object dato[] = new Object[7];
+                
+                Object dato[]={"Dia","Hora","Salon","Ubicacion"};
+                        
+               
+                for (int i = 0; i < 4; i++) {
+                    dato[i] = r.getString(i + 1);
+                    
+                }
+                tabla.addRow(dato);
+            }
+            this.jTable3.setModel(tabla);
+            
+            
+//        //Se crea el JCheckBox en la columna indicada en getColumn, en este caso, la primera columna
+//        jTable1.getColumnModel().getColumn( 6 ).setCellEditor( new Celda_CheckBox() );
+//        //para pintar la columna con el CheckBox en la tabla, en este caso, la primera columna
+//        jTable1.getColumnModel().getColumn( 6 ).setCellRenderer(new Render_CheckBox());   
+
+        } catch (Exception e) {
+        }
     }
 
     public void log(String a) {
@@ -366,12 +553,18 @@ public class MateriasProfesor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnPrueba;
     public static javax.swing.JComboBox comboProfesores;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     public static javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTableHorario;
     // End of variables declaration//GEN-END:variables
 
      

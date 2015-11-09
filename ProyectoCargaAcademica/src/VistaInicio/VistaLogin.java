@@ -67,7 +67,6 @@ public class VistaLogin extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
-        estadoConeccion = new javax.swing.JButton();
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/minimizar.png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -128,14 +127,6 @@ public class VistaLogin extends javax.swing.JFrame {
 
         txtPassword.setText("admin");
 
-        estadoConeccion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        estadoConeccion.setToolTipText("Estado de la conexion a la base de datos");
-        estadoConeccion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                estadoConeccionActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -163,9 +154,6 @@ public class VistaLogin extends javax.swing.JFrame {
                             .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
                             .addComponent(txtUsuario))))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(estadoConeccion, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,9 +173,7 @@ public class VistaLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEntrar)
                     .addComponent(btnRecordarCon))
-                .addGap(18, 18, 18)
-                .addComponent(estadoConeccion, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
-                .addGap(6, 6, 6))
+                .addGap(41, 41, 41))
         );
 
         pack();
@@ -303,14 +289,6 @@ public class VistaLogin extends javax.swing.JFrame {
          
     }//GEN-LAST:event_btnEntrarActionPerformed
 
-    private void estadoConeccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoConeccionActionPerformed
-
-        //        this.frame_configuracion.pack();
-        //        this.frame_configuracion.setResizable(false);
-        //        this.frame_configuracion.setLocationRelativeTo(null);
-        //        this.frame_configuracion.setVisible(true);
-    }//GEN-LAST:event_estadoConeccionActionPerformed
-
     
     
      public boolean ValidarCamposVacios(JTextField... textFields) {
@@ -409,7 +387,6 @@ public class VistaLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
     private javax.swing.JButton btnRecordarCon;
-    private javax.swing.JButton estadoConeccion;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

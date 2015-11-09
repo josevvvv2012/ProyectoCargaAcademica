@@ -135,9 +135,7 @@ public class VistaUsuarios extends javax.swing.JFrame {
     @autor jose vanegas -jvanegasv@ucentral.edu.co
     */
  public int seleccionarfila(int a) {
-        
-        
-        
+      
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         int row = jTable1.getSelectedRow();
         //ahora obtenemos la fila selccionada
@@ -357,7 +355,7 @@ public class VistaUsuarios extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

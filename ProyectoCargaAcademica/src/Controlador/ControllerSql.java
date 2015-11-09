@@ -12,6 +12,7 @@ import static Controlador.Conexion.url;
 import Modelo.Administrador;
 import Modelo.Materia;
 import Modelo.Perfil;
+import Modelo.Salon;
 import Modelo.Usuario;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -37,6 +38,7 @@ public class ControllerSql {//public
     ResultSet rs;
     Usuario Usario;
     Materia Materia;
+    Salon Salon;
    
 
     
@@ -254,12 +256,12 @@ public boolean actualizarUsuario(int identificacion, String nombre,int idPerfil,
     }
     
   /*
-    @Modifica los datos del usuario
+    @Modifica los datos del Materia
     @auto jose vanegas - jvanegasv@ucentral.edu.co
     */       
 public boolean actualizarMateria(int codMateria, String nombreMateria,int tipo,int  creditos,int intHoraria,
             int semestre){
-//    
+
         log("Controller ACTUALIZAR");
         
         try {
@@ -441,12 +443,71 @@ public boolean actualizarMateria(int codMateria, String nombreMateria,int tipo,i
   
   
    /**************************************************************************/ 
+  /*Funciones CRUD Salon*/
+      
+    /*
+     @Crea los datos del salon
+     @auto jose vanegas - jvanegasv@ucentral.edu.co
+     */
+    public boolean AgregarSalon(int idSalon ,String codigoSalon, String nombreSalon, String ubicacion, int estado) {
+
+        Salon Salon = new Salon(idSalon,codigoSalon, nombreSalon, ubicacion, true);
+
+        try {
+
+            String query = "INSERT INTO salon (codigoSalon,nombreSalon,ubicacion,estado) "
+                    + "VALUES (?,?,?,?);";
+
+            // preparo la consulta para mi base de datos
+            PreparedStatement preparedStmt = conexion.prepareStatement(query);
+            preparedStmt.setString(1, Salon.getCodigoSalonM());
+            preparedStmt.setString(2, Salon.getNombreSalon());
+            preparedStmt.setString(3, Salon.getUbicacion());
+            preparedStmt.setInt(4, 1);
+
+            // ejecuto mi query
+            preparedStmt.execute();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+
+    }
+      
+    
+ 
+     /*
+    @Modifica los datos del salon
+    @auto jose vanegas - jvanegasv@ucentral.edu.co
+    */       
+public boolean actualizarSalon(String codigoSalon,String nombreSalon,String ubicacion,int  estado){
+//    
+        log("Controller ACTUALIZAR SALON");
+        
+    
+        try {
+           
+  String query = " update salon set  nombreSalon = ? , ubicacion = ? ,estado= ?  where codigoSalon = ?";
+            
+            log(query);
+
+            PreparedStatement preparedStmt = conexion.prepareStatement(query);            
+           
+            
+            preparedStmt.setString(1,nombreSalon);
+            preparedStmt.setString(2,ubicacion);
+            preparedStmt.setInt(3,estado);
+            preparedStmt.setString(4,codigoSalon);
+            
+            
+            preparedStmt.execute();    
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
   
-  
-  
-  
-  
-  
+  /*******************************************************************************/
   
   
   public static int IngresoLogin(Usuario p) throws ClassNotFoundException, SQLException

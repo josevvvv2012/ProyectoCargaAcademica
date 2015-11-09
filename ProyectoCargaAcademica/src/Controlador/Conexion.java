@@ -209,7 +209,7 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
   
    String myTableName9 ="CREATE TABLE IF NOT EXISTS `mybd` (\n" +
 "  `idbd` int(11) NOT NULL AUTO_INCREMENT,\n" +
-"  `servidor` varchar(255) DEFAULT NULL,\n" +
+"  `servidor` varchar(255) DEFAULT NULL,\n"     +
 "  `login` varchar(255) DEFAULT NULL,\n" +
 "  `password` varchar(255) DEFAULT NULL,\n" +
 "  `dbName` varchar(255) DEFAULT NULL,\n" +          
@@ -217,7 +217,7 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
 "  PRIMARY KEY (`idbd`)\n" +
 ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
    
-      
+/*      
       
  String myTableName10 ="CREATE TABLE IF NOT EXISTS `grupo` (\n" +
 "  `idgrupo` int(11) NOT NULL AUTO_INCREMENT,\n" +
@@ -227,15 +227,74 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
 "  `estado` bit(1) DEFAULT NULL,\n" +
 "  PRIMARY KEY (`idgrupo`)\n" +
 ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+ */
+
+// String myTableName10="-- Volcando estructura para tabla baaa0.salon\n" +
+//"CREATE TABLE IF NOT EXISTS `salon` (\n" +
+//"  `idsalon` int(11) NOT NULL AUTO_INCREMENT,\n" +
+//"  `codigoSalon` varchar(255) DEFAULT NULL,\n" +
+//"  `codBloque` int(11) DEFAULT NULL,\n" +
+//"  `nombreSalon` varchar(255) DEFAULT NULL,\n" +
+//"  `ubicacion` varchar(255) DEFAULT NULL,\n" +
+//"  `estado` bit(1) DEFAULT NULL,\n" +
+//"  PRIMARY KEY (`idsalon`)\n" +
+//") ENGINE=InnoDB DEFAULT CHARSET=utf8;";  
  
+
+ String myTableName10="-- Volcando estructura para tabla baaa0.salon\n" +
+"CREATE TABLE IF NOT EXISTS `salon` (\n" +
+"  `idsalon` int(11) NOT NULL AUTO_INCREMENT,\n" +
+"  `codigoSalon` varchar(255) DEFAULT NULL,\n" +
+"  `nombreSalon` varchar(255) DEFAULT NULL,\n" +
+"  `ubicacion` varchar(255) DEFAULT NULL,\n" +
+"  `estado` bit(1) DEFAULT NULL,\n" +
+"  PRIMARY KEY (`idsalon`)\n" +
+") ENGINE=InnoDB DEFAULT CHARSET=utf8;";     
+   
+   
+ 
+  String myTableName11="CREATE TABLE IF NOT EXISTS `bloque` (\n" +
+"  `idbloque` int(11) NOT NULL,\n" +
+"  `codBloque` varchar(45) DEFAULT NULL,\n" +
+"  `dia` varchar(45) DEFAULT NULL,\n" +
+"  `hora` varchar(45) DEFAULT NULL,\n" +
+"  `estado` bit(1) DEFAULT NULL,\n" +
+"  `idsalon` int(11) NOT NULL,\n" +
+"  PRIMARY KEY (`idbloque`),\n" +
+"  KEY `fk_bloque_salon1_idx` (`idsalon`),\n" +
+"  CONSTRAINT `fk_bloque_salon1` FOREIGN KEY (`idsalon`) REFERENCES `salon` (`idsalon`) ON DELETE NO ACTION ON UPDATE NO ACTION\n" +
+") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+ 
+   
+ String myTableName12 ="CREATE TABLE IF NOT EXISTS `grupo` (\n" +
+"  `idgrupo` int(11) NOT NULL AUTO_INCREMENT,\n" +
+"  `idMateria` int(11) NOT NULL,\n" +
+"  `idbloque` int(11) NOT NULL,\n" +
+"  `jornada` varchar(255) DEFAULT NULL,\n" +
+"  `estado` bit(1) DEFAULT NULL,\n" +
+"  PRIMARY KEY (`idgrupo`),\n" +
+"  KEY `fk_grupo_materia1_idx` (`idMateria`),\n" +
+"  KEY `fk_grupo_bloque1_idx` (`idbloque`),\n" +
+"  CONSTRAINT `fk_grupo_bloque1` FOREIGN KEY (`idbloque`) REFERENCES `bloque` (`idbloque`) ON DELETE NO ACTION ON UPDATE NO ACTION,\n" +
+"  CONSTRAINT `fk_grupo_materia1` FOREIGN KEY (`idMateria`) REFERENCES `materia` (`idMateria`) ON DELETE NO ACTION ON UPDATE NO ACTION\n" +
+") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
            
+ 
+ 
+ 
+ 
+ 
    String insertTable1 ="INSERT INTO `perfil` (`idperfil`, `nombre`, `estado`) VALUES (1, 'SuperAdministrador', b'1');";
    String insertTable2 ="INSERT INTO `perfil` (`idperfil`, `nombre`, `estado`) VALUES (2, 'Administrador', b'1');";        
    String insertTable3 ="INSERT INTO `perfil` (`idperfil`, `nombre`, `estado`) VALUES (3, 'Profesor', b'1');";        
    String insertTable4="INSERT INTO `usuario` (`idusuario`, `identificacion`, `nombre`, `idPerfil`, `login`, `contrasenia`, `estado`) VALUES (1, 1022, 'jose', 1, 'admin', 'admin', b'1');";
-   String insertTable5="INSERT INTO `usuario` (`idusuario`, `identificacion`, `nombre`, `idPerfil`, `login`, `contrasenia`, `estado`) VALUES (2, 10203, 'jose1', 1, 'x', 'x', b'1');";
+   String insertTable5="INSERT INTO `usuario` (`idusuario`, `identificacion`, `nombre`, `idPerfil`, `login`, `contrasenia`, `tipoContrato`, `habilitadoEn`, `estadoDispo`, `estado`) VALUES (3, 122, 'jose2', 3, 'x', 'x', 'Fijo', 'Nocturna', b'1', b'1');";
    String insertTable6="INSERT INTO `materia` (`idMateria`, `codMateria`, `nombreMateria`, `tipo`, `creditos`, `intHoraria`, `semestre`) VALUES (1, 829292, 'ingles', '1', 1, 1, 2);";
    String insertTable7="INSERT INTO `materia` (`idMateria`, `codMateria`, `nombreMateria`, `tipo`, `creditos`, `intHoraria`, `semestre`) VALUES (2, 33829292, 'teatro', '1', 1, 1, 2);";
+   
+   String insertTable8="INSERT INTO `salon` (`codigoSalon`, `nombreSalon`, `ubicacion`, `estado`) VALUES ('1A', 'Salon Eventos', 'Cll 22', b'1');";
+   String insertTable9="INSERT INTO `salon` (`codigoSalon`, `nombreSalon`, `ubicacion`, `estado`) VALUES ('1F', 'Salon Audio', 'Cll 7', b'1');";
+   
  
        
      String prodfiltraUsuarioID="CREATE PROCEDURE `filtraUsuarioId`(IN `cod` INT)\n" +
@@ -252,6 +311,11 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
 	"	\n" +
 	"SELECT * FROM grupo WHERE idgrupo = cod ";
       
+       
+       String prodfiltraSalonID="CREATE PROCEDURE `prodfiltraSalonID`(IN  `cod` VARCHAR(100))\n" +
+	"	\n" +
+	"SELECT * FROM salon WHERE  codigoSalon = cod ";
+       
       
        String prodEliminarUsuario="CREATE PROCEDURE `eliminarUsuario`(IN `cod` INT)\n" +
 	"	\n" +
@@ -266,6 +330,10 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
        String prodEliminarGrupo="CREATE PROCEDURE `eliminarGrupo`(IN `cod` INT)\n" +
 	"	\n" +
 	"delete from grupo where idgrupo = cod ";
+       
+       String prodEliminarSalon="CREATE PROCEDURE `eliminarSalon`(IN `cod` INT)\n" +
+	"	\n" +
+	"delete from salon where idsalon = cod ";
        
        
        String prodEliminarBackframe="CREATE PROCEDURE `eliminarbackframe`(IN `cod` INT , IN  `frame` VARCHAR(100) )\n" +
@@ -293,6 +361,8 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
             s.executeUpdate(myTableName8);
             s.executeUpdate(myTableName9);
             s.executeUpdate(myTableName10);
+            s.executeUpdate(myTableName11);
+            s.executeUpdate(myTableName12);
             
             s.executeUpdate(insertTable1);
             s.executeUpdate(insertTable2);
@@ -301,15 +371,17 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
             s.executeUpdate(insertTable5);
             s.executeUpdate(insertTable6);
             s.executeUpdate(insertTable7);
-////            s.executeUpdate(insertTable8);
-////            s.executeUpdate(insertTable9);
+            s.executeUpdate(insertTable8);
+            s.executeUpdate(insertTable9);
           
             s.executeUpdate(prodfiltraUsuarioID);
             s.executeUpdate(prodfiltraMateriaID);
             s.executeUpdate(prodfiltraGrupoID);
+            s.executeUpdate(prodfiltraSalonID);
             s.executeUpdate(prodEliminarUsuario);
             s.executeUpdate(prodEliminarMateria);
             s.executeUpdate(prodEliminarBackframe);
+            s.executeUpdate(prodEliminarSalon);
             
             
             
