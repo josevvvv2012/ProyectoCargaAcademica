@@ -7,10 +7,13 @@ package Vista.GestionGrupo;
 
 import Controlador.Conexion;
 import Controlador.ControllerSql;
+import java.awt.HeadlessException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -42,17 +45,18 @@ public class VistaGrupos extends javax.swing.JFrame {
         try {
             tabla.addColumn("Grupo");
             tabla.addColumn("Materia");
+            tabla.addColumn("Semestre");
             tabla.addColumn("Jornada");
-            tabla.addColumn("Numero");
-            tabla.addColumn("Numero");
             
-            ps = cn.prepareStatement("SELECT idgrupo,idmateria,jornada,bloque,estado from  grupo");
+            
+            ps = cn.prepareStatement("SELECT grup.idgrupo, mate.nombreMateria,mate.semestre,grup.jornada FROM grupo grup\n" +
+"inner join materia mate ON mate.idMateria = grup.idMateria");
             r = ps.executeQuery();
 
             while (r.next()) {
-                Object dato[] = new Object[5];
+                Object dato[] = new Object[4];
                 
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < 4; i++) {
                     dato[i] = r.getString(i + 1);
                     //log(String.valueOf(dato[0]));
                 }
@@ -100,6 +104,11 @@ public class VistaGrupos extends javax.swing.JFrame {
         });
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Buscar");
 
@@ -123,6 +132,11 @@ public class VistaGrupos extends javax.swing.JFrame {
         btnAGrupo.setText("Asignar Grupo");
 
         btnEliminar.setText("Eliminar Grupo");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/cerrar2.png"))); // NOI18N
         jButton11.setText("jButton2");
@@ -209,7 +223,7 @@ public class VistaGrupos extends javax.swing.JFrame {
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -223,6 +237,93 @@ public class VistaGrupos extends javax.swing.JFrame {
         CUPGrupos.setVisible(true);
     }//GEN-LAST:event_btnCrearActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        consultarTable();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        
+          // TODO add your handling code  here:
+         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        //ahora obtenemos la fila selccionada
+        int fila_select = jTable1.getSelectedRow();
+
+        if(fila_select<0){
+            // no se puede eliminar
+            JOptionPane.showMessageDialog(this,"Tabla vacia o no ha seleccionado uan fila.");
+        }else {
+          // la eliminamos del modelo:
+        modelo.removeRow(fila_select);
+       
+        }
+        eliminarGrupo(fila_select+1); 
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    /*
+     *Consulta los datos de la tabla
+     @autor jose vanegas -jvanegasv@ucentral.edu.co
+     */
+    public void consultarTable() {
+
+        String x = jTextField1.getText();
+
+        PreparedStatement ps;
+        DefaultTableModel tabla = new DefaultTableModel();
+
+        try {
+
+            tabla.addColumn("Grupo");
+            tabla.addColumn("Materia");
+            tabla.addColumn("Semestre");
+            tabla.addColumn("Jornada");
+
+            cts = cn.prepareCall("{call prodfiltraGrupoID(?)}");//procedimiento almacenado
+            cts.setString(1, x);
+            r = cts.executeQuery();
+
+            while (r.next()) {
+                Object dato[] = new Object[4];
+                for (int i = 0; i < 4; i++) {
+                    dato[i] = r.getString(i + 1);
+
+                }
+                tabla.addRow(dato);
+            }
+            this.jTable1.setModel(tabla);
+
+        } catch (Exception e) {
+        }
+
+    }
+    
+    
+    public void eliminarGrupo(int idGrupo) {
+
+        // TODO add your handling code here:
+        String cod = Integer.toString(idGrupo);
+
+        try {
+            cts = cn.prepareCall("{call eliminarGrupo(?)}");
+            cts.setString(1, cod);
+            int rpta = cts.executeUpdate();
+
+            if (rpta == 1) {
+                JOptionPane.showMessageDialog(this, "Grupo Eliminado", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Grupo No Eliminado", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+
+            }
+
+        } catch (SQLException | HeadlessException e) {
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
+    }
+    
+    
     /**
      * @param args the command line arguments
      */

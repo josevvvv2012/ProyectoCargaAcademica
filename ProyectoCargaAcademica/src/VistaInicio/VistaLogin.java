@@ -9,6 +9,7 @@ import Controlador.Conexion;
 import Vista.SuperAdministrador.VistaUsuarios;
 import Controlador.ControllerSql;
 import Modelo.Usuario;
+import Vista.Administrador.VistaPrincipalAdmin;
 import Vista.Profesor.VistaIndexProfesor;
 import Vista.SuperAdministrador.VistaPrincipal;
 import java.awt.Color;
@@ -243,15 +244,15 @@ public class VistaLogin extends javax.swing.JFrame {
                 
                  
                    log("Perfil Administrador");
-                   VistaPrincipal VistaPrincipal = new VistaPrincipal();
-                   VistaPrincipal.setVisible(true);
+                   VistaPrincipalAdmin VistaPrincipalAdmin = new VistaPrincipalAdmin();
+                   VistaPrincipalAdmin.setVisible(true);
                    
                     /*Centra el jframe*/
                     Dimension pantall = Toolkit.getDefaultToolkit().getScreenSize();
                     //obtenemos el tamaño de la ventana  
-                    Dimension ventan = VistaPrincipal.getSize();
+                    Dimension ventan = VistaPrincipalAdmin.getSize();
                     //para centrar la ventana lo hacemos con el siguiente calculo  
-                    VistaPrincipal.setLocation((pantall.width - ventan.width) / 2, (pantall.height - ventan.height) / 2);
+                    VistaPrincipalAdmin.setLocation((pantall.width - ventan.width) / 2, (pantall.height - ventan.height) / 2);
             
                     this.dispose();
                 

@@ -294,7 +294,9 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
    
    String insertTable8="INSERT INTO `salon` (`codigoSalon`, `nombreSalon`, `ubicacion`, `estado`) VALUES ('1A', 'Salon Eventos', 'Cll 22', b'1');";
    String insertTable9="INSERT INTO `salon` (`codigoSalon`, `nombreSalon`, `ubicacion`, `estado`) VALUES ('1F', 'Salon Audio', 'Cll 7', b'1');";
-   
+   String insertTable10="INSERT INTO `bloque` (`idbloque`, `codBloque`, `dia`, `hora`, `estado`, `idsalon`) VALUES (1, '1', 'Lunes', '6 - 7 am', b'1', 1);";
+   String insertTable11="INSERT INTO `grupo` (`idgrupo`, `idMateria`, `idbloque`, `jornada`, `estado`) VALUES (1, 1, 1, 'Tarde', b'1');";
+   String insertTable12="INSERT INTO `grupo` (`idgrupo`, `idMateria`, `idbloque`, `jornada`, `estado`) VALUES (2, 2, 1, 'Tarde', b'1');";           
  
        
      String prodfiltraUsuarioID="CREATE PROCEDURE `filtraUsuarioId`(IN `cod` INT)\n" +
@@ -373,6 +375,9 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
             s.executeUpdate(insertTable7);
             s.executeUpdate(insertTable8);
             s.executeUpdate(insertTable9);
+            s.executeUpdate(insertTable10);
+            s.executeUpdate(insertTable11);
+            s.executeUpdate(insertTable12);
           
             s.executeUpdate(prodfiltraUsuarioID);
             s.executeUpdate(prodfiltraMateriaID);
@@ -382,6 +387,7 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
             s.executeUpdate(prodEliminarMateria);
             s.executeUpdate(prodEliminarBackframe);
             s.executeUpdate(prodEliminarSalon);
+            s.executeUpdate(prodEliminarGrupo);
             
             
             
