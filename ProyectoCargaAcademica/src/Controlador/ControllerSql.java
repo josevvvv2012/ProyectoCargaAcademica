@@ -173,6 +173,25 @@ public class ControllerSql {//public
             return false;
         }
     }
+
+    
+    /*
+    Metodo para consultar el empleado en la base de datos se realiza la 
+    busqueda a traves de la cedula.
+    */
+
+    public ResultSet ConsultarBd() {
+        try {
+
+            String query = "SELECT * FROM mybd ORDER BY idbd DESC LIMIT 1;";
+            Statement st = conexion.createStatement();
+            rs = st.executeQuery(query);
+            return rs;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error");
+            return null;
+        }
+    }   
         
        
    /**************************************************************************/ 
@@ -366,27 +385,32 @@ public boolean actualizarMateria(int codMateria, String nombreMateria,int tipo,i
         return Materias;
     }
     
+    
+    /*
+    @retornar la listado de materia a vista la vistaGrupos
+    @auto jose vanegas - jvanegasv@ucentral.edu.co
+    */
+    public List<Salon> listadoSalones(){
+        List<Salon> Salones = new Stack<Salon>();
+        PreparedStatement ps;
+        try {
+            
+            ps = conexion.prepareStatement("select idsalon,codigoSalon,nombreSalon,ubicacion,estado from salon");
+            rs = ps.executeQuery();
+            while(rs.next()){
+                //Proveedor p = new Proveedor(rs.getInt(4),rs.getString(1), rs.getString(2), rs.getString(3));
+                Salon p = new Salon(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),true);
+                Salones.add(p);
+                log(String.valueOf(p));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return Salones;
+    }
        
  /**************************************************************************/ 
-  /*
-   String myTableName6 ="CREATE TABLE IF NOT EXISTS `baaa0`.`materia` (\n" +
-"  `idMateria` INT(11) NOT NULL COMMENT '',\n" +
-"  `nombreMateria` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
-"  `tipo` VARCHAR(50) NULL DEFAULT NULL COMMENT '',\n" +
-"  `creditos` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
-"  `intHoraria` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
-"  `semestre` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
-"  `idAdministrador` INT(11) NULL DEFAULT NULL COMMENT '',\n" +
-"  PRIMARY KEY (`idMateria`)  COMMENT '',\n" +
-"  INDEX `idAdministrador` (`idAdministrador` ASC)  COMMENT '',\n" +
-"  CONSTRAINT `FK_Materia_Administrador`\n" +
-"    FOREIGN KEY (`idAdministrador`)\n" +
-"    REFERENCES `baaa0`.`administrador` (`idAdmin`))\n" +
-"ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;";*/
-  
-  
-  
-   /**************************************************************************/ 
   
   
   
@@ -508,7 +532,83 @@ public boolean actualizarSalon(String codigoSalon,String nombreSalon,String ubic
     }
   
   /*******************************************************************************/
-  
+     /**************************************************************************/ 
+  /*Funciones CRUD Grupo*/
+      
+    /*
+     @Crea los datos del Grupo
+     @auto jose vanegas - jvanegasv@ucentral.edu.co
+     */
+    public boolean AgregarGrupo(int materia ,int idbloque, String jornada,int estado) {
+
+        
+
+        try {
+
+            String query = "INSERT INTO grupo (idMateria, idbloque, jornada, estado) VALUES (?,?,?,?);";
+
+            // preparo la consulta para mi base de datos
+            PreparedStatement preparedStmt = conexion.prepareStatement(query);
+            preparedStmt.setInt(1, materia);
+            preparedStmt.setInt(2, idbloque);
+            preparedStmt.setString(3,jornada);
+            preparedStmt.setInt(4, 1);
+
+            // ejecuto mi query
+            preparedStmt.execute();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+
+    }
+    
+     /*Funciones CRUD Bloque*/
+      
+    /*
+     @Crea los datos del bloque
+     @auto jose vanegas - jvanegasv@ucentral.edu.co
+     */
+    public boolean AgregarBloque(String codBloque,String dia,String hora,String horafinal,
+            int estado,int idSalon) {
+
+        try {
+
+            String query = "INSERT INTO bloque (codBloque,dia,hora,horaFinal,estado,idsalon) VALUES (?,?,?,?,?,?);";
+
+            // preparo la consulta para mi base de datos
+            PreparedStatement preparedStmt = conexion.prepareStatement(query);
+            
+            preparedStmt.setString(1, codBloque);
+            preparedStmt.setString(2, dia);
+            preparedStmt.setString(3, hora);
+            preparedStmt.setString(4, horafinal);
+            preparedStmt.setInt(5,estado);
+            preparedStmt.setInt(6, idSalon);
+            
+            // ejecuto mi query
+            preparedStmt.execute();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+
+    }
+
+
+  public ResultSet ConsultarIdBloque() {
+        try {
+
+            String query = "select * from bloque";
+            Statement st = conexion.createStatement();
+            rs = st.executeQuery(query);
+            return rs;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error");
+            return null;
+        }
+    }  
+    
   
   public static int IngresoLogin(Usuario p) throws ClassNotFoundException, SQLException
     {

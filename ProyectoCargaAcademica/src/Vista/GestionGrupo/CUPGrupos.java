@@ -9,6 +9,12 @@ import Controlador.ControllerSql;
 import Controlador.FuncionesController;
 import Modelo.Materia;
 import Modelo.Perfil;
+import Modelo.Salon;
+import static Vista.GestionSalones.CUPSalones.comboEstadoS;
+import static Vista.GestionSalones.CUPSalones.txtCodigo;
+import static Vista.GestionSalones.CUPSalones.txtNombreS;
+import static Vista.GestionSalones.CUPSalones.txtSalonU;
+import Vista.GestionSalones.VistaSalones;
 import static Vista.SuperAdministrador.CUPUsuario.comboHabien;
 import static Vista.SuperAdministrador.CUPUsuario.comboPerfil;
 import static Vista.SuperAdministrador.CUPUsuario.comboTipoC;
@@ -18,8 +24,10 @@ import java.awt.event.KeyEvent;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -31,10 +39,12 @@ public class CUPGrupos extends javax.swing.JFrame {
     ControllerSql obj = new ControllerSql();
     FuncionesController cc = new FuncionesController();
     private final List<Materia> Materia;
+    private final List<Salon> Salon;
     CallableStatement cts;
     Connection cn;
     ResultSet r;
-    
+    VistaGrupos VistaGrupos;
+    public int nunBloque;
     
     /**
      * Creates new form CUPGrupos
@@ -45,9 +55,18 @@ public class CUPGrupos extends javax.swing.JFrame {
         
         obj = ControllerSql.getInstancia();
        
-       /*cargar los datos del perfil en el combo*/
+       /*cargar los datos de la materia en el combo*/
        comboMateria.setModel(new javax.swing.DefaultComboBoxModel(cc.listaMateria().toArray()));
        Materia = cc.listaMateria();
+       comboMateria.setSelectedIndex(0);
+       
+       
+       /*cargar los datos del salon en el combo*/
+       comboS1.setModel(new javax.swing.DefaultComboBoxModel(cc.listaSalones().toArray()));
+       comboS2.setModel(new javax.swing.DefaultComboBoxModel(cc.listaSalones().toArray()));
+       comboS3.setModel(new javax.swing.DefaultComboBoxModel(cc.listaSalones().toArray()));
+       comboS4.setModel(new javax.swing.DefaultComboBoxModel(cc.listaSalones().toArray()));
+       Salon = cc.listaSalones();
        comboMateria.setSelectedIndex(0);
        
        /*Desactiva los combos que son utilizados para el numero de bloques por grupo materia*/
@@ -74,9 +93,32 @@ public class CUPGrupos extends javax.swing.JFrame {
        comboS4.setVisible(false);
        
        
+       combloqHoraF1.setVisible(false);
+       combloqHoraF2.setVisible(false);
+       combloqHoraF3.setVisible(false);
+       combloqHoraF4.setVisible(false);
        
        
-       
+       jLabel6.setVisible(false);
+       jLabel7.setVisible(false);
+       jLabel8.setVisible(false);
+       jLabel9.setVisible(false);
+          
+ try {
+                // TODO add your handling cod e here:
+                ResultSet rs;
+               
+              nunBloque=1;
+                   rs = obj.ConsultarIdBloque();
+                while(rs.next()) {
+               nunBloque++;
+                }
+                String x = String.valueOf(nunBloque);
+                log(x);
+                
+            } catch (SQLException ex) {
+                //Logger.getLogger(VistaCalculosMensuales.class.getName()).log(Level.SEVERE, null, ex);
+            }       
        
         
     }
@@ -124,6 +166,11 @@ public class CUPGrupos extends javax.swing.JFrame {
         comboS2 = new javax.swing.JComboBox();
         comboS3 = new javax.swing.JComboBox();
         comboS4 = new javax.swing.JComboBox();
+        jLabel9 = new javax.swing.JLabel();
+        combloqHoraF1 = new javax.swing.JComboBox();
+        combloqHoraF2 = new javax.swing.JComboBox();
+        combloqHoraF3 = new javax.swing.JComboBox();
+        combloqHoraF4 = new javax.swing.JComboBox();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -190,19 +237,19 @@ public class CUPGrupos extends javax.swing.JFrame {
 
         combloqDia1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" }));
 
-        combloqHora1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "6:00 - 7:00 ", "7:00 - 8:00 ", "8:00 - 9:00 ", "9:00 - 10:00 ", "10:00 - 11:00 ", "11:00 - 12:00 ", "12:00 - 13:00 ", "13:00 - 14:00 ", "14:00 - 15:00 ", "15:00 - 16:00 ", "16:00 - 17:00 ", "17:00 - 18:00 ", "18:00 - 19:00 ", "19:00 - 20:00 ", "20:00 - 21:00 ", "21:00 - 22:00 " }));
+        combloqHora1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "8:00 ", "9:00", "10:00 ", "11:00 ", "12:00 ", "13:00 ", "14:00 ", "15:00 ", "16:00 ", "17:00 ", "18:00 ", "19:00 ", "20:00", "21:00" }));
 
         combloqDia2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" }));
 
-        combloqHora2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "6:00 - 7:00 ", "7:00 - 8:00 ", "8:00 - 9:00 ", "9:00 - 10:00 ", "10:00 - 11:00 ", "11:00 - 12:00 ", "12:00 - 13:00 ", "13:00 - 14:00 ", "14:00 - 15:00 ", "15:00 - 16:00 ", "16:00 - 17:00 ", "17:00 - 18:00 ", "18:00 - 19:00 ", "19:00 - 20:00 ", "20:00 - 21:00 ", "21:00 - 22:00 " }));
+        combloqHora2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", " 8:00 ", "9:00", "10:00 ", "11:00 ", "12:00 ", "13:00 ", "14:00 ", "15:00 ", "16:00 ", "17:00 ", "18:00 ", "19:00 ", "20:00", "21:00" }));
 
         combloqDia3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" }));
 
-        combloqHora3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "6:00 - 7:00 ", "7:00 - 8:00 ", "8:00 - 9:00 ", "9:00 - 10:00 ", "10:00 - 11:00 ", "11:00 - 12:00 ", "12:00 - 13:00 ", "13:00 - 14:00 ", "14:00 - 15:00 ", "15:00 - 16:00 ", "16:00 - 17:00 ", "17:00 - 18:00 ", "18:00 - 19:00 ", "19:00 - 20:00 ", "20:00 - 21:00 ", "21:00 - 22:00 " }));
+        combloqHora3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "8:00 ", "9:00", "10:00 ", "11:00 ", "12:00 ", "13:00 ", "14:00 ", "15:00 ", "16:00 ", "17:00 ", "18:00 ", "19:00 ", "20:00", "21:00" }));
 
         combloqDia4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" }));
 
-        combloqHora4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "6:00 - 7:00 ", "7:00 - 8:00 ", "8:00 - 9:00 ", "9:00 - 10:00 ", "10:00 - 11:00 ", "11:00 - 12:00 ", "12:00 - 13:00 ", "13:00 - 14:00 ", "14:00 - 15:00 ", "15:00 - 16:00 ", "16:00 - 17:00 ", "17:00 - 18:00 ", "18:00 - 19:00 ", "19:00 - 20:00 ", "20:00 - 21:00 ", "21:00 - 22:00 " }));
+        combloqHora4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "8:00", "9:00", "10:00 ", "11:00 ", "12:00 ", "13:00 ", "14:00 ", "15:00 ", "16:00 ", "17:00 ", "18:00 ", "19:00 ", "20:00", "21:00" }));
 
         JlabelB2.setText("Bloque 2");
 
@@ -215,7 +262,7 @@ public class CUPGrupos extends javax.swing.JFrame {
 
         jLabel6.setText("Dia");
 
-        jLabel7.setText("Hora");
+        jLabel7.setText("Hora Inicio");
 
         jLabel8.setText("Salon");
 
@@ -227,83 +274,102 @@ public class CUPGrupos extends javax.swing.JFrame {
 
         comboS4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Salon 1", "Salon 2" }));
 
+        jLabel9.setText("Hora Fin");
+
+        combloqHoraF1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "8:00 ", "9:00", "10:00 ", "11:00 ", "12:00 ", "13:00 ", "14:00 ", "15:00 ", "16:00 ", "17:00 ", "18:00 ", "19:00 ", "20:00", "21:00", "22:00 " }));
+
+        combloqHoraF2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "8:00 ", "9:00", "10:00 ", "11:00 ", "12:00 ", "13:00 ", "14:00 ", "15:00 ", "16:00 ", "17:00 ", "18:00 ", "19:00 ", "20:00", "21:00", "22:00 " }));
+
+        combloqHoraF3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "8:00 ", "9:00", "10:00 ", "11:00 ", "12:00 ", "13:00 ", "14:00 ", "15:00 ", "16:00 ", "17:00 ", "18:00 ", "19:00 ", "20:00", "21:00", "22:00 " }));
+
+        combloqHoraF4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "8:00 ", "9:00", "10:00 ", "11:00 ", "12:00 ", "13:00 ", "14:00 ", "15:00 ", "16:00 ", "17:00 ", "18:00 ", "19:00 ", "20:00", "21:00", "22:00 " }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(111, 111, 111))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(JlabelB4)
-                                            .addComponent(JlabelB3)
-                                            .addComponent(JlabelB2)
-                                            .addComponent(JlabelB1)
-                                            .addComponent(jLabel1))
-                                        .addGap(45, 45, 45)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(combloqDia4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(combloqDia3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(combloqDia2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(combloqDia1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(26, 26, 26)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel7)
-                                            .addComponent(combloqHora1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(combloqHora2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(combloqHora3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(combloqHora4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel8)
-                                            .addComponent(comboS1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(comboS2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(comboS3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(comboS4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel4))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(comboJornada, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(comboMateria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txtGrupo, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                                            .addComponent(comboBloques, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(140, 140, 140)))
-                                .addGap(27, 27, 27))
-                            .addComponent(jButton1))
+                        .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton2)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, 0))
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JlabelB4)
+                            .addComponent(JlabelB3)
+                            .addComponent(JlabelB2)
+                            .addComponent(JlabelB1)
+                            .addComponent(jLabel1))
+                        .addGap(45, 45, 45)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(combloqDia4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(combloqDia3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(combloqDia2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(combloqDia1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel7)
+                            .addComponent(combloqHora1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(combloqHora2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(combloqHora3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(combloqHora4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(combloqHoraF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(combloqHoraF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(combloqHoraF3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(combloqHoraF4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(18, 18, 18))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(comboJornada, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboMateria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtGrupo, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                            .addComponent(comboBloques, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(140, 140, 140)))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(comboS1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboS2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboS3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboS4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(244, 244, 244)
                         .addComponent(JlabelB1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JlabelB2))
+                        .addGap(11, 11, 11)
+                        .addComponent(JlabelB2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -329,29 +395,34 @@ public class CUPGrupos extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel8))
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(combloqDia1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(combloqHora1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboS1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(comboS1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(combloqHoraF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(combloqDia2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(combloqHora2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboS2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(combloqDia3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(combloqHora3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboS3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JlabelB3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(combloqDia4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(combloqHora4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboS4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JlabelB4))))
+                            .addComponent(comboS2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(combloqHoraF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(combloqDia3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(combloqHora3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboS3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JlabelB3)
+                    .addComponent(combloqHoraF3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(combloqDia4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(combloqHora4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboS4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JlabelB4)
+                    .addComponent(combloqHoraF4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -388,7 +459,10 @@ public class CUPGrupos extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-       guardarBloque();
+        guardarBloque();
+        
+        guardarGrupo();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     
@@ -410,11 +484,16 @@ public void GenerarNoBloques(int a)
             if(y == 1)
                 {
                     
+       jLabel6.setVisible(true);
+       jLabel7.setVisible(true);
+       jLabel8.setVisible(true);
+       jLabel9.setVisible(true);
                     
                     JlabelB1.setVisible(true);
                     combloqDia1.setVisible(true);
                     combloqHora1.setVisible(true);
                     comboS1.setVisible(true);
+                    combloqHoraF1.setVisible(true);
                    
                     
                 }
@@ -422,6 +501,11 @@ public void GenerarNoBloques(int a)
             
                 if(y ==2)
                 {
+                    
+                    jLabel6.setVisible(true);
+       jLabel7.setVisible(true);
+       jLabel8.setVisible(true);
+       jLabel9.setVisible(true);
                     
                     JlabelB1.setVisible(true);
                     JlabelB2.setVisible(true);
@@ -431,6 +515,8 @@ public void GenerarNoBloques(int a)
                     combloqHora2.setVisible(true);
                     comboS1.setVisible(true);
                     comboS2.setVisible(true);
+                    combloqHoraF1.setVisible(true);
+                    combloqHoraF2.setVisible(true);
                     
                     
                     
@@ -441,6 +527,11 @@ public void GenerarNoBloques(int a)
                     
                 if(y == 3)
                 {
+                    
+                    jLabel6.setVisible(true);
+       jLabel7.setVisible(true);
+       jLabel8.setVisible(true);
+       jLabel9.setVisible(true);
                     JlabelB1.setVisible(true);
                     JlabelB2.setVisible(true);
                     JlabelB3.setVisible(true);
@@ -453,6 +544,10 @@ public void GenerarNoBloques(int a)
                     comboS1.setVisible(true);
                     comboS2.setVisible(true);
                     comboS3.setVisible(true);
+                    combloqHoraF1.setVisible(true);
+                    combloqHoraF2.setVisible(true);
+                    combloqHoraF3.setVisible(true);
+                    
                     
                 }
                 else
@@ -461,6 +556,11 @@ public void GenerarNoBloques(int a)
                 if(y == 4)
                 {
                     
+                    
+                    jLabel6.setVisible(true);
+       jLabel7.setVisible(true);
+       jLabel8.setVisible(true);
+       jLabel9.setVisible(true);
                      JlabelB1.setVisible(true);
                     JlabelB2.setVisible(true);
                     JlabelB3.setVisible(true);
@@ -477,7 +577,10 @@ public void GenerarNoBloques(int a)
                     comboS2.setVisible(true);
                     comboS3.setVisible(true);
                     comboS4.setVisible(true);
-                    
+                    combloqHoraF1.setVisible(true);
+                    combloqHoraF2.setVisible(true);
+                    combloqHoraF3.setVisible(true);
+                    combloqHoraF4.setVisible(true);
                     
                     
                 }
@@ -498,9 +601,130 @@ public void GenerarNoBloques(int a)
 @funcion guardar bloque 
 @autor jose vanegas - jvanegasv@ucentral.edu.co
 */    
+public void guardarGrupo()
+{
+
+// TODO add your handling code here:
+
+        if (ValidarCamposVacios(txtGrupo)) {
+            JOptionPane.showMessageDialog(this, "Faltan datos en los campos.");
+        } else {
+
+             
+            String nombreGrupo = txtGrupo.getText();
+            
+            //comboMateria
+            //comboJornada
+            
+            
+            Object jornada = comboJornada.getSelectedItem();
+            Object numeroBloques = comboBloques.getSelectedItem();
+            String ab = (String) numeroBloques;
+            
+            int materia = ((Materia) comboMateria.getSelectedItem()).getIdMateria();
+            
+            
+            try {
+
+               int intBLoq = Integer.parseInt(ab);
+               
+                 
+                 
+                log("hola soy el bloque numero "+String.valueOf(nunBloque));
+                
+                //public boolean AgregarGrupo(int materia ,int idbloque, String jornada,int estado) {
+                 
+                boolean res = obj.AgregarGrupo((int) materia,(int) nunBloque, (String) jornada,1);
+
+                if (res == true) {
+                    this.dispose();
+                    VistaGrupos = new VistaGrupos();
+                    VistaGrupos.setVisible(true);
+                    JOptionPane.showMessageDialog(null, "Grupo Registrado Correctamente");
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo ingresar otro usuario ya existe"
+                            + "de datos");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "por favor verifique la conexion del servidor ");
+
+            }
+
+          //  deleteDataFrame(1);
+        }
+    
+    
+
+}
+
+    /*Funciones*/
+/*
+@funcion guardar grupo 
+@autor jose vanegas - jvanegasv@ucentral.edu.co
+*/ 
 public void guardarBloque()
 {
 
+// TODO add your handling code here:
+
+        if (ValidarCamposVacios(txtGrupo)) {
+            JOptionPane.showMessageDialog(this, "Faltan datos en los campos.");
+        } else {
+
+             
+            
+            
+//            combloqDia1
+//            combloqHora1
+//            combloqHoraF1
+//            comboS1
+            
+            Object dia = combloqDia1.getSelectedItem();
+            Object hora = combloqHora1.getSelectedItem();
+            Object horafinal = combloqHoraF1.getSelectedItem();
+            
+            int salon = ((Salon) comboS1.getSelectedItem()).getIdSalon();
+            
+//            Object salon = comboS1.getSelectedItem();
+//            String sSalon = (String) tipoEstado;
+            
+            
+            
+            try {
+
+////                 int intperfil = Integer.parseInt(sperfil);
+//                int intSalon = Integer.parseInt(ssalon);
+                
+                 
+////                public boolean AgregarBloque(String codBloque,String dia,String hora,String horafinal,
+////            int estado,int idSalon) {
+                
+                String  a="4";
+                int b = 1;
+                 
+                boolean res = obj.AgregarBloque(a, (String) dia, (String) hora, (String) horafinal,1 ,(int) salon);
+
+                if (res == true) {
+                    this.dispose();
+                    VistaGrupos = new VistaGrupos();
+                    VistaGrupos.setVisible(true);
+                    JOptionPane.showMessageDialog(null, "Grupo Registrado Correctamente");
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo ingresar otro Grupo ya existe"
+                            + "de datos");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "por favor verifique la conexion del servidor ");
+
+            }
+
+          //  deleteDataFrame(1);
+        }
+    
+    
+    
 
 }
 
@@ -611,6 +835,10 @@ public void guardarBloque()
     private javax.swing.JComboBox combloqHora2;
     private javax.swing.JComboBox combloqHora3;
     private javax.swing.JComboBox combloqHora4;
+    private javax.swing.JComboBox combloqHoraF1;
+    private javax.swing.JComboBox combloqHoraF2;
+    private javax.swing.JComboBox combloqHoraF3;
+    private javax.swing.JComboBox combloqHoraF4;
     private javax.swing.JComboBox comboBloques;
     private javax.swing.JComboBox comboJornada;
     public static javax.swing.JComboBox comboMateria;
@@ -630,6 +858,7 @@ public void guardarBloque()
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtGrupo;

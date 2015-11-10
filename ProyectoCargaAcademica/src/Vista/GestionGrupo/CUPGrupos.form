@@ -47,74 +47,14 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="JlabelB4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="JlabelB3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="JlabelB2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="JlabelB1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="45" pref="45" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="combloqDia4" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="combloqDia3" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="combloqDia2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="combloqDia1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="combloqHora1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="combloqHora2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="combloqHora3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="combloqHora4" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace pref="16" max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                          <Component id="comboS1" min="-2" pref="92" max="-2" attributes="0"/>
-                                          <Component id="comboS2" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
-                                          <Component id="comboS3" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
-                                          <Component id="comboS4" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jLabel3" max="32767" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Component id="jLabel2" alignment="0" min="-2" pref="77" max="-2" attributes="0"/>
-                                                  <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="comboJornada" max="32767" attributes="0"/>
-                                          <Component id="comboMateria" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="txtGrupo" alignment="0" pref="117" max="32767" attributes="0"/>
-                                          <Component id="comboBloques" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -126,7 +66,78 @@
                       <Component id="jButton6" min="-2" pref="32" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="JlabelB4" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="JlabelB3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="JlabelB2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="JlabelB1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="45" pref="45" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="combloqDia4" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="combloqDia3" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="combloqDia2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="combloqDia1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="combloqHora1" max="32767" attributes="0"/>
+                          <Component id="combloqHora2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="combloqHora3" alignment="0" max="32767" attributes="0"/>
+                          <Component id="combloqHora4" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                          <Component id="combloqHoraF1" min="-2" max="-2" attributes="0"/>
+                          <Component id="combloqHoraF2" min="-2" max="-2" attributes="0"/>
+                          <Component id="combloqHoraF3" min="-2" max="-2" attributes="0"/>
+                          <Component id="combloqHoraF4" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel3" pref="108" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel2" min="-2" pref="77" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="comboJornada" max="32767" attributes="0"/>
+                          <Component id="comboMateria" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtGrupo" alignment="0" pref="117" max="32767" attributes="0"/>
+                          <Component id="comboBloques" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboS1" min="-2" pref="92" max="-2" attributes="0"/>
+                  <Component id="comboS2" min="-2" pref="92" max="-2" attributes="0"/>
+                  <Component id="comboS3" min="-2" pref="92" max="-2" attributes="0"/>
+                  <Component id="comboS4" min="-2" pref="92" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -134,11 +145,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="244" max="-2" attributes="0"/>
                       <Component id="JlabelB1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="JlabelB2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                      <Component id="JlabelB2" min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -171,34 +182,39 @@
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="combloqDia1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="combloqHora1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="comboS1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="combloqHoraF1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="combloqDia2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="combloqHora2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="comboS2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="combloqDia3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="combloqHora3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="comboS3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="JlabelB3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="combloqDia4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="combloqHora4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="comboS4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="JlabelB4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="combloqHoraF2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="combloqDia3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="combloqHora3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboS3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="JlabelB3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="combloqHoraF3" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="combloqDia4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="combloqHora4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboS4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="JlabelB4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="combloqHoraF4" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="79" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -328,24 +344,22 @@
     <Component class="javax.swing.JComboBox" name="combloqHora1">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="17">
+          <StringArray count="15">
             <StringItem index="0" value="Seleccionar"/>
-            <StringItem index="1" value="6:00 - 7:00 "/>
-            <StringItem index="2" value="7:00 - 8:00 "/>
-            <StringItem index="3" value="8:00 - 9:00 "/>
-            <StringItem index="4" value="9:00 - 10:00 "/>
-            <StringItem index="5" value="10:00 - 11:00 "/>
-            <StringItem index="6" value="11:00 - 12:00 "/>
-            <StringItem index="7" value="12:00 - 13:00 "/>
-            <StringItem index="8" value="13:00 - 14:00 "/>
-            <StringItem index="9" value="14:00 - 15:00 "/>
-            <StringItem index="10" value="15:00 - 16:00 "/>
-            <StringItem index="11" value="16:00 - 17:00 "/>
-            <StringItem index="12" value="17:00 - 18:00 "/>
-            <StringItem index="13" value="18:00 - 19:00 "/>
-            <StringItem index="14" value="19:00 - 20:00 "/>
-            <StringItem index="15" value="20:00 - 21:00 "/>
-            <StringItem index="16" value="21:00 - 22:00 "/>
+            <StringItem index="1" value="8:00 "/>
+            <StringItem index="2" value="9:00"/>
+            <StringItem index="3" value="10:00 "/>
+            <StringItem index="4" value="11:00 "/>
+            <StringItem index="5" value="12:00 "/>
+            <StringItem index="6" value="13:00 "/>
+            <StringItem index="7" value="14:00 "/>
+            <StringItem index="8" value="15:00 "/>
+            <StringItem index="9" value="16:00 "/>
+            <StringItem index="10" value="17:00 "/>
+            <StringItem index="11" value="18:00 "/>
+            <StringItem index="12" value="19:00 "/>
+            <StringItem index="13" value="20:00"/>
+            <StringItem index="14" value="21:00"/>
           </StringArray>
         </Property>
       </Properties>
@@ -368,24 +382,22 @@
     <Component class="javax.swing.JComboBox" name="combloqHora2">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="17">
+          <StringArray count="15">
             <StringItem index="0" value="Seleccionar"/>
-            <StringItem index="1" value="6:00 - 7:00 "/>
-            <StringItem index="2" value="7:00 - 8:00 "/>
-            <StringItem index="3" value="8:00 - 9:00 "/>
-            <StringItem index="4" value="9:00 - 10:00 "/>
-            <StringItem index="5" value="10:00 - 11:00 "/>
-            <StringItem index="6" value="11:00 - 12:00 "/>
-            <StringItem index="7" value="12:00 - 13:00 "/>
-            <StringItem index="8" value="13:00 - 14:00 "/>
-            <StringItem index="9" value="14:00 - 15:00 "/>
-            <StringItem index="10" value="15:00 - 16:00 "/>
-            <StringItem index="11" value="16:00 - 17:00 "/>
-            <StringItem index="12" value="17:00 - 18:00 "/>
-            <StringItem index="13" value="18:00 - 19:00 "/>
-            <StringItem index="14" value="19:00 - 20:00 "/>
-            <StringItem index="15" value="20:00 - 21:00 "/>
-            <StringItem index="16" value="21:00 - 22:00 "/>
+            <StringItem index="1" value=" 8:00 "/>
+            <StringItem index="2" value="9:00"/>
+            <StringItem index="3" value="10:00 "/>
+            <StringItem index="4" value="11:00 "/>
+            <StringItem index="5" value="12:00 "/>
+            <StringItem index="6" value="13:00 "/>
+            <StringItem index="7" value="14:00 "/>
+            <StringItem index="8" value="15:00 "/>
+            <StringItem index="9" value="16:00 "/>
+            <StringItem index="10" value="17:00 "/>
+            <StringItem index="11" value="18:00 "/>
+            <StringItem index="12" value="19:00 "/>
+            <StringItem index="13" value="20:00"/>
+            <StringItem index="14" value="21:00"/>
           </StringArray>
         </Property>
       </Properties>
@@ -408,24 +420,22 @@
     <Component class="javax.swing.JComboBox" name="combloqHora3">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="17">
+          <StringArray count="15">
             <StringItem index="0" value="Seleccionar"/>
-            <StringItem index="1" value="6:00 - 7:00 "/>
-            <StringItem index="2" value="7:00 - 8:00 "/>
-            <StringItem index="3" value="8:00 - 9:00 "/>
-            <StringItem index="4" value="9:00 - 10:00 "/>
-            <StringItem index="5" value="10:00 - 11:00 "/>
-            <StringItem index="6" value="11:00 - 12:00 "/>
-            <StringItem index="7" value="12:00 - 13:00 "/>
-            <StringItem index="8" value="13:00 - 14:00 "/>
-            <StringItem index="9" value="14:00 - 15:00 "/>
-            <StringItem index="10" value="15:00 - 16:00 "/>
-            <StringItem index="11" value="16:00 - 17:00 "/>
-            <StringItem index="12" value="17:00 - 18:00 "/>
-            <StringItem index="13" value="18:00 - 19:00 "/>
-            <StringItem index="14" value="19:00 - 20:00 "/>
-            <StringItem index="15" value="20:00 - 21:00 "/>
-            <StringItem index="16" value="21:00 - 22:00 "/>
+            <StringItem index="1" value="8:00 "/>
+            <StringItem index="2" value="9:00"/>
+            <StringItem index="3" value="10:00 "/>
+            <StringItem index="4" value="11:00 "/>
+            <StringItem index="5" value="12:00 "/>
+            <StringItem index="6" value="13:00 "/>
+            <StringItem index="7" value="14:00 "/>
+            <StringItem index="8" value="15:00 "/>
+            <StringItem index="9" value="16:00 "/>
+            <StringItem index="10" value="17:00 "/>
+            <StringItem index="11" value="18:00 "/>
+            <StringItem index="12" value="19:00 "/>
+            <StringItem index="13" value="20:00"/>
+            <StringItem index="14" value="21:00"/>
           </StringArray>
         </Property>
       </Properties>
@@ -448,24 +458,22 @@
     <Component class="javax.swing.JComboBox" name="combloqHora4">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="17">
+          <StringArray count="15">
             <StringItem index="0" value="Seleccionar"/>
-            <StringItem index="1" value="6:00 - 7:00 "/>
-            <StringItem index="2" value="7:00 - 8:00 "/>
-            <StringItem index="3" value="8:00 - 9:00 "/>
-            <StringItem index="4" value="9:00 - 10:00 "/>
-            <StringItem index="5" value="10:00 - 11:00 "/>
-            <StringItem index="6" value="11:00 - 12:00 "/>
-            <StringItem index="7" value="12:00 - 13:00 "/>
-            <StringItem index="8" value="13:00 - 14:00 "/>
-            <StringItem index="9" value="14:00 - 15:00 "/>
-            <StringItem index="10" value="15:00 - 16:00 "/>
-            <StringItem index="11" value="16:00 - 17:00 "/>
-            <StringItem index="12" value="17:00 - 18:00 "/>
-            <StringItem index="13" value="18:00 - 19:00 "/>
-            <StringItem index="14" value="19:00 - 20:00 "/>
-            <StringItem index="15" value="20:00 - 21:00 "/>
-            <StringItem index="16" value="21:00 - 22:00 "/>
+            <StringItem index="1" value="8:00"/>
+            <StringItem index="2" value="9:00"/>
+            <StringItem index="3" value="10:00 "/>
+            <StringItem index="4" value="11:00 "/>
+            <StringItem index="5" value="12:00 "/>
+            <StringItem index="6" value="13:00 "/>
+            <StringItem index="7" value="14:00 "/>
+            <StringItem index="8" value="15:00 "/>
+            <StringItem index="9" value="16:00 "/>
+            <StringItem index="10" value="17:00 "/>
+            <StringItem index="11" value="18:00 "/>
+            <StringItem index="12" value="19:00 "/>
+            <StringItem index="13" value="20:00"/>
+            <StringItem index="14" value="21:00"/>
           </StringArray>
         </Property>
       </Properties>
@@ -500,7 +508,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Hora"/>
+        <Property name="text" type="java.lang.String" value="Hora Inicio"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
@@ -548,6 +556,107 @@
             <StringItem index="0" value="Seleccionar"/>
             <StringItem index="1" value="Salon 1"/>
             <StringItem index="2" value="Salon 2"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel9">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Hora Fin"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="combloqHoraF1">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="16">
+            <StringItem index="0" value="Seleccionar"/>
+            <StringItem index="1" value="8:00 "/>
+            <StringItem index="2" value="9:00"/>
+            <StringItem index="3" value="10:00 "/>
+            <StringItem index="4" value="11:00 "/>
+            <StringItem index="5" value="12:00 "/>
+            <StringItem index="6" value="13:00 "/>
+            <StringItem index="7" value="14:00 "/>
+            <StringItem index="8" value="15:00 "/>
+            <StringItem index="9" value="16:00 "/>
+            <StringItem index="10" value="17:00 "/>
+            <StringItem index="11" value="18:00 "/>
+            <StringItem index="12" value="19:00 "/>
+            <StringItem index="13" value="20:00"/>
+            <StringItem index="14" value="21:00"/>
+            <StringItem index="15" value="22:00 "/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="combloqHoraF2">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="16">
+            <StringItem index="0" value="Seleccionar"/>
+            <StringItem index="1" value="8:00 "/>
+            <StringItem index="2" value="9:00"/>
+            <StringItem index="3" value="10:00 "/>
+            <StringItem index="4" value="11:00 "/>
+            <StringItem index="5" value="12:00 "/>
+            <StringItem index="6" value="13:00 "/>
+            <StringItem index="7" value="14:00 "/>
+            <StringItem index="8" value="15:00 "/>
+            <StringItem index="9" value="16:00 "/>
+            <StringItem index="10" value="17:00 "/>
+            <StringItem index="11" value="18:00 "/>
+            <StringItem index="12" value="19:00 "/>
+            <StringItem index="13" value="20:00"/>
+            <StringItem index="14" value="21:00"/>
+            <StringItem index="15" value="22:00 "/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="combloqHoraF3">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="16">
+            <StringItem index="0" value="Seleccionar"/>
+            <StringItem index="1" value="8:00 "/>
+            <StringItem index="2" value="9:00"/>
+            <StringItem index="3" value="10:00 "/>
+            <StringItem index="4" value="11:00 "/>
+            <StringItem index="5" value="12:00 "/>
+            <StringItem index="6" value="13:00 "/>
+            <StringItem index="7" value="14:00 "/>
+            <StringItem index="8" value="15:00 "/>
+            <StringItem index="9" value="16:00 "/>
+            <StringItem index="10" value="17:00 "/>
+            <StringItem index="11" value="18:00 "/>
+            <StringItem index="12" value="19:00 "/>
+            <StringItem index="13" value="20:00"/>
+            <StringItem index="14" value="21:00"/>
+            <StringItem index="15" value="22:00 "/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="combloqHoraF4">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="16">
+            <StringItem index="0" value="Seleccionar"/>
+            <StringItem index="1" value="8:00 "/>
+            <StringItem index="2" value="9:00"/>
+            <StringItem index="3" value="10:00 "/>
+            <StringItem index="4" value="11:00 "/>
+            <StringItem index="5" value="12:00 "/>
+            <StringItem index="6" value="13:00 "/>
+            <StringItem index="7" value="14:00 "/>
+            <StringItem index="8" value="15:00 "/>
+            <StringItem index="9" value="16:00 "/>
+            <StringItem index="10" value="17:00 "/>
+            <StringItem index="11" value="18:00 "/>
+            <StringItem index="12" value="19:00 "/>
+            <StringItem index="13" value="20:00"/>
+            <StringItem index="14" value="21:00"/>
+            <StringItem index="15" value="22:00 "/>
           </StringArray>
         </Property>
       </Properties>

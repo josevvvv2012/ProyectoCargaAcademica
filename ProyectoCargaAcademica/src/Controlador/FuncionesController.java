@@ -10,6 +10,7 @@ import Controlador.Conexion;
 import Controlador.ControllerSql;
 import Modelo.Materia;
 import Modelo.Perfil;
+import Modelo.Salon;
 import Modelo.Usuario;
 import java.io.IOException;
 import java.net.URL;
@@ -58,4 +59,9 @@ private Conexion cn;
          return sen.listadoUsuarioProfesores();
      }
  
+      
+      public List<Salon> listaSalones(){
+         return sen.listadoSalones();
+     }
+      
 }

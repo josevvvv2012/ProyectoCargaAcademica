@@ -53,7 +53,6 @@
                       <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnAGrupo" max="32767" attributes="0"/>
                           <Component id="btnEliminar" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnSeleccionar" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnExportar" max="32767" attributes="0"/>
@@ -96,11 +95,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                       <Component id="btnSeleccionar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnAGrupo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnEliminar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnExportar" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -162,11 +159,6 @@
     <Component class="javax.swing.JButton" name="btnExportar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Exportar"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnAGrupo">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Asignar Grupo"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnEliminar">

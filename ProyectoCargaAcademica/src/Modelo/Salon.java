@@ -68,6 +68,9 @@ public class Salon {
         this.estado = estado;
     }
 
-    
+    @Override
+    public String toString() {
+        return getNombreSalon();
+    } 
     
 }

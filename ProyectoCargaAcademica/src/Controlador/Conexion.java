@@ -254,10 +254,11 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
    
  
   String myTableName11="CREATE TABLE IF NOT EXISTS `bloque` (\n" +
-"  `idbloque` int(11) NOT NULL,\n" +
+"  `idbloque` int(11) NOT NULL AUTO_INCREMENT,\n" +
 "  `codBloque` varchar(45) DEFAULT NULL,\n" +
 "  `dia` varchar(45) DEFAULT NULL,\n" +
 "  `hora` varchar(45) DEFAULT NULL,\n" +
+"  `horaFinal` varchar(45) DEFAULT NULL,\n" +          
 "  `estado` bit(1) DEFAULT NULL,\n" +
 "  `idsalon` int(11) NOT NULL,\n" +
 "  PRIMARY KEY (`idbloque`),\n" +
@@ -305,7 +306,7 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
    
    String insertTable8="INSERT INTO `salon` (`codigoSalon`, `nombreSalon`, `ubicacion`, `estado`) VALUES ('1A', 'Salon Eventos', 'Cll 22', b'1');";
    String insertTable9="INSERT INTO `salon` (`codigoSalon`, `nombreSalon`, `ubicacion`, `estado`) VALUES ('1F', 'Salon Audio', 'Cll 7', b'1');";
-   String insertTable10="INSERT INTO `bloque` (`idbloque`, `codBloque`, `dia`, `hora`, `estado`, `idsalon`) VALUES (1, '1', 'Lunes', '6 - 7 am', b'1', 1);";
+   String insertTable10="INSERT INTO `bloque` (`idbloque`, `codBloque`, `dia`, `hora`,`horaFinal`, `estado`, `idsalon`) VALUES (1, '1', 'Lunes', '8:00', '9:00', b'1', 1);";
    String insertTable11="INSERT INTO `grupo` (`idgrupo`, `idMateria`, `idbloque`, `jornada`, `estado`) VALUES (1, 1, 1, 'Tarde', b'1');";
    String insertTable12="INSERT INTO `grupo` (`idgrupo`, `idMateria`, `idbloque`, `jornada`, `estado`) VALUES (2, 2, 1, 'Tarde', b'1');";           
  

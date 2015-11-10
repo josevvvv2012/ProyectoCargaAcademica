@@ -56,15 +56,15 @@ public class VistaMaterias extends javax.swing.JFrame {
             tabla.addColumn("No Creditos");
             tabla.addColumn("Int Horaria");
             tabla.addColumn("Semestre");
-            tabla.addColumn("Administrador");
             
-            ps = cn.prepareStatement("SELECT idMateria,codMateria,nombreMateria,tipo,creditos,intHoraria,semestre,idAdministradorM FROM materia");
+            
+            ps = cn.prepareStatement("SELECT idMateria,codMateria,nombreMateria,tipo,creditos,intHoraria,semestre FROM materia");
             r = ps.executeQuery();
 
             while (r.next()) {
-                Object dato[] = new Object[8];
+                Object dato[] = new Object[7];
                 
-                for (int i = 0; i < 8; i++) {
+                for (int i = 0; i < 7; i++) {
                     dato[i] = r.getString(i + 1);
                     //log(String.valueOf(dato[0]));
                 }
@@ -192,7 +192,7 @@ public class VistaMaterias extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel2)
-                        .addGap(97, 97, 97)
+                        .addGap(191, 191, 191)
                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -221,8 +221,10 @@ public class VistaMaterias extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(btnCrear)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

@@ -258,7 +258,7 @@ public class AsignarHorarioP extends javax.swing.JFrame {
             ps = cn.prepareStatement("select mate.nombreMateria,blo.dia,blo.hora,blo.horaFinal from materia mate\n" +
 "inner join grupo gru ON mate.idMateria = gru.idMateria\n" +
 "inner join bloque blo ON gru.idbloque = blo.idbloque\n" +
-"where mate.codMateria = 829292");
+"");
             r = ps.executeQuery();
 
             while (r.next()) {
