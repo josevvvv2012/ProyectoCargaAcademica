@@ -280,6 +280,17 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
 ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
            
  
+
+ 
+  String myTableName13="-- Volcando estructura para tabla baaa0.salon\n" +
+"CREATE TABLE IF NOT EXISTS `HorarioTemp` (\n" +
+"  `idHorarioTemp` int(11) NOT NULL AUTO_INCREMENT,\n" +
+"  `Lunes` varchar(255) DEFAULT NULL,\n" +
+"  `estadoLunes` bit(1) DEFAULT NULL,\n" +
+"  `Martes` varchar(255) DEFAULT NULL,\n" +
+"  `estadoMartes` bit(1) DEFAULT NULL,\n" +
+"  PRIMARY KEY (`idHorarioTemp`)\n" +
+") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
  
  
  
@@ -365,6 +376,7 @@ String myTableName3 ="CREATE TABLE IF NOT EXISTS `baaa0`.`profesor` (\n" +
             s.executeUpdate(myTableName10);
             s.executeUpdate(myTableName11);
             s.executeUpdate(myTableName12);
+            s.executeUpdate(myTableName13);
             
             s.executeUpdate(insertTable1);
             s.executeUpdate(insertTable2);
